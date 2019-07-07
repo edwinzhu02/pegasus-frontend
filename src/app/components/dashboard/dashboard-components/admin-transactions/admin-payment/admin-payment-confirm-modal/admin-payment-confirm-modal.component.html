@@ -1,0 +1,31 @@
+<!--modal header-->
+<div class='modal-header'>
+  <h4 class="modal-title">Confirmation</h4>
+  <button type="button" class='btn btn-sm btn-info tl_um_close_btn' aria-label="Close"
+    (click)="activeModal.close('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class='modal-body'>
+  <div class='t_mf_form'>
+    <form [formGroup]="updateForm">
+      <div class="row">
+        <div class="col-12">
+          <label class='t_mf_label'>Confirm:</label>&nbsp;
+          <small class='text-danger errorfontsmall' style='text-align: center'
+            *ngIf='updateForm.get("IsConfirmed").invalid && updateForm.get("IsConfirmed").touched'>required</small>
+          <input type="checkbox" formControlName="IsConfirmed" value="1"
+            [class.t_mf_error_border]='updateForm.get("IsConfirmed").invalid && updateForm.get("IsConfirmed").touched'>&nbsp;Yes
+        </div>
+        <div class="col-12">
+          <label class='t_mf_label'>Comment:</label>&nbsp;
+          <input type="text" formControlName="Comment">
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<!--modal footer-->
+<div class='modal-footer'>
+  <button type='button' class='btn btn-outline-dark' (click)='onSubmit(this.updateForm)'>Save</button>
+</div>

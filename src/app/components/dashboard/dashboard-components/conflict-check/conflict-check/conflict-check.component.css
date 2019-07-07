@@ -1,0 +1,15 @@
+.t_info_title{
+  height:80px;
+  font-size:30px;
+  font-weight: 330;
+  line-height: 80px;
+  color:grey;
+  text-align: center;
+}
+.text-content{
+  font-size:19px;
+  font-weight:400;
+}
+.hand:hover{
+  cursor: pointer;
+}

@@ -1,0 +1,89 @@
+.t_s_class_title{
+  font-weight: bold;
+  font-size: 10px;
+}
+.t_s_tabs{
+  height: 200px;
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+  text-align: center;
+  padding-top: 20px;
+  margin:10px;
+
+  position: relative;
+  overflow: hidden;
+}
+.t_s_tabs_disable{
+  height: 200px;
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+  text-align: center;
+  padding-top: 20px;
+  margin:10px;
+
+  position: relative;
+  overflow: hidden;
+}
+/*
+  这部分控制tab的hover和点击特效
+*/
+.t_s_tabs:before{
+  content: '';
+  background: #7cacb4;
+  width: 800px;
+  height: 600px;
+  position: absolute;
+  transform: translate(-1000px, -400px) rotate(130deg);
+  transition: all 600ms ease;
+}
+.t_s_tabs:after {
+  transition: all 10ms ease;
+}
+.t_s_tabs:active{
+  position:relative;
+  top:2px;
+  box-shadow:inset 0px -1px 0px rgba(0,0,0,0.1), 0px 2px 0px rgba(0,0,0,0.1);
+}
+.t_s_tabs:hover:before {
+  transform: translate(-200px, -400px) rotate(130deg);
+}
+.t_s_tabs:hover{
+  cursor: pointer;
+  font-size: 12px;
+}
+.t_s_tabs_disable_hover{
+  cursor: none!important;
+  font-size: 10px;
+}
+
+.t_s_tabs_title{
+  font-size:14px;
+  font-weight: bold;
+}
+.t_s_tabs_close{
+  position: absolute;
+  top:5px;
+  right: 5px;
+  font-size:10px;
+}
+.t_s_tabs_close:hover{
+  cursor: pointer;
+  color:white;
+  font-size:11px;
+}
+.t_s_tabs_img{
+  position: absolute;
+  bottom: 30px;
+  right: 0px;
+}
+.t_s_tabs_img img{
+  width: 50px;
+  height: 50px;
+}
+.t_s_tabs_content{
+  /*important可以阻止父元素hover*/
+  font-size:8px!important;
+  text-transform:capitalize;
+  position: absolute;
+  top: 125px;
+}

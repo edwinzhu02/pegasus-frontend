@@ -1,0 +1,14 @@
+.m_n_noti{
+    height: 20px;
+    min-width: 20px;
+    background: rgb(243, 105, 105);
+    border-radius:50%;
+    font-size:15px;
+    color:white;
+    text-align: center;
+    line-height: 20px;
+    float: left;
+    padding:0 2px;
+    margin-left: 5px;
+    margin-top:5px;
+}

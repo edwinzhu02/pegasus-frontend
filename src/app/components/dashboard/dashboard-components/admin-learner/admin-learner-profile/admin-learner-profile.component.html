@@ -1,0 +1,17 @@
+<div class='row'>
+  <div class='col-2' *ngFor="let para of localPara">
+    <div class='t_s_tabs' (click)='popUpModal(para.parameter)' >
+      <span class='t_s_tabs_title col-12'>{{para.title}}</span>
+      <span class='t_s_tabs_img col-12' title=para.title><span class={{para.class}}></span></span>
+    </div>
+  </div>
+
+  <!--calendar icon功能跳转至 trial course 页面-->
+<div class='col-2'>
+  <div class='t_s_tabs'(click)='jumpToTrialCoursePage()'>
+      <span class='t_s_tabs_title col-12'>Trial Course</span>
+    <span class='t_s_tabs_img col-12'  title='Trial Course' routerLink='/learner/trial' [queryParams] = '{LearnerId:1}'><a class='fas fa-calendar-week'></a></span>
+    <!--              请假-->
+  </div>
+</div>
+</div>

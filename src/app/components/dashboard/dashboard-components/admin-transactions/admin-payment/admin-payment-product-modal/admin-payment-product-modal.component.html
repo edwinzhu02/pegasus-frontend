@@ -1,0 +1,31 @@
+<!--modal header-->
+<div class='modal-header'>
+  <h4 class="modal-title">Products Detail</h4>
+  <button type="button" class='btn btn-sm btn-info tl_um_close_btn' aria-label="Close"
+    (click)="activeModal.close('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<!-- Details Content -->
+<div class='container tl_body'>
+  <div class="row">
+    <div class='col-12'>
+      <table class='table table-striped' style="text-align: center;">
+        <thead>
+          <tr>
+            <th scope='col' class='tl_body_table_head'>#</th>
+            <th scope='col' class='tl_body_table_head'>Product Name</th>
+            <th scope='col' class='tl_body_table_head'>Quantity</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of SoldTransaction; let j = index">
+            <th scope='row'>{{j+1}}</th>
+            <td>{{item.Product.ProductName}}</td>
+            <td>{{item.SoldQuantity}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
