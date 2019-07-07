@@ -29,16 +29,12 @@
   background-color: #eaeaf0;
   padding: 10px;
   text-align: center;
-  /* line-height: 40px; */
   width: 10vw;
 }
 .location {
   background-color: #eaeaf0;
   color: rgb(182, 178, 178);
   height: 50px;
-  /* text-align: center; */
-  /* line-height: 40px; */
-  /* width: 10vw; */
 }
 .slots {
   border-top: 1px solid rgb(182, 178, 178);
@@ -46,6 +42,8 @@
 .slot {
   border-bottom: 1px dotted #e0e0e0;
   height: 10px;
+  width: 10vw;
+  position: relative;
 }
 .slot:last-child {
   border-bottom: none;
@@ -61,63 +59,58 @@
   background-color: rgba(255, 0, 0, 0.5);
   border-radius: 3px;
   border: 0px;
-  opacity: 0.5;
   border-bottom: 1px dotted #e0e0e0;
 }
 .availableDayIsBlue {
   background-color: rgba(15, 191, 235, 0.5);
   border-radius: 3px;
   border: 0px;
-  opacity: 0.5;
   border-bottom: 1px dotted #e0e0e0;
 }
 .dayOffIsGray {
   background-color: rgba(115, 111, 116, 0.5);
   border-radius: 3px;
   border: 0px;
-  opacity: 0.5;
   border-bottom: 1px dotted #e0e0e0;
 }
 .tempChangeIsYellow {
   background-color: rgba(248, 220, 59, 0.5);
   border-radius: 3px;
   border: 0px;
-  opacity: 0.5;
   border-bottom: 1px dotted #e0e0e0;
 }
 .ableToPickIsGreen {
   background-color: rgba(6, 104, 19, 0.5);
   border-radius: 3px;
   border: 0px;
-  opacity: 0.5;
   border-bottom: 1px dotted #e0e0e0;
 }
 .unableToPickIsGray {
   background-color: rgb(59, 55, 55);
   border-radius: 3px;
   border: 0px;
-  opacity: 0.1;
+  /* : 0.1; */
   border-bottom: 1px dotted #e0e0e0;
 }
 .unableToPickAvailableIsBlue {
   background-color: rgb(8, 26, 43);
   border-radius: 3px;
   border: 0px;
-  opacity: 0.1;
+  /* : 0.1; */
   border-bottom: 1px dotted #e0e0e0;
 }
-.availableButUnableToPick {
+.allTeacherAvailableDayUnableToPick {
   background-color: rgb(138, 140, 141);
   border-radius: 3px;
   border: 0px;
-  opacity: 0.1;
+  /* : 0.1; */
   border-bottom: 1px dotted #e0e0e0;
 }
 .oneHourUnableToPick {
-  background-color: rgb(232, 95, 152);
+  background-color: rgb(202, 193, 197);
   border-radius: 3px;
   border: 0px;
-  opacity: 0.1;
+  /* : 0.1; */
   border-bottom: 1px dotted #e0e0e0;
 }
 .dot {
@@ -145,53 +138,56 @@
 .dot_pink {
   background-color: rgb(250, 136, 184);
 }
-  /* display: none; 
- position: absolute;
-  right: 4px;
-  top: 2px; */
 
-/* .rmws-event {
-  background-color: rgba(255, 0, 0, 0.5);
-  border: 1px solid rgba(255, 0, 0, 0.75);
-  border-radius: 3px;
-  box-sizing: border-box;
-  color: rgba(155, 0, 0, 0.75);
-  left: 0;
-  font-size: 14px;
-  font-weight: 600;
-  padding: 3px 4px;
+/* Popover styling */
+.popover__content {
   position: absolute;
-  right: 0;
-  z-index: 10;
+  visibility: hidden;
+  width: 200px;
+  height: 150px; 
+  border: 1px solid rgb(182, 184, 185);
+  border-radius: 0.3rem;
+  box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
+  bottom: 20px;
+  left: -20px;
 }
-.rmws-event .rmws-time {
-  font-size: 12px;
-  font-weight: 300;
+.isShow:hover .popover__content{
+  visibility: visible;
+  height: 170px;
+  background-color:white;
+  z-index: 1;
 }
-.rmws-event .rmws-handle {
-  cursor: row-resize;
-  height: 7px;
-  left: 0;
-  right: 0;
+.popover__header {
+  font-size: 16px;
+  font-weight: bold;
+  padding: 10px;
+  background-color: #f8f8f8;
+}
+.popover__line {
+  border: 0.5px solid rgb(182, 184, 185);
+  height: 0;
+}
+.popover__body {
+  font-size: 13px;
+  padding: 10px;
+}
+.popover__body__item {
+  margin: 3px 0;
+}
+.confirm__btn {
+  border: 1px solid #0599cd;
+  border-radius: 5px;
+  font-size: 16px;
+  color: white;
+  background-color: #0599cd;
+  margin: 5px auto;
+}
+.triangle {
+  width:0px;  
+  height:0px;
+  border:10px solid transparent;
+  border-top:10px solid white;
   position: absolute;
+  left: 85px;
+  bottom: -20px;
 }
-.rmws-event .rmws-handle.rmws-handle-bottom {
-  bottom: -1px;
-}
-.rmws-event .rmws-handle.rmws-handle-top {
-  top: -1px;
-}
-.rmws-event .rmws-close {
-  cursor: pointer;
-  display: none;
-  position: absolute;
-  right: 4px;
-  top: 2px;
-}
-.rmws-event .rmws-close:after {
-  content: "\f00d";
-  font-family: FontAwesome;
-}
-.rmws-event:hover .rmws-close {
-  display: block;
-} */

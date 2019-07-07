@@ -1,9 +1,9 @@
 <div class="time-picker">
    <!-- color meanings -->
    <div class="d-flex flex-column" style="margin-left: 20px; margin-top: 10px;">
-      <div class="d-inline-flex"><span class="dot dot_blue"></span><span>Teacher's available day.</span></div>
+      <div class="d-inline-flex"><span class="dot dot_blue"></span><span>Teacher's available time.</span></div>
       <div class="d-inline-flex"><span class="dot dot_red"></span><span>These durations are arranged.</span></div>
-      <div class="d-inline-flex"><span class="dot dot_green"></span><span>These durations can be picked.</span></div>
+      <div class="d-inline-flex"><span class="dot dot_green"></span><span>These durations you picked.</span></div>
       <div class="d-inline-flex"><span class="dot dot_yellow"></span><span>Someone change duration temporarily</span></div>
       <div class="d-inline-flex"><span class="dot dot_gray"></span><span>Someone was off.</span></div>
       <div class="d-inline-flex"><span class="dot dot_pink"></span><span>One hour around the arranged duration can not be picked because of different location.</span></div>
@@ -35,23 +35,34 @@
                       'dayOffIsGray': slot[x][y] == 'isDayOff',
                       'tempChangeIsYellow': slot[x][y] == 'isTempChange',
                       'ableToPickIsGreen': slot[x][y] == 'ableToPick',
-                      'availableButUnableToPick': slot[x][y] == 'tOrgNotIncludesLorg',
-                      'oneHourUnableToPick': slot[x][y] == 'oneHourUnableTopick'
+                      'allTeacherAvailableDayUnableToPick': slot[x][y] == 'tOrgNotIncludesLOrg',
+                      'oneHourUnableToPick': slot[x][y] == 'oneHourUnableTopick',
+                      'isShow': slot[x][y] == 'ableToPick'
                     }"
-          (mouseover)="mouseoverSlot(x,y)" (mouseout)="mouseoutSlot(x,y)"
-          [ngbPopover]="popContent" [popoverTitle]="popTitle" triggers="manual" placement="top"
-          #p="ngbPopover" (mouseenter)="openPopover(p,x,y,$event)" (mouseleave)="closePopover(p,x,y,$event)"
-          >
-          <ng-template #popTitle>
-            {{name}}
-          </ng-template>
-          <ng-template #popContent>
-            <p style="margin: 10px"><b>Weekday:</b>&nbsp;{{weekdays[x]}}</p>
-            <p style="margin: 10px"><b>Time:</b>&nbsp;{{slotTime[x][y]}}-{{slotTime[x][y+duration+1]}}</p>
-            <p style="margin: 10px"><b>Location:</b>&nbsp;{{learnerOrg.OrgId | simplifyOrg}}</p>
-            <button class="btn btn-info btn-sm" style="width:100%">confirm</button>
-          </ng-template>
-          <small *ngIf="slot[x][y]">{{learnerName[x][y]}}</small>
+          (mouseover)="mouseover(x,y)" (mouseout)="mouseout(x,y)"
+          (mouseenter)="mouseenter(x,y)" (mouseleave)="mouseleave(x,y)"
+          > 
+            <div class="popover__content">
+              <div class="popover__header"><span>teacher's name</span></div>
+              <div class="popover__line"></div>
+              <div class="popover__body">
+                <div class="popover__body__item"><span><b>Weekday:</b>&nbsp;{{weekdays[x]}}</span></div>
+                <div class="popover__body__item"><span><b>Time:</b>&nbsp;{{startTimeToEndTime}}</span></div>
+                <div class="popover__body__item"><span><b>Location:</b>&nbsp;{{learnerOrg.OrgId | simplifyOrg}}</span></div>
+                <button class="confirm__btn" style="width:100%">confirm</button>
+              </div>
+              <div class="triangle"></div>
+            </div>
+            <!-- <ng-template #popTitle>
+              {{name}}
+            </ng-template>
+            <ng-template #popContent>
+              <p style="margin: 10px"><b>Weekday:</b>&nbsp;{{weekdays[x]}}</p>
+              <p style="margin: 10px"><b>Time:</b>&nbsp;{{slotTime[x][y]}}-{{slotTime[x][y+duration+1]}}</p>
+              <p style="margin: 10px"><b>Location:</b>&nbsp;{{learnerOrg.OrgId | simplifyOrg}}</p>
+              <button class="btn btn-info btn-sm" style="width:100%">confirm</button>
+            </ng-template> -->
+            <small *ngIf="slot[x][y]">{{learnerName[x][y]}}</small>
           </div>
         </div>
       </div>
