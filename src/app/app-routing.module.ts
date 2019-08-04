@@ -47,6 +47,7 @@ import{PageGroupDetailsComponent} from './components/dashboard/dashboard-compone
 import { ConflictCheckComponent } from './components/dashboard/dashboard-components/conflict-check/conflict-check/conflict-check.component';
 import { StockApplicationListComponent } from './components/dashboard/dashboard-components/inventory/inventory-stock-application/stock-application-list/stock-application-list.component';
 import { AdminLearnerTimetableComponent } from './components/dashboard/dashboard-components/admin-learner/admin-learner-timetable/admin-learner-timetable.component';
+import { PayListComponent } from './components/dashboard/dashboard-components/admin-staff/pay-list/pay-list.component';
 
 
 
@@ -172,6 +173,8 @@ const routes: Routes = [
       },
       //Staff Area
       { path: 'staff/list', component: StaffListComponent },
+
+      {path: 'staff/paylist', component: PayListComponent},
 
       //pagegroup area
       { path:'pageGroup',component:PageGroupDetailsComponent},

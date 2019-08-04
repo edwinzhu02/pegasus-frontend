@@ -55,6 +55,24 @@ export class NgbootstraptableService {
     }
     return temList;
   }
+  // this is another method to test whether it contian this character or not,
+  //but you need to print the list by your self.
+  search(listToSearch:Array<any>,searchby:string,searchvalue:string){
+    let temp=[];
+    for (let i=0; listToSearch.length;i++){
+      for (let j=0;j<listToSearch[i].searchBy.split(" ").length;j++){
+            for (let k=0;k<listToSearch[i].searchBy.split(" ")[j].length;k++){
+              if(listToSearch[i].searchBy.split(" ")[j][k].toLowerCase().search(searchvalue)!==-1){
+               
+                  return true;
+                                
+                
+               }
+             }
+      }
+
+  }
+}
   // Judge all key words selected could be found, return true.
   judgesearch(StrFilter, ByFilter) {
     let bool = [];

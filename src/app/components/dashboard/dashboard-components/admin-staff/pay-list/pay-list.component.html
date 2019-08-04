@@ -1,0 +1,158 @@
+
+<div class='container tl_body'>
+  <div class="row">
+    <!--body head-->
+    <div class='col-12 t_info_title'>
+      Payments List
+    </div>
+    <!--body search dates-->
+    <div class="col-12">
+      <div *ngIf="searchbar == true" style="width:50%;float: left;">
+        <div class='t_info_search_bar'>
+          <select  type="text" style="height: 40px;"(change)='onSearch($event)'>
+            <option value='' disabled selected hidden>Confirmation Status</option>
+            <option value=0>No</option>
+            <option value=1>Yes</option>
+          </select>
+          <p></p>
+          <!-- search Information by type -->
+          <input class="form-control" id="seachInput" type="text" style="height:40px;"
+          (keyup)="onSearchInfo($event)" placeholder="Print key word">
+          <!-- <select name="searchOption" id="searchOption" [(ngModel)]="searchValue" (change)=OnchangeOther($event)>
+            <option *ngFor="let i of colunsselect" value={{i}} >{{i}}</option>
+          </select> -->
+        </div>
+        
+         <!-- <div class='t_info_search_icon'>
+          <span (click)="onSearchInfo(null)">
+            <i class='fas fa-search'></i>
+          </span>
+        </div>  -->
+      </div>
+      <div style="width:69%; float: right;">
+        <form style="float:right;" [formGroup]='searchForm'>
+          <span>
+            <p class="label_p">Select a period of date:</p>
+          </span>
+          <div class="input-group input_datebar">
+            <input class="form-control" style="height: 30px;" placeholder="yyyy-mm-dd" ngbDatepicker
+              #begindate="ngbDatepicker" formControlName="BeginDate" (dateSelect)="onBeginDateSelection($event)">
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary calendar" style="height: 30px; line-height: 0;"
+                (click)="begindate.toggle()" type="button">
+                <i class="far fa-calendar-alt"></i>
+              </button>
+            </div>
+          </div>
+          <span>
+            <p class="label_p">To</p>
+          </span>
+          <div class="input-group input_datebar">
+            <input class="form-control" style="height: 30px;" placeholder="yyyy-mm-dd" ngbDatepicker
+              #enddate="ngbDatepicker" formControlName="EndDate" (dateSelect)="onEndDateSelection($event)">
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary calendar" style="height: 30px; line-height: 0;"
+                (click)="enddate.toggle()" type="button">
+                <i class="far fa-calendar-alt"></i>
+              </button>
+            </div>
+          </div>
+          <!--add more btn-->
+          <button type="button" class='btn btn-info t_info_addmore_btn' (click)="onSubmit()">
+            <i class='fas fa-search'></i>Search
+          </button>
+        </form>
+      </div>
+    </div>
+    <!--info page table-->
+    <div *ngIf='loadingFlag' class="loaderLarge"></div>
+    <div *ngIf='!loadingFlag' class='t_mf_form'>
+      <div class='col-12'>
+        <table class='table table-striped' style="text-align: center;">
+          <thead>
+            <tr>
+              <th scope='col' class='tl_body_table_head' style="width:2rem;">#</th>
+              <th scope='col' class='tl_body_table_head sorting_item' style="width:18rem"
+                (click)='onSort("LearnerName")'> 
+                Learner Name
+              </th>
+              <th scope='col' class='tl_body_table_head sorting_item' style="width:17rem" 
+                (click)='onSort("StaffName")'>
+                Staff Name
+              </th>
+              <th scope='col' class='tl_body_table_head sorting_item' style="width:5rem" 
+                (click)='onSort("CreatedAt")' >
+                Created At
+              </th>
+              <th scope='col' class='tl_body_table_head sorting_item' style="width:4rem" (click)='onSort("Amount")'>
+                Amt.
+              </th>
+              <th scope='col' class='tl_body_table_head sorting_item' style="width:10rem"
+                (click)='onSort("PaymantTypeName")'>
+                Payment Type
+              </th>
+              <th scope='col' class='tl_body_table_head sorting_item' style="width:6rem"
+                (click)='onSort("PaymentMethodName")'>
+                Payment Method
+              </th>
+              <th scope='col' class='tl_body_table_head' style="width:9rem">
+                Course/Product
+              </th>
+              <th scope='col' class='tl_body_table_head sorting_item' style="width:5rem"
+                (click)='onSort("LessonQuantity")'>
+                Lesson QTY
+              </th>
+              <th scope='col' class='tl_body_table_head sorting_item' style="width:8rem"
+                (click)='onSort("IsConfirmed")'>
+                Confirmation
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- dataTable-->
+            <tr
+              *ngFor='let i of adminPaymentList | slice: (page-1)* pageSize : (page-1) * pageSize + pageSize; let j = index'>
+              <th scope="row">{{j+1}}</th>
+              <td>
+                {{i.LearnerName}}
+              </td>
+              <td>{{i.StaffName}}</td>
+              <td>{{i.CreatedAt | date:'shortDate'}}</td>
+              <td>${{i.Amount}}</td>
+              <td>{{i.PaymentTypeName}}</td>
+              <td>{{i.PaymentMethodName}}</td>
+              <!-- Invoice content -->
+              <td *ngIf="i.LessonQuantity">{{i.CourseName}}</td>
+              <td *ngIf="i.LessonQuantity">{{i.LessonQuantity}}</td>
+              <!-- Sold Transaction content -->
+              <td *ngIf="i.ProductName">
+                <span class='tl_body_table_btn col-4' style="text-align: center;" (click)="open(0, i)">
+                  <i class="fas fa-receipt"></i>
+                </span>
+              </td>
+              <td *ngIf="i.ProductName">///</td>
+              <!-- other content -->
+              <td *ngIf="!i.LessonQuantity && !i.ProductName">null</td>
+              <td *ngIf="!i.LessonQuantity && !i.ProductName">null</td>
+              <!-- Managers confirm paying -->
+              <td *ngIf="i.IsConfirmed == 0">
+                <span class='tl_body_table_btn col-4' style="text-align: center;" (click)="open(1, i)">
+                  <i class="fas fa-times" style="color: red;"></i>
+                </span>
+              </td>
+              <td *ngIf="i.IsConfirmed != 0">
+                <i class="fas fa-check"></i>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!--body pagination-->
+      <div class='col-12'>
+        <ngb-pagination [collectionSize]='adminPaymentListLength' [(page)]='page' [pageSize]='pageSize'>
+        </ngb-pagination>
+      </div>
+    </div>
+  </div>
+</div>
+
