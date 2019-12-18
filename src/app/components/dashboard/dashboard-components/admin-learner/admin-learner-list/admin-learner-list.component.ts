@@ -23,7 +23,7 @@ export class AdminLearnerListComponent implements OnInit {
   //what columns showed in the info page, can get from back-end in the future. must as same as database
   public columnsToShow: Array<string> = ['FirstName', 'LastName'];
 
-  public columnsToShow1: Array<string> = ['ContactNum', 'Email'];
+  public columnsToShow1: Array<string> = ['ContactNum'];
   //learners data from servers
   public learnerList: Array<any>;
 
