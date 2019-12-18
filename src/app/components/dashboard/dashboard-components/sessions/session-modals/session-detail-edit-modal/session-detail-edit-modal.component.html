@@ -30,7 +30,9 @@
       </div>
       <div class="col-5">
         <div>
-          <label class="mt-2">Teacher</label>
+          <!-- <label class="mt-2">Teacher</label> -->
+          <input #tempTeacherCheckbox (change)="getTeachers()" 
+               type="checkbox">Select Temporary Teacher
           <select [class.is-invalid]="Teacher.invalid && Teacher.touched" (blur)="getRooms()" (change)="getRooms()" class="form-control" type="text" formControlName="Teacher">
             <!--              <option selected disabled [value]="LessonModel.TeacherFirstName">{{LessonModel.TeacherFirstName}}</option>-->
             <option *ngFor="let teacher of TeacherSelects" [value]="teacher.TeacherId">{{teacher.TeacherName}}</option>

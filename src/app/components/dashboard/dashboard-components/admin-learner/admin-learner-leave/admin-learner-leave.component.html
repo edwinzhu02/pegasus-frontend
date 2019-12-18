@@ -67,17 +67,18 @@
                   {{amendment.BeginDate| date:'yyyy-MM-dd'}} to {{amendment.EndDate| date:'yyyy-MM-dd'}} ( Teacher:
                   {{amendment.Teacher.FirstName}} Location : {{amendment.Org.Abbr}} - {{amendment.Room.RoomName}})
                 </small>
-              </div><div >
-                <div class="row" *ngFor="let lessons of lessonsOfCourse[i],let j=index;">
-                  <div class="col-4" *ngFor="let lesson of lessons,let k=index;">
-                    <input #checkboxLesson type="checkbox" [value]="lesson.LessonId" 
-                      name={{lesson.CourseInstanceId}} [attr.lesson-time]="lesson.BeginTime" [checked]="lesson.isChecked">&nbsp;&nbsp;
-                    <label>{{lesson.strDate}}({{j+1}})</label>
-                  </div>
-                  <!-- <div class="col-12"></div> -->
-                </div>
               </div>
+             
             </div>
+            <div class="row" *ngFor="let lessons of lessonsOfCourse[i],let j=index;">
+                <div class="col-4" *ngFor="let lesson of lessons,let k=index;">
+                  <input #checkboxLesson type="checkbox" [value]="lesson.LessonId" 
+                    name={{lesson.CourseInstanceId}} [attr.lesson-time]="lesson.BeginTime" [checked]="lesson.isChecked">&nbsp;&nbsp;
+                  <label>{{lesson.strDate}}({{j+1}})</label>
+                </div>
+                <!-- <div class="col-12"></div> -->
+              </div>
+
           </div>
         </div>
       </div>

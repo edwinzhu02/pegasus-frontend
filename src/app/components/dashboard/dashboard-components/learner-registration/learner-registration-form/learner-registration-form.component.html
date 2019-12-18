@@ -396,12 +396,13 @@
             <div class="selectCourse-yourLever row">
               <div class="col-sm-6 col-md-6">
                 <label for="course">Course Category</label>
-                <select class="form-control" formControlName="courseCategory"
+                <select *ngIf='setUniCatListArray.length>0'  class="form-control" formControlName="courseCategory"
                   (change)="selectCategory($event.target.value, i)">
                   <option selected>Choose..</option>
                   <option *ngFor="let courseCategory of setUniCatListArray[i]"
                     [value]="courseCategory.CourseCategoryId">{{courseCategory.CourseCategoryName}}</option>
                 </select>
+                <div *ngIf='setUniCatListArray==0'>Loading...</div>
               </div>
               <div class="col-sm-6 col-md-6">
                 <label for="course">Course</label>

@@ -29,7 +29,11 @@ export class SessionsService {
       headers: this.httpHeaders
     });
   }
-
+  getTeachers(){
+    return this.http.get<any>(this.baseUrl + "teacher", {
+      headers: this.httpHeaders
+    });
+  }
   getReceptionistLesson(date,orgId) {
     // console.log(this.httpHeaders);
     return this.http.get<any>(

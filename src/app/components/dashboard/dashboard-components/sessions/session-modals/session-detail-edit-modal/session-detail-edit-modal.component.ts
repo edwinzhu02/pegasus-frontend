@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, Input, OnInit ,ViewChild,ElementRef} from "@angular/core";
 import { NgbActiveModal, NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { FormBuilder, Validators } from "@angular/forms";
 import { SessionsService } from "../../../../../../services/http/sessions.service";
@@ -13,6 +13,7 @@ import { TrialCalendarComponent } from "../../../trial-course/trial-calendar/tri
 })
 export class SessionDetailEditModalComponent implements OnInit {
   @Input() LessonModel;
+  @ViewChild('tempTeacherCheckbox') tempTeacherRef:ElementRef;
   isloading = false;
   isEditSuccess = false;
   isEditFail = false;
@@ -23,6 +24,7 @@ export class SessionDetailEditModalComponent implements OnInit {
   BranchSelects: any;
   RoomSelects: any;
   TeacherSelects: any;
+  Teachers:any;
   duration: number;
   constructor(
     public activeModal: NgbActiveModal,
@@ -58,6 +60,7 @@ export class SessionDetailEditModalComponent implements OnInit {
       Reason: ["", [Validators.required]]
     });
     this.getBranchs();
+    this.getAllTeachers();
   }
 
   getRooms = () => {
@@ -141,11 +144,23 @@ export class SessionDetailEditModalComponent implements OnInit {
       }
     );
   };
-
+  getAllTeachers = ()=>{
+    this.sessionsService.getTeachers().subscribe(
+      res=>{
+        this.Teachers=res['Data']
+      },
+      err=>{
+        alert("Something ERR");
+      }
+    )
+  }
   getTeachers = (branchId: number) => {
-    this.TeacherSelects = this.BranchSelects.filter(
-      s => s.OrgId === branchId
-    )[0].Teacher;
+    if (this.tempTeacherRef.nativeElement.checked!=true)
+      this.TeacherSelects = this.BranchSelects.filter(
+        s => s.OrgId === branchId
+      )[0].Teacher;
+    else
+      this.TeacherSelects = this.Teachers;
   };
 
   // confirm Modal
