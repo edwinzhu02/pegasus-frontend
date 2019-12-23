@@ -1,0 +1,59 @@
+<div class="time-picker" *ngIf="availableDayArrEx">
+    <div class="weekly-schedule">
+      <div class="hour-labels">
+        <div class="hour-label" *ngFor="let hour of hours">{{hour}}:00</div>
+      </div>
+      <div class="days">
+        <div class="day" *ngFor="let val of weekdays; let x = index">
+  
+          <div class="day-label" [ngClass]="{'bg-success text-dark':true}">
+            {{val}}
+            <!-- <div class="location" [ngClass]="{'bg-success text-light':x== dayofweek-1}">
+              <div *ngFor="let availableObj of availableDayArr">
+                <div *ngIf="x == availableObj.DayOfWeek-1">
+                  <p style="margin:0px; font-size:13px; text-align: center" *ngFor="let org of availableObj.Orgs">
+                    {{org.OrgId | simplifyOrg}}</p>
+                </div>
+              </div>
+            </div> -->
+          </div>
+          <div class="slots">
+            <div class="slot" *ngFor="let y of yIndex; let i = index" [ngClass]="{'slot-bottom': i%4==3,
+                          'availableDayIsBlue': slot[x][y] == 'isAvailable',
+                          'unableToPickAvailableIsBlue': slot[x][y] == 'isAvailableButUnableToPick',
+                          'arrangedIsRed': slot[x][y] == 'isArranged',
+                          'dayOffIsGray': slot[x][y] == 'isDayOff',
+                          'tempChangeIsYellow': slot[x][y] == 'isTempChange',
+                          'ableToPickIsGreen': slot[x][y] == 'ableToPick',
+                          'oneHourUnableToPick': slot[x][y] == 'oneHourUnableTopick',
+                          'isShow': slot[x][y] == 'ableToPick'
+                        }" (mouseover)="mouseoverEx(x,y)" (mouseout)="mouseoutEx(x,y)">
+              <div class="popover__content">
+                <div class="popover__header"><span>{{teacherName}}</span></div>
+                <div class="popover__line"></div>
+                <div class="popover__body">
+                  <div class="popover__body__item"><span><b>Weekday:</b>&nbsp;{{weekdays[x]}}</span></div>
+                  <div class="popover__body__item"><span><b>Time:</b>&nbsp;{{startTimeToEndTime}}</span></div>
+                  <div class="popover__body__item"><span><b>Location:</b>&nbsp;{{learnerOrgId | simplifyOrg}}</span></div>
+                  <button class="confirm__btn" (click)="confirm(x,y)" style="width:100%">confirm</button>
+                </div>
+                <div class="triangle"></div>
+              </div>
+              <small *ngIf="slot[x][y]" style="color:black;font:bold;font-size: medium;">{{learnerName[x][y]}}</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- color meanings -->
+    <div class="d-flex flex-column" style="margin-left: 20px; margin-top: 10px;">
+      <div class="d-inline-flex"><span class="dot dot_blue"></span><span>Teacher's available time.</span></div>
+      <div class="d-inline-flex"><span class="dot dot_red"></span><span>These durations have been arranged.</span></div>
+      <div class="d-inline-flex"><span class="dot dot_green"></span><span>The duration you've picked.</span></div>
+      <div class="d-inline-flex"><span class="dot dot_yellow"></span><span>Someone change schedule temporarily</span></div>
+      <div class="d-inline-flex"><span class="dot dot_gray"></span><span>Someone was on leave.</span></div>
+      <div class="d-inline-flex"><span class="dot dot_pink"></span><span>One hour between the arranged duration can not be
+          picked because of different locations.</span></div>
+    </div>
+  
+  </div>

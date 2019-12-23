@@ -191,6 +191,7 @@ import { TodoListComponent } from './components/dashboard/dashboard-components/a
 import { LearnerFilterComponent } from './shared/components/learner-filter/learner-filter.component';
 import { SessionsTopviewsComponent } from './components/dashboard/dashboard-components/sessions/sessions-topviews/sessions-topviews.component';
 import { TimePickerOrgComponent } from './components/dashboard/dashboard-components/time-picker-org/time-picker-org.component';
+import { TimerPickerBranchComponent } from './components/dashboard/dashboard-components/timer-picker-branch/timer-picker-branch.component';
 
 @NgModule({
   declarations: [
@@ -369,7 +370,8 @@ import { TimePickerOrgComponent } from './components/dashboard/dashboard-compone
     PublishPanelComponent,
     AdminNoticeComponent,
     TodoListComponent,
-    TimePickerOrgComponent
+    TimePickerOrgComponent,
+    TimerPickerBranchComponent
   ],
   imports: [
     NgbModule,
