@@ -22,8 +22,9 @@ export class TimerPickerBranchComponent implements OnInit {
   public loadingFlag: boolean = false;
   // properties for rendering in HTML
   public weekdays2 = ['1','2','3','4','5','6','7'];
-  // public weekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+  public weekdaysEx = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
   public weekdays: any[] = []; 
+  public weekdaysId: any[] = []; 
   public hours = [7,8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,22,23];
   public xIndex: number[] = [0, 1, 2, 3, 4, 5, 6];
   public yIndex: number[] = [];
@@ -84,19 +85,20 @@ export class TimerPickerBranchComponent implements OnInit {
     // get data from @Input
     this.learnerOrgId = Number(this.customCourse.location);
     this.startDate = this.customCourse.beginDate;
-    this.teacherId = this.teaList[0].TeacherId;
-    if (this.command === 1) {
-      this.teacherName = this.teaList[0].TeacherName
-    } else {
-      if(this.teaList[0].TeacherName!==undefined){
-        this.teacherName=this.teaList[0].TeacherName
-      }
-      else{
-        this.teacherName = this.teaList[0].Teacher.FirstName;
-      }
+    // this.teacherId = this.teaList[0].TeacherId;
+    // if (this.command === 1) {
+    //   this.teacherName = this.teaList[0].TeacherName
+    // } else {
+    //   if(this.teaList[0].TeacherName!==undefined){
+    //     this.teacherName=this.teaList[0].TeacherName
+    //   }
+    //   else{
+    //     this.teacherName = this.teaList[0].Teacher.FirstName;
+    //   }
       
-    }
-    this.duration = this.teaList[1].Duration;
+    // }
+    // this.duration = this.teaList[1].Duration;
+    this.duration = this.customCourse.Duration;    
     this.dayofweek = this.customCourse.DayOfWeek;
 
     // get data from server 
@@ -150,6 +152,7 @@ export class TimerPickerBranchComponent implements OnInit {
             funArr.push(this.timePickerService.getTeacherAvailableCheck(elem.TeacherId, this.startDate));
 
             this.weekdays.push(elem["Teacher"].FirstName + " " + elem["Teacher"].LastName);
+            this.weekdaysId.push(elem["TeacherId"]);
                 // console.log('TeacherAvailableData', res.Data);
                 // this.setSpecificTime(res.Data);
                 // this.renderAvailableDay();
@@ -543,9 +546,11 @@ export class TimerPickerBranchComponent implements OnInit {
   
   confirm(x: number, y: number) {
     let outputObj = {};
-    outputObj['BeginTime'] = this.startTime;
-    outputObj['Index'] = this.teaList[2];
-    outputObj['DayOfWeek'] = this.weekdays[x];
+    // outputObj['BeginTime'] = this.startTime;
+    outputObj['BeginTime'] = this.slotTime[x][y];    
+    // outputObj['Index'] = this.teaList[2];
+    outputObj['DayOfWeek'] = this.weekdaysEx[this.dayofweek];
+    outputObj['TeacherId'] = this.weekdaysId[x];
     this.beginTime.emit(outputObj);
   }
   ////////////////////////////// check if teacher's org includes learner's org/////////////////////////////////

@@ -75,15 +75,15 @@
           </div>
 
           <div [style.visibility]="isSpecifiedTime ? 'hidden' : 'visible'">
-            <input type="checkbox" formControlName="allBranchTeachers" class="checkbox" (click)="selectAllTeacherClicked()">
+            <input type="checkbox" formControlName="allBranchTeachers" class="checkbox" (click)="selectAllTeacherClicked($event)">
             <label class="check-label">All branch teachers</label>            
           </div>
-          <div [style.visibility]="(!isSpecifiedTime && this.PeriodCourseChangeForm.value.allBranchTeachers) ? 'visible' : 'hidden'">
+          <!-- <div [style.visibility]="(!isSpecifiedTime && this.PeriodCourseChangeForm.value.allBranchTeachers) ? 'visible' : 'hidden'">
             <div>Time</div>
-            <input type="text" class="form-control" formControlName="Time">
+            <input type="text" class="form-control" formControlName="Time"> -->
             <!-- <app-reason-Input  class="form-control" formControlName="reason" ></app-reason-Input>           -->
             <!-- <small class="text-danger" *ngIf="reason.invalid && reason.touched">Please enter Time</small> -->
-          </div>          
+          <!-- </div>           -->
         </div>
        
         
@@ -166,7 +166,9 @@
           this.PeriodCourseChangeForm.value.CourseScheduleId !== ''">
           <div *ngIf="this.PeriodCourseChangeForm.value.DayOfWeek !==''
             ||this.isSpecifiedTime!=1">
-            <button type='button' (click)=open()>Choose the time</button>
+            <div *ngIf="!(this.isSpecifiedTime==0 && this.PeriodCourseChangeForm.value.allBranchTeachers)">
+              <button type='button' (click)=open()>Choose the time</button>
+            </div>            
           </div>
           <!-- <button type="button" (click)=open()>Choose the time</button> -->
 
