@@ -15,7 +15,7 @@
         <li *ngFor="let key of item.Page;">
           <div *ngIf="key.Url">
           <a [routerLink]="['/' + key.Url]" routerLinkActive="active">
-            <i class="fas fa-angle-right sub-icon"></i>
+            <i class="fas sidebaricon" [ngClass]="key.Icon"></i>
             {{key.PageName}}
           </a>
         </div>
@@ -26,6 +26,9 @@
   <!-- Extras -->
   <span class="heading">Extras</span>
   <ul class="list-unstyled">
-    <li><a [routerLink]="[ '/trial']"><i class="fas fa-flask sidebaricon"></i>Test</a></li>
+    <li><a [routerLink]="[ '/trial']"><i class="fas fa-flask sidebaricon"></i>Test1</a></li>
+    <li><a [routerLink]="[ '/testone']"><i class="fas fa-desktop sidebaricon"></i>Test2</a></li>
+    <li><a [routerLink]="[ '/testone']"><i class="far fa-envelope sidebaricon"></i>Test3</a></li>
+    <li><a href="#"><i class="far fa-image sidebaricon"></i>Demo</a></li>
   </ul>
 </nav>
