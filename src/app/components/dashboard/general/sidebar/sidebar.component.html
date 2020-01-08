@@ -3,19 +3,19 @@
   <ul>
     <li>
       <a href="" routerLink="/home">
-        <i class="fa fa-home" ></i>
+        <i class="fa fa-home main-icon main-icon-home" ></i>
         Home</a>
     </li>
     <li *ngFor="let item of navitem; let i = index">
       <a href="#exampledropdownDropdown{{i}}" aria-expanded="false" data-toggle="collapse" routerLinkActive="active" class="font6">
-        <i class="fas sidebaricon" [ngClass]="item.Icon"></i>
+        <i class="fas sidebaricon main-icon" [ngClass]="item.Icon"></i>
         {{item.PageGroupName | uppercase}}
       </a>
       <ul id="exampledropdownDropdown{{i}}" class="collapse">
         <li *ngFor="let key of item.Page;">
           <div *ngIf="key.Url">
           <a [routerLink]="['/' + key.Url]" routerLinkActive="active">
-            <i class="fas sidebaricon" [ngClass]="key.Icon"></i>
+            <i class="fas fa-angle-right sub-icon"></i>
             {{key.PageName}}
           </a>
         </div>
@@ -26,9 +26,6 @@
   <!-- Extras -->
   <span class="heading">Extras</span>
   <ul class="list-unstyled">
-    <li><a [routerLink]="[ '/trial']"><i class="fas fa-flask sidebaricon"></i>Test1</a></li>
-    <li><a [routerLink]="[ '/testone']"><i class="fas fa-desktop sidebaricon"></i>Test2</a></li>
-    <li><a [routerLink]="[ '/testone']"><i class="far fa-envelope sidebaricon"></i>Test3</a></li>
-    <li><a href="#"><i class="far fa-image sidebaricon"></i>Demo</a></li>
+    <li><a [routerLink]="[ '/trial']"><i class="fas fa-flask sidebaricon"></i>Test</a></li>
   </ul>
 </nav>
