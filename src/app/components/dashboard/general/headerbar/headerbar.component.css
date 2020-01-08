@@ -187,7 +187,7 @@ nav.navbar .dropdown-menu h3 {
   background: white;
   mask-size: cover;
   position: relative;
-  top: px;
+  top: 5px;
 }
 .msg-number {
   display: block;
