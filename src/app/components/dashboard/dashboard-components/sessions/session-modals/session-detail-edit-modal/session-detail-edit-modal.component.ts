@@ -154,8 +154,9 @@ export class SessionDetailEditModalComponent implements OnInit {
       }
     )
   }
-  getTeachers = (branchId: number) => {
-    if (this.tempTeacherRef.nativeElement.checked!=true)
+  getTeachers = () => {
+    const branchId = +this.SessionForm.get("Branch").value;
+    if (this.tempTeacherRef.nativeElement.checked!=true&&branchId !=null)
       this.TeacherSelects = this.BranchSelects.filter(
         s => s.OrgId === branchId
       )[0].Teacher;
