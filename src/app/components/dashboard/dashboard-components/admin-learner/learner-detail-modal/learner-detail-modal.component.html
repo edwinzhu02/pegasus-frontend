@@ -294,13 +294,13 @@
                   <!-- teacher无编辑 -->
                   <div class="col-12" *ngIf='ele.Amendment.length == 0'>
                     <span class="label">Teacher Name: </span>
-                    <span class='text'>{{ele.Teacher.FirstName}} {{ele.Teacher.LastName}}</span>
+                    <span class='text' [ngStyle]="{'text-decoration':ele.EndDate?'line-through':null}">{{ele.Teacher.FirstName}} {{ele.Teacher.LastName}}</span>
                   </div>
 
                   <!-- teacher有编辑 -->
                   <div class='col-12' *ngIf='ele.Amendment.length !== 0'>
                     <span class="label">Teacher Name: </span>
-                    <span class='text line-trough'>{{ele.Teacher.FirstName}} {{ele.Teacher.LastName}}</span>
+                    <span class='text line-trough' >{{ele.Teacher.FirstName}} {{ele.Teacher.LastName}}</span>
                     <span class='text' *ngIf='ele.permanent'> ===> {{ele.permanent.Teacher.FirstName}}
                       {{ele.permanent.Teacher.LastName}}</span>
 
@@ -310,7 +310,7 @@
                   <div *ngIf='ele.Amendment.length == 0' class="col-12">
                     <div *ngIf='ele.Org'>
                       <span class="label">Location: </span>
-                      <span *ngIf='ele.Org.OrgName&&ele.Room.RoomName' class='text'>{{ele.Org.OrgName}}
+                      <span *ngIf='ele.Org.OrgName&&ele.Room.RoomName' [ngStyle]="{'text-decoration':ele.EndDate?'line-through':null}" class='text'>{{ele.Org.OrgName}}
                         {{ele.Room.RoomName}}</span>
                     </div>
                   </div>
@@ -328,7 +328,7 @@
                   <!-- startDay无编辑 -->
                   <div class="col-12" *ngIf='ele.Amendment.length ==0 && ele.BeginDate'>
                     <span class="label">Course Start Day: </span>
-                    <span class='text'>{{ele.BeginDate| date:'EEE, MMM d, y'}}</span>
+                    <span class='text' [ngStyle]="{'text-decoration':ele.EndDate?'line-through':null}">{{ele.BeginDate| date:'EEE, MMM d, y'}}</span>
                   </div>
 
                   <!-- startDay有编辑 -->
@@ -341,7 +341,7 @@
                   <!-- End date 无编辑 -->
                   <div class="col-12" *ngIf='ele.Amendment.length == 0'>
                     <span class="label" *ngIf='ele.EndDate'>Course End Day:</span>
-                    <span class='text' *ngIf='ele.EndDate'>{{ele.EndDate| date:'EEE, MMM d, y'}}</span>
+                    <span class='text' *ngIf='ele.EndDate' [ngStyle]="{'text-decoration':ele.EndDate?'line-through':null}">{{ele.EndDate| date:'EEE, MMM d, y'}}</span>
                   </div>
 
                   <!-- end date有编辑 -->
@@ -353,7 +353,7 @@
                   <div *ngIf='ele.Amendment.length == 0' class="col-12">
                     <div *ngFor='let sechdule of ele.CourseSchedule'>
                       <span class="label">Course Sechdule: </span>
-                      <span class='text'> {{sechdule.DayOfWeek|weekFormat}}
+                      <span class='text' [ngStyle]="{'text-decoration':ele.EndDate?'line-through':null}"> {{sechdule.DayOfWeek|weekFormat}}
                         {{sechdule.BeginTime.replace('T',' ')}} -- {{sechdule.EndTime.replace('T',' ')}} </span>
                     </div>
                   </div>

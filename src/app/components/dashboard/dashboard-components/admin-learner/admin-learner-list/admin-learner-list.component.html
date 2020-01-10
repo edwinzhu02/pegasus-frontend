@@ -56,14 +56,14 @@
           <!--table header-->
           <thead>
             <tr>
-              <th scope='col' style='width: 50px'>#</th>
-              <th *ngFor='let i of columnsToShow' scope='col' (click)='onSort(i)' counter='0' style='width: 60px'
+              <th scope='col' style='width: 30px'>#</th>
+              <th *ngFor='let i of columnsToShow' scope='col' (click)='onSort(i)' counter='0' style='width: 140px'
                 class='t_sort_title'>
                 {{AddSpaceInString(i)}}</th>
               <th *ngFor='let i of columnsToShow1' scope='col' (click)='onSort(i)' counter='0' style='width: 110px'
                 class='t_sort_title'>
                 {{AddSpaceInString(i)}}</th>
-              <th scope='col' style='width: 150px; padding-right:0px'> Status</th>
+              <th scope='col' style='width: 80px; padding-right:0px'> Status</th>
               <th scope='col' style='width: 100px; padding-right:0px'> Profile & Enrollment</th>
               <th scope='col' style='width: 100px; padding-left: 0px;'>Trial Session& Change Schedule</th>
             </tr>

@@ -17,12 +17,16 @@ export class LearnerDeleteCourseModalComponent implements OnInit {
   groupEndArray = [];
   ono2OneEndArray = [];
   dateForm;
+  currentDate:string;
 
   constructor(public activeModal: NgbActiveModal, private endCourse: LearnerRegistrationService, private fb: FormBuilder) {
     this.dateForm = this.fb.group({
     groupDateForm: this.fb.array([]),
     ono2OneDateForm: this.fb.array([])
   });
+  this.currentDate = new Date().getFullYear()+'-'+("0"+(new Date().getMonth()+1)).slice(-2)+'-'+("0"+new Date().getDate()).slice(-2)
+  // var today = new Date().getFullYear()+'-'+("0"+(new Date().getMonth()+1)).slice(-2)+'-'+("0"+new Date().getDate()).slice(-2)
+
   }
 
 
@@ -68,6 +72,15 @@ export class LearnerDeleteCourseModalComponent implements OnInit {
 
   onSubmit(ele,i){
     let fun;
+
+    if (this.ono2OneArray.controls[i].value.OneEnd >ele.EndDate ){
+      Swal.fire({
+        title: 'Error!',
+        text: 'Input date must be before the end date of the course',
+        type: 'error',
+      });
+      return;
+    }
     if(this.isGroupCourse){
       let idIns = ele.GroupCourseInstanceId;
       fun = this.endCourse.endGroupCourse(idIns, this.groupArray.controls[i].value.OneEnd);

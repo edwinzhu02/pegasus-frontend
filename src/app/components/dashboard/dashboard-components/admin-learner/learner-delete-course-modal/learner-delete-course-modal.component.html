@@ -104,7 +104,7 @@
               <div  class="col-6" [formGroupName]="j">
                 <span *ngIf='ele.EndDate' class="label">Course End Day: </span>
                 <span *ngIf='ele.EndDate' class='text'>{{ele.EndDate| date: "MMM d, y"}}</span>
-                <div *ngIf='!ele.EndDate||ele.EndDate>CurrentDate'>
+                <div *ngIf='!ele.EndDate||ele.EndDate>currentDate'>
                   <p class='text'>Edit End Day:</p>
                   <input class='form-control' type="date" formControlName="OneEnd">
                 </div>
@@ -118,7 +118,7 @@
                     {{sechdule.BeginTime}} -- {{sechdule.EndTime}} </span>
                 </div>
               </div>
-              <div *ngIf='!ele.EndDate||ele.EndDate>CurrentDate' class='col-6'>
+              <div *ngIf='!ele.EndDate||ele.EndDate>currentDate' class='col-6'>
                   <button (click)='onSubmit(ele, j)' class='btn btn-danger'>Submit End Date</button>
                 </div>              
             </div>
