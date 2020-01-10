@@ -30,7 +30,7 @@ export class HeaderbarComponent implements OnInit {
   photoUrl: any = environment.photoUrl;
   userDetail =
     {
-      img: '../../../../assets/images/usersimg/testimg.jpg',
+      img: '../../../../../assets/images/usersimg/testimg.jpg',
       firstName: '',
       lastName: ''
     }

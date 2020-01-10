@@ -135,25 +135,6 @@ nav.navbar .dropdown-menu {
   margin-right: 10px;
 }
 
-/* nav.navbar .dropdown-menu .dropdown-item:hover {
-  background: #f5f5f5;
-} */
-
-/* nav.navbar .dropdown-menu .dropdown-item i {
-  width: 30px;
-  height: 30px;
-  line-height: 30px;
-  background: #796AEE;
-  text-align: center;
-  color: #fff;
-  border-radius: 50%;
-  margin-right: 10px;
-} */
-/* 
-nav.navbar .dropdown-menu .dropdown-item small {
-  margin-left: 40px;
-} */
-
 nav.navbar .dropdown-menu span {
   /* position: static; */
   font-size: 0.9em;
@@ -167,11 +148,13 @@ nav.navbar .dropdown-menu strong {
   font-size: 1.1em;
 }
 
-/* nav.navbar .dropdown-menu .msg-profile {
-  width: 45px;
-  height: 45px;
-  margin-right: 10px;
-} */
+.nav-link.logout {
+  padding-left: 20px;
+  padding-right: 30px;
+}
+.nav-link.dropdown-toggle {
+  padding-right: 30px;
+}
 
 nav.navbar .dropdown-menu h3 {
   font-weight: 500;
@@ -200,7 +183,7 @@ nav.navbar .dropdown-menu h3 {
 .icon {
   display: inline-block;
   width: 28px;
-  height: 30px;
+  height: 25px;
   background: white;
   mask-size: cover;
   position: relative;
