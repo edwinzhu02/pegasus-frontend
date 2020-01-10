@@ -42,7 +42,27 @@ export class CourseDetailModalComponent implements OnInit {
     this.getDuration();
     // console.log(typeof(this.getTeacherLevel()))
   }
-
+  /*set course name automatic*/ 
+  setCourseName(){
+    
+    const courseName
+      =this.getSelectedText("courseCategory")+'-'
+      +this.getSelectedText("level")+'-'
+      +this.getSelectedText("teacherLevel")+'-'
+      +this.getSelectedText("duration")+'-'
+      +this.getSelectedText("courseType");
+      this.updateForm.patchValue({CourseName:courseName});
+      // =document.getElementById("courseCategory").innerText+'-'
+      // +document.getElementById("level").innerText+'-'
+      // +document.getElementById("teacherLevel").innerText+'-'
+      // +document.getElementById("duration").innerText+'-'
+      // +document.getElementById("courseType").innerText;
+  }
+  
+  getSelectedText(elementId){
+    const ele = document.getElementById(elementId) as HTMLSelectElement;
+    return  ele.options[ele.selectedIndex].text;
+  }
   /* For Dropdown Options*/
   getCourseCategories() {
     this.coursesService.getCourseCategories().subscribe(

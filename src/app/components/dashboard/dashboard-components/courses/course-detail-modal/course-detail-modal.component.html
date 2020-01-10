@@ -13,31 +13,31 @@
 <div class='modal-body'>
   <div class='t_mf_form'>
     <form [formGroup]='updateForm'>
-      <div class="row">
+      <div class="row"  (input)="setCourseName()">
         <div class="col-6">
           <label class='t_mf_label'>Course Name:</label>&nbsp;
           <small class='text-danger errorfontsmall' style='text-align: center'
           *ngIf='updateForm.get("CourseName").invalid && updateForm.get("CourseName").touched'>required</small>
-          <input type="text" class='col-12 t_mf_input' formControlName='CourseName'
+          <input id="courseName" type="text" class='col-12 t_mf_input' formControlName='CourseName'
           [class.t_mf_error_border]='updateForm.get("CourseName").invalid && updateForm.get("CourseName").touched'>
           <label class='t_mf_label'>Type:</label>&nbsp;
           <small class='text-danger errorfontsmall' style='text-align: center'
           *ngIf='updateForm.get("CourseType").invalid && updateForm.get("CourseType").touched'>required</small>
-          <select type="text" class='col-12 t_mf_input' formControlName='CourseType'
+          <select id="courseType" type="text" class='col-12 t_mf_input' formControlName='CourseType'
             [class.t_mf_error_border]='updateForm.get("CourseType").invalid && updateForm.get("CourseType").touched'>
             <option *ngFor='let i of courseTypes' value={{i.PropValue}}>{{i.PropName}}</option>
           </select>
           <label class='t_mf_label'>Teacher Level:</label>&nbsp;
           <small class='text-danger errorfontsmall' style='text-align: center'
           *ngIf='updateForm.get("TeacherLevel").invalid && updateForm.get("TeacherLevel").touched'>required</small>
-          <select type="text" class='col-12 t_mf_input' formControlName='TeacherLevel'
+          <select id="teacherLevel" type="text" class='col-12 t_mf_input' formControlName='TeacherLevel'
             [class.t_mf_error_border]='updateForm.get("TeacherLevel").invalid && updateForm.get("TeacherLevel").touched'>
             <option *ngFor='let i of teachersLevels' value={{i.PropValue}}>{{i.PropName}}</option>
           </select>
           <label class='t_mf_label'>Learner Level:</label>&nbsp;
           <small class='text-danger errorfontsmall' style='text-align: center'
           *ngIf='updateForm.get("Level").invalid && updateForm.get("Level").touched'>required</small>
-          <select type="text" class='col-12 t_mf_input' formControlName='Level'
+          <select id="level" type="text" class='col-12 t_mf_input' formControlName='Level'
             [class.t_mf_error_border]='updateForm.get("Level").invalid && updateForm.get("Level").touched'>
             <option *ngFor='let i of levels' value={{i.PropValue}}>{{i.PropName}}</option>
           </select>
@@ -46,14 +46,14 @@
           <label class='t_mf_label'>Category:</label>&nbsp;
           <small class='text-danger errorfontsmall' style='text-align: center'
           *ngIf='updateForm.get("CourseCategoryId").invalid && updateForm.get("CourseCategoryId").touched'>required</small>
-          <select type="text" class='col-12 t_mf_input' formControlName='CourseCategoryId'
+          <select id="courseCategory" type="text" class='col-12 t_mf_input' formControlName='CourseCategoryId'
             [class.t_mf_error_border]='updateForm.get("CourseCategoryId").invalid && updateForm.get("CourseCategoryId").touched'>
             <option *ngFor='let i of courseCategories' value={{i.CourseCategoryId}}>{{i.CourseCategoryName}}</option>
           </select>
           <label class='t_mf_label'>Duration(mins):</label>&nbsp;
           <small class='text-danger errorfontsmall' style='text-align: center'
           *ngIf='updateForm.get("Duration").invalid && updateForm.get("Duration").touched'>required</small>
-          <select type="text" class='col-12 t_mf_input' formControlName='Duration'
+          <select id="duration" type="text" class='col-12 t_mf_input' formControlName='Duration'
             [class.t_mf_error_border]='updateForm.get("Duration").invalid && updateForm.get("Duration").touched'>
             <option *ngFor='let i of durations' value={{i.PropValue}}>{{i.PropName}}</option>
           </select>
