@@ -19,7 +19,7 @@
       <div class="col-5">
         <div>
           <label class="mt-2">Branch</label>
-          <select [class.is-invalid]="Branch.invalid && Branch.touched" class="form-control" type="text" (change)="getTeachers(+$event.target.value)" (change)="getRooms()" (blur)="getRooms()" formControlName="Branch">
+          <select [class.is-invalid]="Branch.invalid && Branch.touched" class="form-control" type="text" (change)="getTeachers()" (change)="getRooms()" (blur)="getRooms()" formControlName="Branch">
             <!--              <option selected disabled [value]="LessonModel.Branch">{{LessonModel.Branch}}</option>-->
             <option *ngFor="let branch of BranchSelects" [value]="branch.OrgId">
               {{branch.OrgName}}
