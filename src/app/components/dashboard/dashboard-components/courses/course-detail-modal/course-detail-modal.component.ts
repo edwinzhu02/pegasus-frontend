@@ -43,8 +43,12 @@ export class CourseDetailModalComponent implements OnInit {
     // console.log(typeof(this.getTeacherLevel()))
   }
   /*set course name automatic*/ 
-  setCourseName(){
-    
+  setCourseName(e){
+    if (this.command == 2) return;
+    if (e.target.id=="courseName") return;
+    if (e.target.id=="courseCategory"&&this.getSelectedValue("courseCategory")=='9') {
+      return
+    };
     const courseName
       =this.getSelectedText("courseCategory")+'-'
       +this.getSelectedText("level")+'-'
@@ -63,6 +67,10 @@ export class CourseDetailModalComponent implements OnInit {
     const ele = document.getElementById(elementId) as HTMLSelectElement;
     return  ele.options[ele.selectedIndex].text;
   }
+  getSelectedValue(elementId){
+    const ele = document.getElementById(elementId) as HTMLSelectElement;
+    return  ele.options[ele.selectedIndex].value;
+  }  
   /* For Dropdown Options*/
   getCourseCategories() {
     this.coursesService.getCourseCategories().subscribe(

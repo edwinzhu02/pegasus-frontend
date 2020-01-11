@@ -13,7 +13,7 @@
 <div class='modal-body'>
   <div class='t_mf_form'>
     <form [formGroup]='updateForm'>
-      <div class="row"  (input)="setCourseName()">
+      <div class="row"  (input)="setCourseName($event)">
         <div class="col-6">
           <label class='t_mf_label'>Course Name:</label>&nbsp;
           <small class='text-danger errorfontsmall' style='text-align: center'
