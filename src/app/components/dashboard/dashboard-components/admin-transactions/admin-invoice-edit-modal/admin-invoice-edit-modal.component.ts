@@ -1,6 +1,6 @@
 import { IInvoice } from './../../../../../services/others/download-pdf.service';
 import { ModelTemplateComponent } from 'src/app/shared/components/model-template/model-template.component';
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter,ViewChild } from '@angular/core';
 import { NgbActiveModal, NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, Validator, Validators, RequiredValidator } from '@angular/forms';
 import { TransactionService } from '../../../../../services/http/transaction.service';
@@ -66,7 +66,11 @@ export class AdminInvoiceEditModalComponent implements OnInit {
   tempOther18Fee: number = 0
   item2: any;
   isLoading:Boolean =false;
-  totalFee: number
+  totalFee: number;
+  @ViewChild('Check1') inputCheck1; 
+  @ViewChild('Check2') inputCheck2; 
+  @ViewChild('Check3') inputCheck3; 
+
 
   // activated modal tranfer data
   @Input() item;
@@ -192,8 +196,9 @@ export class AdminInvoiceEditModalComponent implements OnInit {
     this.owingFeeLocal = this.item2.TotalFee || this.item2.LessonFee;
     this.tempLessonFee = this.item2.LessonFee
     this.getCourse();
-    this.getLooksUpData()
+    this.getLooksUpData();    
   }
+  
 
   setDataIfConfirmed() {
     if (!this.item2.ConcertFee) {
@@ -230,7 +235,7 @@ export class AdminInvoiceEditModalComponent implements OnInit {
         .subscribe(
           res => {
             this.courseData = res
-            this.coursePrice = res.Data.Course.Price
+            this.coursePrice = res.Data.Course.Price;
           },
           error => {
             this.errorMsg = JSON.parse(error.error);
@@ -257,7 +262,8 @@ export class AdminInvoiceEditModalComponent implements OnInit {
       Other3: {
         Other3FeeName: this.item2.Other3FeeName,
         Other3Fee: this.item2.Other3Fee || 0
-      }, Other1: {
+      }, 
+      Other1: {
         Other1FeeName: this.item2.Other1FeeName,
         Other1Fee: this.item2.Other1Fee || 0,
       },
@@ -328,17 +334,18 @@ export class AdminInvoiceEditModalComponent implements OnInit {
       PaidFee: this.item2.PaidFee,
       Comment: this.item2.Comment
     });
-    this.setCheckBox();
+    // this.setCheckBox();
   }
   setCheckBox(){
     if (this.item2.Other14Fee==-5){
-      document.getElementById('Check1')['checked']=true;
+      this.inputCheck1.nativeElement['checked']=true;
+      // document.getElementById('Check1')['checked']=true;
     }
     if (this.item2.Other15Fee==-10){
-      document.getElementById('Check2')['checked']=true;
+      this.inputCheck2.nativeElement['checked']=true;
     }
     if (this.item2.Other16Fee==-15){
-      document.getElementById('Check3')['checked']=true;
+      this.inputCheck3.nativeElement['checked']=true;
     }
   }
 
@@ -438,12 +445,13 @@ export class AdminInvoiceEditModalComponent implements OnInit {
       CourseInstanceId: this.item2.CourseInstanceId,
       Comment: this.invoiceEditForm.value.Comment
     }
-    data.OwingFee = +data.LessonFee + +data.ConcertFee + +data.NoteFee + +data.Other1Fee + +data.Other2Fee + +data.Other3Fee
-      + +data.Other4Fee + +data.Other5Fee + +data.Other6Fee
-      + +data.Other7Fee + +data.Other8Fee + +data.Other9Fee
-      + +data.Other10Fee + +data.Other11Fee + +data.Other12Fee
-      + +data.Other13Fee + +data.Other14Fee + +data.Other15Fee
-      + +data.Other16Fee + +data.Other17Fee + +data.Other18Fee;
+    data.OwingFee = (+data.LessonFee||0)+ (+data.ConcertFee||0) 
+      + (+data.NoteFee||0) + (+data.Other1Fee||0) + (+data.Other2Fee||0) + (+data.Other3Fee||0)
+      + (+data.Other4Fee||0) + (+data.Other5Fee||0) + (+data.Other6Fee||0)
+      + (+data.Other7Fee||0) + (+data.Other8Fee||0) + (+data.Other9Fee||0)
+      + (+data.Other10Fee||0) + (+data.Other11Fee||0) + (+data.Other12Fee||0)
+      + (+data.Other13Fee||0) + (+data.Other14Fee||0) + (+data.Other15Fee||0)
+      + (+data.Other16Fee||0) + (+data.Other17Fee||0) + (+data.Other18Fee||0);
     data.TotalFee = data.OwingFee;
 
     this.itemTempPublic = data
@@ -513,7 +521,8 @@ export class AdminInvoiceEditModalComponent implements OnInit {
             ConcertFee: this.item2.ConcertFee || +this.concertData[1].PropName,
             ConcertFeeName: this.item2.ConcertFeeName || this.concertData[0].PropName
           }
-        }
+        };
+        this.setCheckBox();
       },
       error => {
         console.log(error)
@@ -522,11 +531,11 @@ export class AdminInvoiceEditModalComponent implements OnInit {
     this.lookUpsService.getLookUps(19).subscribe(
       res => {
         let auralData = res["Data"]
-        this.tempAuralFee = Number(auralData[0].PropName);
+        this.tempAuralFee = Number(auralData[1].PropName);
         this.tempOther2 = {
           Other2: {
-            Other2Fee: this.item2.Other2Fee || +auralData[0].PropName,
-            Other2FeeName: this.item2.Other2FeeName || auralData[1].PropName
+            Other2Fee: this.item2.Other2Fee || +auralData[1].PropName,
+            Other2FeeName: this.item2.Other2FeeName || auralData[0].PropName
           }
         }
       },
@@ -537,11 +546,11 @@ export class AdminInvoiceEditModalComponent implements OnInit {
     this.lookUpsService.getLookUps(20).subscribe(
       res => {
         let theoryData = res["Data"];
-        this.tempTheoryFee = Number(theoryData[0].PropName);
+        this.tempTheoryFee = Number(theoryData[1].PropName);
         this.tempOther3 = {
           Other3: {
-            Other3Fee: this.item2.Other3Fee || +theoryData[0].PropName,
-            Other3FeeName: this.item2.Other3FeeName || theoryData[1].PropName
+            Other3Fee: this.item2.Other3Fee || +theoryData[1].PropName,
+            Other3FeeName: this.item2.Other3FeeName || theoryData[0].PropName
           }
         }
       },
