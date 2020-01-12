@@ -12,7 +12,7 @@ import { switchMap } from 'rxjs/operators';
 })
 export class SessionsTopviewsComponent implements OnInit {
  orgs:any;
- selectedOrg:number;
+//  selectedOrg:number;
 
 private selectedOrg: any;
 private dateToShow: any;
