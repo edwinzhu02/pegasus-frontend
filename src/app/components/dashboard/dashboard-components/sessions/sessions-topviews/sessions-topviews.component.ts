@@ -14,8 +14,8 @@ export class SessionsTopviewsComponent implements OnInit {
  orgs:any;
 //  selectedOrg:number;
 
-private selectedOrg: any;
-private dateToShow: any;
+public selectedOrg: any;
+public dateToShow: any;
 
   constructor(private sessionsService: SessionsService,
     private activatedRoute: ActivatedRoute,
