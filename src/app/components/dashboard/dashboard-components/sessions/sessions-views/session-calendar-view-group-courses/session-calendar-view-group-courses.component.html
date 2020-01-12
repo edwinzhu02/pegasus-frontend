@@ -1,0 +1,40 @@
+<!--search modal-->
+<ng-template #datepicker let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Search lesson by date</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="searchForm">
+      <div class="form-group">
+        <label for="dateofLesson">Date of lesson</label>
+        <div class="input-group">
+          <input formControlName="dateOfLesson" id="dateofLesson" class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #dp="ngbDatepicker">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary " (click)="dp.toggle()" type="button"><i class="fa fa-calendar"></i></button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close()" (click)="search()">Search</button>
+  </div>
+</ng-template>
+
+<div class="container" id="adminScheduler">
+  <div *ngIf="isloading" class="loaderLarge"></div>
+  
+  <div *ngIf="calendarOptions">
+    <ng-fullcalendar
+      #fullcalendar
+      [options]="calendarOptions"
+      [eventsModel]="eventsModel"
+      (clickButton)="calendarClickButton($event)"
+    ></ng-fullcalendar>
+  </div>
+</div>
+
+<!-- <app-sessions-calendar-view-admin [selectedOrg]=clickedBranch></app-sessions-calendar-view-admin> -->

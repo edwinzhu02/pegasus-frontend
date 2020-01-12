@@ -21,6 +21,8 @@ import { SessionsPanelComponent } from "./components/dashboard/dashboard-compone
 import { CoursesPanelComponent } from "./components/dashboard/dashboard-components/courses/courses-panel/courses-panel.component";
 import { AdminLearnerPanelComponent } from "./components/dashboard/dashboard-components/admin-learner/admin-learner-panel/admin-learner-panel.component";
 import { AdminLearnerListComponent } from "./components/dashboard/dashboard-components/admin-learner/admin-learner-list/admin-learner-list.component";
+import { AdminLearnerPaymentComponent } from "./components/dashboard/dashboard-components/admin-learner/admin-learner-payment/admin-learner-payment.component";
+
 import { InventoryPanelComponent } from "./components/dashboard/dashboard-components/inventory/inventory-panel/inventory-panel.component";
 import { InventoryListComponent } from "./components/dashboard/dashboard-components/inventory/inventory-list/inventory-list.component";
 import { PayrollPanelComponent } from "./components/dashboard/dashboard-components/admin-payroll/payroll-panel/payroll-panel.component";
@@ -31,6 +33,7 @@ import { AdminPaymentListComponent } from "./components/dashboard/dashboard-comp
 import { AdminSalesListComponent } from "./components/dashboard/dashboard-components/admin-transactions/admin-sales-list/admin-sales-list.component";
 import { SessionsCalendarViewAdminComponent } from "./components/dashboard/dashboard-components/sessions/sessions-views/sessions-calendar-view-admin/sessions-calendar-view-admin.component";
 import { SessionsCalendarViewTutorComponent } from "./components/dashboard/dashboard-components/sessions/sessions-views/sessions-calendar-view-tutor/sessions-calendar-view-tutor.component";
+import { SessionCalendarViewGroupCoursesComponent } from './components/dashboard/dashboard-components/sessions/sessions-views/session-calendar-view-group-courses/session-calendar-view-group-courses.component';
 import { TeacherPanelComponent } from "./components/dashboard/dashboard-components/teachers/teacher-panel/teacher-panel.component";
 import { TeacherInfoComponent } from "./components/dashboard/dashboard-components/teachers/teacher-info/teacher-info.component";
 import { TestoneComponent } from "./components/testcomponent/testone/testone.component";
@@ -177,6 +180,11 @@ const routes: Routes = [
             component: SessionsTopviewsComponent,
             canActivate: [UserAuthGuard]
           },
+          {
+            path: "calendar/groupcourses",
+            component: SessionCalendarViewGroupCoursesComponent,
+            canActivate: [UserAuthGuard]
+          },          
         ]
       },
       // Courses Area
@@ -217,6 +225,11 @@ const routes: Routes = [
             component: LearnerRegistrationFormComponent,
             canActivate: [UserAuthGuard]
           },
+          {
+            path: "payment",
+            component: AdminLearnerPaymentComponent,
+            canActivate: [UserAuthGuard]
+          },          
           { path: "trial", component: TrialInfoComponent },
           {
             path: "credit",

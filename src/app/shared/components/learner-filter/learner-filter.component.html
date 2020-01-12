@@ -32,8 +32,17 @@
                   <option *ngFor='let teacher of teachers' value={{teacher.id}} name="teacher" >{{teacher.name}}</option>
                 </select>
                 <div class="col-1"></div>
+                <div class="col-1"></div>
              <!-- </div> -->
              <!--  -->
+              <label class="col-2">Payment:</label>
+              <select class="col-3" [(ngModel)]="selectedItem.paymentStatus">
+                 <option selected value=-1>All</option>
+                 <option *ngFor='let payment of payments' value={{payment.id}} name="payment" >{{payment.name}}</option>
+               </select>
+               
+            <!-- </div> -->
+            <!--  -->             
         </div>
     </div>  
 </div>

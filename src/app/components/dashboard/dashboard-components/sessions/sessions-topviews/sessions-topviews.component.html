@@ -9,6 +9,6 @@
 <div *ngFor="let org of orgs">
   <div *ngIf="org.OrgId==selectedOrg">
       <!-- <div [style.visibility]="org.OrgId==selectedOrg ? 'visible' : 'hidden'">     -->
-      <app-sessions-calendar-view-admin [selectedOrg]=org.OrgId></app-sessions-calendar-view-admin>
+      <app-sessions-calendar-view-admin [selectedOrg]=org.OrgId [dateToShow]=dateToShow></app-sessions-calendar-view-admin>
   </div>  
 </div>

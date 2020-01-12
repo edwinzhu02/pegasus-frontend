@@ -154,6 +154,155 @@ export class DownloadPDFService {
     // doc.save(`${learnerName.firstName}  ${learnerName.lastName}'s invoice`);
     doc.output('dataurlnewwindow'); 
   }
+
+
+  downloadPDF_blob(learnerName: IInvoiceLearnerName, invoice: IInvoice ,branch) {
+    let table_header = [['DESCRIPTION', "PRICE","QUANTITY", 'AMOUNT']]
+    let body = []
+    let options = { columnWidth: 'auto' }
+    let currentHeight: number = 90
+    let interval: number = 8
+    let rowHeight = 5; 
+    let lineSpacing = { NormalSpacing: 12 }
+    let startY = 120
+    // let color = [41, 59, 68];
+    let color = [230, 230, 230];
+    let doc = new jsPDF({
+      unit: 'mm',
+    })
+    // title
+    doc.setFontSize(20);
+    // doc.setTextColor(0, 0, 0)
+    doc.setFillColor(...color)
+    //doc.rect(14, 20, 183, 25, 'F')
+    // doc.addImage(this.logo, 'PNG', 55, 20);
+    doc.addImage(this.logo, 'PNG', 14, 20);
+    doc.setTextColor(11, 58, 221);
+    doc.text(`INVOICE`,160, 30);
+    doc.setTextColor(0, 0, 0);
+    //Title words
+    doc.setFontSize(20);
+    doc.text(`ABLE MUSIC STUDIO`,60, 30);
+    doc.setFontSize(12);
+    doc.text(`${branch.OrgName.toUpperCase()} BRANCH`,65, 37);
+
+    // detail
+    doc.setFontSize(8);
+    doc.text(`${splitAddress(branch.Address).firstPart}`,15, 60);
+    doc.text(`INVOICE DATE`, 100, 60)
+    doc.text(`${formatDate(invoice.BeginDate.slice(0, 10))}`, 150, 60)    
+    doc.text(`${splitAddress(branch.Address).secondPart}`, 15, 60+rowHeight);
+    doc.text(`INVOICE NUMBER`, 100, 60+rowHeight)
+    doc.text(`${invoice.InvoiceNum}`, 150, 60+rowHeight)    
+    doc.text(` PHONE: ${branch.Phone}`, 15, 60+2*rowHeight);
+    doc.text(`GST NUMBER`, 100, 60+2*rowHeight)    
+    doc.text(`${branch.GstNum}`, 150, 60+2*rowHeight)        
+    doc.text(` E-MAIL: ${branch.Email}`, 15, 60+3*rowHeight);
+    if (invoice.DueDate) {
+      doc.text(`PAYMENT DUE:`, 100, 60+3*rowHeight);
+      doc.text(`${formatDate(invoice.DueDate.split("T")[0])}`, 150, 60+3*rowHeight);      
+    }
+
+    doc.setFontSize(10);
+    // doc.setTextColor(255, 255, 255);
+    doc.setFillColor(...color)
+    doc.rect(14, 60+5*rowHeight-5, 183, 8, 'F')
+    doc.text(`BILL To: `, 16, 60+5*rowHeight);
+    doc.setFontSize(8);
+    // doc.setTextColor(0, 0, 0);    
+    doc.text(`${learnerName.firstName.toUpperCase()}  ${learnerName.lastName.toUpperCase()}`, 16, 65+6*rowHeight);   
+    if (learnerName.Email)
+      doc.text(`EMAIL:${learnerName.Email}`, 16, 65+7*rowHeight);  
+
+    currentHeight -= interval;
+
+    if (invoice.LessonFee>0) {
+      currentHeight += interval
+      body.push([invoice.CourseName, '$'+(invoice.LessonFee/invoice.LessonQuantity).toFixed(2),
+        invoice.LessonQuantity, '$'+invoice.LessonFee.toFixed(2)])
+    }
+    if (invoice.ConcertFee) {
+      currentHeight += interval
+      // doc.text(`${invoice.ConcertFeeName}`, 20, currentHeight);
+      // doc.text(`$${invoice.ConcertFee}`, 90, currentHeight);
+      body.push([invoice.ConcertFeeName, '$'+invoice.ConcertFee.toFixed(2),1, '$'+invoice.ConcertFee.toFixed(2)])
+    }
+
+    if (invoice.NoteFee) {
+      currentHeight += interval
+      // doc.text(`${invoice.LessonNoteFeeName}`, 20, currentHeight);
+      // doc.text(`$${invoice.NoteFee}`, 90, currentHeight);
+      body.push([invoice.LessonNoteFeeName, '$'+invoice.NoteFee.toFixed(2), 1, '$'+invoice.NoteFee.toFixed(2)])
+    }
+
+    // if (invoice.Other1Fee) {
+    //   currentHeight += interval
+    //   // doc.text(`${invoice.Other1FeeName}`, 20, currentHeight)
+    //   // doc.text(`$${invoice.Other1Fee}`, 90, currentHeight)
+    //   body.push([invoice.Other1FeeName, '$'+invoice.Other1Fee.toFixed(2),1, '$'+invoice.Other1Fee.toFixed(2)])
+    // }
+
+    // if (invoice.Other2Fee) {
+    //   currentHeight += interval
+    //   // doc.text(`${invoice.Other2FeeName}`, 20, currentHeight)
+    //   // doc.text(`$${invoice.Other2Fee}`, 90, currentHeight)
+    //   body.push([invoice.Other2FeeName,'$'+invoice.Other2Fee.toFixed(2), 1, '$'+invoice.Other2Fee.toFixed(2)])
+    // }
+
+    // if (invoice.Other3Fee) {
+    //   currentHeight += interval
+    //   // doc.text(`${invoice.Other3FeeName}`, 20, currentHeight)
+    //   // doc.text(`$${invoice.Other3Fee}`, 90, currentHeight)
+    //   body.push([invoice.Other3FeeName, '$'+invoice.Other3Fee.toFixed(2),1, '$'+invoice.Other3Fee.toFixed(2)])
+    // }
+    for (let i=1; i<=18; i++){
+      let col1= 'Other'+i+'FeeName';
+      let col2 = 'Other'+i+'Fee';
+      currentHeight = addItem(invoice,body,interval,currentHeight,col1,col2);
+    }
+    
+
+    doc.setFontSize(16);
+    doc.autoTable({
+      head: table_header, body, options,
+      startY,
+      styles: { fillColor: [...color]},
+      headerStyles: {
+        fillColor: [...color],
+        textColor: [0,0,0],
+        // fontSize: 12
+    },
+    });
+    startY = doc.autoTableEndPosY() + 10;
+    doc.setFontSize(10);
+    doc.text(`Subtotal:`, 155, startY );
+    doc.text(`$ ${invoice.TotalFee.toFixed(2)}`, 180, startY );    
+    doc.setFontSize(9);
+    doc.text(`GST incl:`, 155, startY +=6);
+    doc.text(`$ ${(getGst(invoice.TotalFee))}`, 180, startY);    
+    doc.setFontSize(11);
+    doc.text(`TOTAL:`, 155, startY += 6);
+    doc.text(`$ ${invoice.TotalFee.toFixed(2)}`, 180, startY);    
+
+    // doc.setTextColor(255, 255, 255);
+    doc.setFillColor(...color)
+    doc.rect(14, startY+=6, 183, 8, 'F')
+    doc.setFontSize(11);
+    doc.text(`Note:`, 16, startY+=6); 
+    // doc.setTextColor(0, 0, 0);
+    doc.setFontSize(8);   
+    doc.text(`1, Total payment due in 7 days`, 16, startY+=8);      
+    doc.text(`2, Please include the invoice number with your payment`, 16, startY+=6); 
+
+    doc.text(`ABLE MUSIC STUDIO ${branch.OrgName.toUpperCase()} BANK ACCOUNT DETAIL`, 16, startY+=8);
+    doc.text(`BANK:${branch.BankName}`, 16, startY+=6);
+    doc.text(`Account Number:${branch.BankAccountNo}`, 16, startY+=6);    
+    doc.text(`If you have any questions about this invoice, please contact us immediately.`, 30, startY+=6);    
+    // doc.save(`${learnerName.firstName}  ${learnerName.lastName}'s invoice`);
+    // var re  = doc.output('arraybuffer'); 
+    var re  = doc.output('blob');
+    return re;
+  }  
 }
 function splitAddress(address:string) {
   const [number, road, Suburb, city] = address.split(',');

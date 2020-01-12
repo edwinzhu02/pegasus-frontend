@@ -1,0 +1,39 @@
+<!--modal header-->
+<div class='modal-header'>
+  <h4 class='modal-title'><span class='t_dm_title'>Send Email</span></h4>
+  <button type="button" class='btn btn-sm btn-info t_dm_close_btn' aria-label="Close"
+    (click)="activeModal.close('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+
+<form [formGroup]="emailForm" (ngSubmit)="onSubmit()">
+
+  <div>
+    <label for="title" class="form-label">
+      Title: 
+    </label>
+    <input id="title" type="text" class="title  col-12" formControlName="title">
+  </div>
+
+  <div>
+    <label for="contents" class="form-label">
+      Contents: 
+    </label>
+    <textarea id="contents" formControlName="contents" maxlength="1000" class='l-comment col-12'></textarea>
+  </div>
+  <br>
+  <input type="checkbox" class="selectAll" formControlName="selectAttachment" (click)="checkAttachmentClick()">
+  <label class="check-label">
+    Attach Invoices
+  </label>
+
+  <button class="submit btn btn-outline-primary" type="submit">Send</button>
+</form>
+
+
+<!--modal footer-->
+<div class='modal-footer'> 
+  <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+</div>  

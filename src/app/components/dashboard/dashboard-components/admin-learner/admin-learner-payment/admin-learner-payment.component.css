@@ -1,0 +1,20 @@
+.loaderLarge{
+    position: fixed;
+    top:40%;
+    left: 50%;
+  }
+
+  .t_info_title{
+    height:80px;
+    font-size:30px;
+    font-weight: 330;
+    line-height: 80px;
+    color:grey;
+    text-align: center;
+}
+
+
+.check-label
+{
+  margin-left: 5px;
+}

@@ -29,6 +29,8 @@ import { JsonHubProtocol } from '@aspnet/signalr';
 })
 export class SessionsCalendarViewAdminComponent implements OnInit {
   @Input() selectedOrg;
+  @Input() dateToShow;  
+
   debounce = debounce();
   searchForm: FormGroup; // searchform by formbuilder
   reason: string;  // session edit reason
@@ -67,7 +69,15 @@ export class SessionsCalendarViewAdminComponent implements OnInit {
       this.selectedOrg=JSON.parse(localStorage.getItem("OrgId"))[0];
     this.sessionService.getReceptionistRoom(this.selectedOrg).subscribe(data => {
       this.resourceData = data.Data;
-      const date = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
+
+      let date;
+      if(this.dateToShow == null || this.dateToShow == undefined){
+        date = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
+      }
+      else{
+        date = this.dateToShow;       
+      }
+      
       this.sessionService.getReceptionistLesson(date,this.selectedOrg).subscribe(event => {
         this.eventsModel = this.generateEventData(event.Data);
         this.teacherAvoidDuplicate();
@@ -143,6 +153,11 @@ export class SessionsCalendarViewAdminComponent implements OnInit {
         },
         plugins: [timeslot, interactionPlugin]
       };
+
+      if(this.dateToShow != null && this.dateToShow != undefined){
+        this.fullcalendar.calendar.gotoDate(this.dateToShow);
+      }
+
     });
   }
   ngOnChanges():void {

@@ -191,6 +191,9 @@ import { TodoListComponent } from './components/dashboard/dashboard-components/a
 import { LearnerFilterComponent } from './shared/components/learner-filter/learner-filter.component';
 import { SessionsTopviewsComponent } from './components/dashboard/dashboard-components/sessions/sessions-topviews/sessions-topviews.component';
 import { TimePickerOrgComponent } from './components/dashboard/dashboard-components/time-picker-org/time-picker-org.component';
+import { AdminLearnerPaymentComponent } from './components/dashboard/dashboard-components/admin-learner/admin-learner-payment/admin-learner-payment.component';
+import { AdminSendPaymentEmailComponent } from './components/dashboard/dashboard-components/admin-learner/admin-send-payment-email/admin-send-payment-email.component';
+import { SessionCalendarViewGroupCoursesComponent } from './components/dashboard/dashboard-components/sessions/sessions-views/session-calendar-view-group-courses/session-calendar-view-group-courses.component';
 
 @NgModule({
   declarations: [
@@ -369,7 +372,10 @@ import { TimePickerOrgComponent } from './components/dashboard/dashboard-compone
     PublishPanelComponent,
     AdminNoticeComponent,
     TodoListComponent,
-    TimePickerOrgComponent
+    TimePickerOrgComponent,
+    AdminLearnerPaymentComponent,
+    AdminSendPaymentEmailComponent,
+    SessionCalendarViewGroupCoursesComponent
   ],
   imports: [
     NgbModule,
@@ -463,7 +469,9 @@ import { TimePickerOrgComponent } from './components/dashboard/dashboard-compone
     TrialCalendarComponent,
     TrialConfirmationComponent,
     RegistrationToParentComponent,
-    LearnerAddModalTestComponent
+    LearnerAddModalTestComponent,
+    AdminLearnerPaymentComponent,
+    AdminSendPaymentEmailComponent
   ],
   exports: [AppComponent],
   bootstrap: [AppComponent]

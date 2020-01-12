@@ -13,7 +13,8 @@ interface ISelectedItem {
   teacherId: number;
   branchId: number ;
   courseTypeId:number;
-  instrumentId:number
+  instrumentId:number;
+  paymentStatus:number;
 }
 
 @Component({
@@ -31,12 +32,14 @@ export class LearnerFilterComponent implements OnInit {
   public instruments:IOption[]=[];
   public courseTypes:IOption[]=[];
   public branchs:IOption[]=[];
+  public payments:IOption[]=[];
   public thisUserbranchs=[];
   public selectedItem:ISelectedItem={
     teacherId:-1,
     branchId:-1,
     courseTypeId:-1,
-    instrumentId:-1
+    instrumentId:-1,
+    paymentStatus:-1
   };
 
   public isError:boolean=false;
@@ -54,6 +57,7 @@ export class LearnerFilterComponent implements OnInit {
         this.branchs = this.parseBranch( res[1]['Data']); 
         this.courseTypes = this.parseCourseType( res[2]['Data']);         
         this.instruments = this.parseInstrument( res[3]['Data']);         
+        this.payments = this.makePaymentType();
       },
       err=>{
         this.isError = true;
@@ -116,6 +120,23 @@ export class LearnerFilterComponent implements OnInit {
     });
     return outData;
   } 
+
+  makePaymentType(){
+    let outData=[];
+
+      outData.push({
+         id:Number(0),
+         name:"not paid"
+       });
+
+       outData.push({
+        id:Number(1),
+        name:"paid"
+      });
+
+    return outData;
+  }   
+
   onChange(){
     this.filter.emit(this.selectedItem);
   }

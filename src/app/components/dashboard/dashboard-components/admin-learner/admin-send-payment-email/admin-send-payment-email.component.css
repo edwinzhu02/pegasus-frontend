@@ -1,0 +1,57 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    padding-top: 24px;
+  }
+
+.form-label{
+    display: block;
+    width: 6em;
+    margin: .5em 0;
+    color: #607D8B;
+    font-weight: bold;
+    /* padding-left: 24px; */
+}
+
+.check-label
+{
+  margin-left: 5px;
+}
+
+form{
+
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.submit {
+      display: block;
+    /* font-family: Arial;
+    background-color: #eee;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer; */
+    /* margin-right: 20px; */
+    float:right;
+}
+
+/* 
+button:hover {
+    background-color: #cfd8dc;
+}
+
+button:disabled {
+    background-color: #eee;
+    color: #ccc;
+    cursor: auto;
+} */
+
+.l-comment{
+  border: none;
+  border: 1px solid lightgray;
+  border-radius: 9px;
+  height: 150px;
+  text-align: left;
+}
+
