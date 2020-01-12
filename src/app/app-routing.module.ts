@@ -225,11 +225,7 @@ const routes: Routes = [
             component: LearnerRegistrationFormComponent,
             canActivate: [UserAuthGuard]
           },
-          {
-            path: "payment",
-            component: AdminLearnerPaymentComponent,
-            canActivate: [UserAuthGuard]
-          },          
+          
           { path: "trial", component: TrialInfoComponent },
           {
             path: "credit",
@@ -289,7 +285,12 @@ const routes: Routes = [
         component: CoporateOrderApplicationComponent
       },
       { path: "conflict-Check", component: ConflictCheckComponent },
-      { path: "publish", component: PublishPanelComponent }
+      { path: "publish", component: PublishPanelComponent },
+      {
+        path: "emailSender",
+        component: AdminLearnerPaymentComponent,
+        canActivate: [UserAuthGuard]
+      },
     ]
   },
   { path: "login", component: LoginComponent },

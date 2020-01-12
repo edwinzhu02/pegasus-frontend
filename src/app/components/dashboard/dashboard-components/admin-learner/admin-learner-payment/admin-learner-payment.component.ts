@@ -23,7 +23,7 @@ export class AdminLearnerPaymentComponent implements OnInit {
 
   private termId: number;
 
-  private loadingFlag: boolean;
+  public loadingFlag: boolean;
 
   private paymentStatus=-1
 

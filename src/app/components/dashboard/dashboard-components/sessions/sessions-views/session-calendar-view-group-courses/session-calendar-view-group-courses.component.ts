@@ -31,7 +31,7 @@ export class SessionCalendarViewGroupCoursesComponent implements OnInit {
   @ViewChild(CalendarComponent) fullcalendar: CalendarComponent;
   @ViewChild('datepicker') datePicker;
 
-  private calendarOptions: OptionsInput;
+  public calendarOptions: OptionsInput;
   private calendarResourceData: any;
   private calendarEventData = [];
   private eventsModel: any;
@@ -42,7 +42,7 @@ export class SessionCalendarViewGroupCoursesComponent implements OnInit {
 
   private isOneToOne: any;
 
-  private isloading = false;
+  public isloading = false;
 
   debounce = debounce();
 

@@ -18,7 +18,7 @@ import { PostEmailServiceService } from "../../../../../services/http/post-email
 })
 export class AdminSendPaymentEmailComponent implements OnInit {
 
-  private emailForm: FormGroup;
+  public emailForm: FormGroup;
   public errorMessage: string;
 
 @Input() learnlist;
