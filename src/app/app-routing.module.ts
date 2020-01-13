@@ -184,7 +184,12 @@ const routes: Routes = [
             path: "calendar/groupcourses",
             component: SessionCalendarViewGroupCoursesComponent,
             canActivate: [UserAuthGuard]
-          },          
+          },         
+          {
+            path: "calendar/groupcourses/:onetoone",
+            component: SessionCalendarViewGroupCoursesComponent,
+            canActivate: [UserAuthGuard]
+          },                     
         ]
       },
       // Courses Area

@@ -102,7 +102,7 @@ export class SessionCalendarViewGroupCoursesComponent implements OnInit {
         this.generateOneToOneCoursesEventData(datetoshow);
 
       }
-
+      console.log(this.fullcalendar);
       this.fullcalendar.calendar.gotoDate(datetoshow);
     },
     err => {
