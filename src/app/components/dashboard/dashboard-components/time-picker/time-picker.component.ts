@@ -351,6 +351,8 @@ export class TimePickerComponent implements OnInit {
       let bottomY = this.getBottomY(isAvailable, ableToPick, x, y);
       for (let i = 0; i < this.duration + 1; i++) {
         this.slot[x][bottomY - i] = ableToPick;
+        this.startTime = `${this.slotTime[x][bottomY-(this.duration+1)]}`;
+        this.startTimeToEndTime = `${this.slotTime[x][bottomY-(this.duration+1)]}-${this.slotTime[x][bottomY]}`;        
       };
     }
   }

@@ -108,35 +108,7 @@ export class TimerPickerBranchComponent implements OnInit {
   }
 
   getTeachers(){
-    // if(this.isAllTeacherChecked){
-      // this.coursesService.getOrgs().subscribe((res) => {
-      //   let outData = [];
-      //   // console.log(res);
-      //   res['Data'].forEach(e => {
-      //     outData.push({
-      //       id: e['OrgId'], 
-      //       title: e['OrgName']});
-      //   });
-  
-      //   this.learnerService.GetTeacherByOrg(this.PeriodCourseChangeForm.get('OrgId').value)
-      //   .subscribe(res => {
-      //     this.Teachers = res['Data'];
-      //     // this.teaList=this.Teachers[0].Teacher;
-      //   }, err => {
-      //     console.log(err);
-      //   }); 
 
-      // },
-      // err => {
-      //   this.isloading = false;
-      //   Swal.fire({
-      //     type: 'error',
-      //     title: 'Oops...',
-      //     text: err.error.ErrorMessage
-      //   });
-      // });   
-    // }
-    // else{
 
 
   
@@ -214,115 +186,6 @@ export class TimerPickerBranchComponent implements OnInit {
               console.log(err);
               alert('Sorry, something went wrong.' + err)
             })          
-
-
-
-
-          // let funArr = [];
-          // funArr.push(this.coursesService.getCourses());
-          // funArr.push(this.registrationService.getGroupCourse());
-          // this.whichLearner.One2oneCourseInstance.forEach(e => {
-          //   funArr.push(this.registrationService.getTeacherFilter(e.CourseId));
-          // })
-          // //funArr.push(this.registrationService.getTeacherFilter(this.whichLearner.One2oneCourseInstance[0].CourseId));
-          // forkJoin(...funArr).subscribe(
-          //   (res) => {
-          //     pureCourses = res[0].Data;
-          //     this.groupCourseInstance = res[1].Data;
-          //     allData = res;
-    
-          //     console.log(pureCourses, allData)
-          //     pureCourses.forEach(e => {
-          //       //console.log(e);
-          //       if (CatList.findIndex(c => c.CourseCategoryId === e.CourseCategory.CourseCategoryId) < 0)
-          //         CatList.push(e.CourseCategory);
-          //     });
-          //     console.log(CatList);
-    
-          //     //groupCourse
-          //     console.log(this.whichLearner.LearnerGroupCourse, this.groupCourseInstance);
-          //     this.groupCourseInstance.forEach(g => {
-          //       let foundGroupCourse = this.whichLearner.LearnerGroupCourse.find(e =>
-          //         e.GroupCourseInstanceId === g.GroupCourseInstanceId
-          //       );
-    
-          //       if (foundGroupCourse) {
-          //         g.isChecked = true;
-          //         g.comments = foundGroupCourse.Comment;
-          //         g.beginDate = foundGroupCourse.BeginDate.slice(0, 10);
-          //       } else {
-          //         g.comments = null;
-          //         g.isChecked = false;
-          //         g.beginDate = this.myDate();
-          //       }
-          //     });
-          //     console.log(this.whichLearner.LearnerGroupCourse, this.groupCourseInstance);
-          //     this.whichLearner.LearnerGroupCourse.forEach(lg => {
-    
-          //     })
-          //     //one to one
-          //     this.whichLearner.One2oneCourseInstance.map((o, i) => {
-          //       console.log(o, pureCourses);
-          //       teacherFilter = allData[i + 2].Data;
-          //       this.setUniCatListArray[i] = CatList;
-          //       let courseItemArray1 = pureCourses.filter(e =>
-          //         e.CourseCategory.CourseCategoryId == o.Course.CourseCategoryId
-          //       )
-          //       console.log(courseItemArray1);
-          //       let courseItemArray = courseItemArray1
-          //         .filter(ele =>
-          //           ((o.Course.CourseCategoryId == 1 && ele.Level == this.selectLearnerLevel)
-          //             || o.Course.CourseCategoryId != 1)
-          //         );
-          //       console.log(courseItemArray);
-          //       console.log(this.courseListArray);
-          //       this.courseListArray[i] = { courseItemArray: courseItemArray };
-          //       console.log(this.courseListArray);
-          //       //let locItemArray = TeacherFilter;
-          //       this.locListArray[i] = { locItemArray: teacherFilter };
-          //       //prepareTeaLevListArray[i].
-          //       console.log(teacherFilter);
-          //       let prepareTeaLevItemArray = teacherFilter.find(e => e.OrgId == o.OrgId).Level;
-          //       this.prepareTeaLevListArray[i] = { prepareTeaLevItemArray: prepareTeaLevItemArray };
-          //       //prepareTeaNameListArray[i].prepareTeaNameItemArray
-          //       let prepareTeaNameItemArray = prepareTeaLevItemArray.find(e => e.levelId == o.Course.TeacherLevel).teacher;
-          //       this.prepareTeaNameListArray[i] = { prepareTeaNameItemArray: prepareTeaNameItemArray };
-          //       //prepareRoomListArray[i].prepareRoomItemArray
-          //       let prepareRoomItemArray = teacherFilter.find(e => e.OrgId == o.OrgId).Room;
-          //       this.prepareRoomListArray[i] = { prepareRoomItemArray: prepareRoomItemArray };
-          //       this.customCourse.push(
-          //         this.fb.group({
-          //           courseCategory: [o.Course.CourseCategoryId],
-          //           course: [o.Course.CourseId],
-          //           teacherLevel: [o.Course.TeacherLevel],
-          //           teacherName: [o.TeacherId],
-          //           location: [o.OrgId],
-          //           room: [o.RoomId],
-          //           beginDate: [o.BeginDate ? o.BeginDate.slice(0, 10) : ''],
-          //           endDate: [o.EndDate ? o.EndDate.slice(0, 10) : ''],
-          //           schedule: this.fb.group({
-          //             dayOfWeek: [o.CourseSchedule[0] ? (o.CourseSchedule[0].DayOfWeek ? o.CourseSchedule[0].DayOfWeek : null) : null],
-          //             beginTime: [{
-          //               hour: o.CourseSchedule[0] ? (o.CourseSchedule[0].BeginTime ? parseInt(o.CourseSchedule[0].BeginTime.slice(0, 2)) : null) : null,
-          //               minute: o.CourseSchedule[0] ? (o.CourseSchedule[0].BeginTime ? parseInt(o.CourseSchedule[0].BeginTime.slice(3, 5)) : null) : null,
-          //               second: o.CourseSchedule[0] ? (o.CourseSchedule[0].BeginTime ? parseInt(o.CourseSchedule[0].BeginTime.slice(6, 8)) : null) : null
-          //             }],//{ hour: 9, minute: 0, second: 0 }
-          //             //{ hour: 9, minute: 0, second: 0 }  09:03:14
-          //             durationType: [o.Course.Duration]
-          //           }),
-          //         })
-          //       );
-          //       console.log(o);
-          //       console.log(this.setUniCatListArray, this.courseListArray);
-          //       console.log(this.locListArray, this.prepareTeaLevListArray);
-          //       console.log(this.prepareTeaNameListArray, this.prepareRoomListArray);
-          //     },
-          //       (err) => {
-          //         console.log(err);
-          //         alert('Sorry, something went wrong.' + err)
-          //       }
-          //     );
-          //   })
 
 
         }, err => {
@@ -725,6 +588,8 @@ export class TimerPickerBranchComponent implements OnInit {
       let bottomY = this.getBottomY(isAvailable, ableToPick, x, y);
       for (let i = 0; i < this.duration + 1; i++) {
         this.slot[x][bottomY - i] = ableToPick;
+        this.startTime = `${this.slotTime[x][bottomY-(this.duration+1)]}`;
+        this.startTimeToEndTime = `${this.slotTime[x][bottomY-(this.duration+1)]}-${this.slotTime[x][bottomY]}`;   
       };
     }
   }
