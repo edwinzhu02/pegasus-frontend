@@ -347,6 +347,23 @@ export class AdminInvoiceEditModalComponent implements OnInit {
     if (this.item2.Other16Fee==-15){
       this.inputCheck3.nativeElement['checked']=true;
     }
+    if (this.item2.Other16Fee==-15){
+      this.inputCheck3.nativeElement['checked']=true;
+    }
+    if (this.item2.Other16Fee==-15){
+      this.inputCheck3.nativeElement['checked']=true;
+    }
+
+    if (this.item2.Other2Fee>0){
+      (document.getElementById("auralCheckBox")['checked'])=true;
+      this.auralInUse = !this.auralInUse;
+    }
+      
+    if (this.item2.Other3Fee>0){
+      (document.getElementById("theoryCheckBox")['checked'])=true;
+      this.theoryInUse = !this.theoryInUse 
+    }
+          
   }
 
   // moniting user change course quantity

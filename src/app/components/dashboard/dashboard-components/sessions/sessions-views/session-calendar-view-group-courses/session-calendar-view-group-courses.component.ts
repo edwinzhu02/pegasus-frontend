@@ -102,8 +102,8 @@ export class SessionCalendarViewGroupCoursesComponent implements OnInit {
         this.generateOneToOneCoursesEventData(datetoshow);
 
       }
-      console.log(this.fullcalendar);
-      this.fullcalendar.calendar.gotoDate(datetoshow);
+      // console.log(this.fullcalendar);
+      // this.fullcalendar.calendar.gotoDate(datetoshow);
     },
     err => {
       this.isloading = false;
@@ -228,7 +228,7 @@ export class SessionCalendarViewGroupCoursesComponent implements OnInit {
     }
 
 
-    this.fullcalendar.calendar.gotoDate(datetoshow);
+    // this.fullcalendar.calendar.gotoDate(datetoshow);
   }
 
   generateGroupCoursesEventData(datetoshow){
@@ -256,7 +256,7 @@ export class SessionCalendarViewGroupCoursesComponent implements OnInit {
       console.log(outData);
       this.isloading = false;
 
-      // this.fullcalendar.calendar.gotoDate(datetoshow);
+       this.fullcalendar.calendar.gotoDate(datetoshow);
 
 
     }, err => {
@@ -297,7 +297,7 @@ generateOneToOneCoursesEventData(datetoshow){
     console.log(outData);
     this.isloading = false;
 
-    // this.fullcalendar.calendar.gotoDate(datetoshow);
+     this.fullcalendar.calendar.gotoDate(datetoshow);
 
   }, err => {
     this.isloading = false;

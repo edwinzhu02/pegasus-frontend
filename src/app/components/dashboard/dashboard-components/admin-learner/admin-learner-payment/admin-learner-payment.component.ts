@@ -107,11 +107,11 @@ export class AdminLearnerPaymentComponent implements OnInit {
     modalRef.componentInstance.learnlist = this.learnerInvoList;
     modalRef.componentInstance.selectArray = this.checkboxModel;    
 
-    modalRef.componentInstance.signalForInit.subscribe(res => {
-      if (res == true) {
-        that.ngOnInit();
-      }
-    });
+    // modalRef.componentInstance.signalForInit.subscribe(res => {
+    //   if (res == true) {
+    //     that.ngOnInit();
+    //   }
+    // });
   }
 
 onChange(learners)
