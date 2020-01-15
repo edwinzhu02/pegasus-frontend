@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, ViewChild, AfterViewChecked, Output, EventEmitter } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { TimePickerComponent } from '../../time-picker/time-picker.component';
+import { TimerPickerBranchComponent } from '../../timer-picker-branch/timer-picker-branch.component';
+
 import { Observable } from 'rxjs';
 import { Command } from 'protractor';
 @Component({
@@ -12,8 +14,11 @@ export class LearnerRegistrationModalComponent implements OnInit, AfterViewCheck
   timepickerChosen;
   // get data from timepickerComponent
   @ViewChild(TimePickerComponent) timePickerComponent;
+  @ViewChild(TimerPickerBranchComponent) timerPickerBranchComponent; 
+
   customCourse;
   teaList;
+  isSpecifiedTime;
 
   // edwin add
   @Input() command;
@@ -26,7 +31,12 @@ export class LearnerRegistrationModalComponent implements OnInit, AfterViewCheck
   constructor(public activeModal: NgbActiveModal) { }
 
   ngAfterViewChecked() {
-    this.timepickerChosen = this.timePickerComponent.name;
+    if(this.isSpecifiedTime){
+      this.timepickerChosen = this.timerPickerBranchComponent.name; 
+    }
+    else{
+      this.timepickerChosen = this.timePickerComponent.name;      
+    }
   }
 
   ngOnInit() {

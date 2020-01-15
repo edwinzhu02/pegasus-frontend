@@ -4,10 +4,16 @@
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
-<div class="modal-body">
+<div class="modal-body" *ngIf="!this.isSpecifiedTime">
   <app-time-picker [command]="command" [customCourse]='customCourse' [teaList]='teaList'
     (beginTime)="beginTimeFromChild($event)"></app-time-picker>
 </div>
+
+<div class="modal-body" *ngIf="this.isSpecifiedTime">
+  <app-timer-picker-branch [command]="command" [customCourse]='customCourse' [teaList]='teaList'
+    (beginTime)="beginTimeFromChild($event)"></app-timer-picker-branch>
+</div>
+
 <div class="modal-footer">
   <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
 </div>

@@ -194,6 +194,7 @@ import { TimePickerOrgComponent } from './components/dashboard/dashboard-compone
 import { AdminLearnerPaymentComponent } from './components/dashboard/dashboard-components/admin-learner/admin-learner-payment/admin-learner-payment.component';
 import { AdminSendPaymentEmailComponent } from './components/dashboard/dashboard-components/admin-learner/admin-send-payment-email/admin-send-payment-email.component';
 import { SessionCalendarViewGroupCoursesComponent } from './components/dashboard/dashboard-components/sessions/sessions-views/session-calendar-view-group-courses/session-calendar-view-group-courses.component';
+import { TimerPickerBranchComponent } from './components/dashboard/dashboard-components/timer-picker-branch/timer-picker-branch.component';
 
 @NgModule({
   declarations: [
@@ -375,7 +376,8 @@ import { SessionCalendarViewGroupCoursesComponent } from './components/dashboard
     TimePickerOrgComponent,
     AdminLearnerPaymentComponent,
     AdminSendPaymentEmailComponent,
-    SessionCalendarViewGroupCoursesComponent
+    SessionCalendarViewGroupCoursesComponent,
+    TimerPickerBranchComponent
   ],
   imports: [
     NgbModule,

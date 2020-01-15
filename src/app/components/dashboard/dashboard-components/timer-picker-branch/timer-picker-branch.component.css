@@ -1,0 +1,205 @@
+.weekly-schedule {
+    display: table;
+    background-color: #f5f5fa;
+    border: 1px solid #ddd;
+    padding: 10px;
+  }
+  .hour-labels {
+    display: table-cell;
+    width: 50px;
+  }
+  .hour-label {
+    font-size: 13px;
+    text-align: center;
+    margin-right: 7px;
+    height: 40px;
+    box-sizing: border-box;
+    position: relative;
+    top: 72px;
+  }
+  .days {
+    border: 1px solid rgb(182, 178, 178);
+  }
+  .day {
+    display: table-cell;
+    border: 1px solid #ddd;
+  }
+  .day-label-test {
+    background-color: rgb(130, 175, 130);
+    padding: 10px;
+    text-align: center;
+    width: 7vw;
+  }
+  .day-label {
+    background-color: #eaeaf0;
+    padding: 10px;
+    text-align: center;
+    width: 7vw;
+    height: 90px;
+  }
+  .location {
+    background-color: #eaeaf0;
+    color: rgb(182, 178, 178);
+    height: 50px;
+  }
+  
+  .slots {
+    border-top: 1px solid rgb(182, 178, 178);
+  }
+  .slot {
+    border-bottom: 1px dotted #e0e0e0;
+    height: 10px;
+    width: 7vw;
+    position: relative;
+  }
+  .slot:last-child {
+    border-bottom: none;
+  }
+  .slot-bottom {
+    border-bottom: 1px solid rgb(204, 165, 165);
+  }
+  .button {
+    margin-top: 10px;
+    margin-right: 20px;
+  }
+  .arrangedIsRed {
+    background-color: rgba(255, 0, 0, 0.5);
+    border-radius: 3px;
+    border: 0px;
+    border-bottom: 1px dotted #e0e0e0;
+  }
+  .availableDayIsBlue {
+    background-color: rgba(15, 191, 235, 0.5);
+    border-radius: 3px;
+    border: 0px;
+    border-bottom: 1px dotted #e0e0e0;
+  }
+  .dayOffIsGray {
+    background-color: rgba(115, 111, 116, 0.5);
+    border-radius: 3px;
+    border: 0px;
+    border-bottom: 1px dotted #e0e0e0;
+  }
+  .tempChangeIsYellow {
+    background-color: rgba(248, 220, 59, 0.5);
+    border-radius: 3px;
+    border: 0px;
+    border-bottom: 1px dotted #e0e0e0;
+  }
+  .ableToPickIsGreen {
+    background-color: rgba(6, 104, 19, 0.5);
+    border-radius: 3px;
+    border: 0px;
+    border-bottom: 1px dotted #e0e0e0;
+  }
+  .unableToPickIsGray {
+    background-color: rgb(59, 55, 55);
+    border-radius: 3px;
+    border: 0px;
+    opacity: 0.1;
+    border-bottom: 1px dotted #e0e0e0;
+  }
+  .unableToPickAvailableIsBlue {
+    background-color: rgb(8, 26, 43);
+    border-radius: 3px;
+    border: 0px;
+    opacity: 0.1;
+    border-bottom: 1px dotted #e0e0e0;
+  }
+  .availableButUnableToPick {
+    background-color: rgb(138, 140, 141);
+    border-radius: 3px;
+    border: 0px;
+    opacity: 0.1;
+    border-bottom: 1px dotted #e0e0e0;
+  }
+  .oneHourUnableToPick {
+    background-color: rgba(202, 193, 197, 0.1);
+    border-radius: 3px;
+    border: 0px;
+    border-bottom: 1px dotted #a39c9c;
+  }
+  .allTeacherAvailableDayUnableToPick {
+    background-color: rgb(138, 140, 141);
+    border-radius: 3px;
+    border: 0px;
+    border-bottom: 1px dotted #e0e0e0;
+  }
+  .dot {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: block;
+    margin-right: 10px;
+  }
+  .dot_blue {
+    background-color: rgba(15, 191, 235, 0.5);
+  }
+  .dot_green {
+    background-color: rgba(6, 104, 19, 0.5);
+  }
+  .dot_yellow {
+    background-color: rgba(248, 220, 59, 0.5);
+  }
+  .dot_red {
+    background-color: rgba(255, 0, 0, 0.5);
+  }
+  .dot_gray {
+    background-color: rgb(129, 127, 127);
+  }
+  .dot_pink {
+    background-color: rgb(250, 136, 184);
+  }
+  /* Popover styling */
+  .popover__content {
+    position: absolute;
+    visibility: hidden;
+    width: 200px;
+    height: 150px;
+    border: 1px solid rgb(182, 184, 185);
+    border-radius: 0.3rem;
+    box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
+    bottom: 13px;
+    left: -20px;
+  }
+  .isShow:hover .popover__content {
+    visibility: visible;
+    height: 170px;
+    background-color: white;
+    z-index: 1;
+  }
+  .popover__header {
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px;
+    background-color: #f8f8f8;
+  }
+  .popover__line {
+    border: 0.5px solid rgb(182, 184, 185);
+    height: 0;
+  }
+  .popover__body {
+    font-size: 13px;
+    padding: 10px;
+  }
+  .popover__body__item {
+    margin: 3px 0;
+  }
+  .confirm__btn {
+    border: 1px solid #0599cd;
+    border-radius: 5px;
+    font-size: 16px;
+    color: white;
+    background-color: #0599cd;
+    margin: 5px auto;
+  }
+  .triangle {
+    width: 0px;
+    height: 0px;
+    border: 10px solid transparent;
+    border-top: 10px solid white;
+    position: absolute;
+    left: 85px;
+    bottom: -20px;
+  }
+  
