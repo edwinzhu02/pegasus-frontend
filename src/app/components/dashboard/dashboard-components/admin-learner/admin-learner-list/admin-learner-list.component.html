@@ -57,13 +57,13 @@
           <thead>
             <tr>
               <th scope='col' style='width: 20px'>#</th>
-              <th *ngFor='let i of columnsToShow' scope='col' (click)='onSort(i)' counter='0' style='width: 140px'
+              <th *ngFor='let i of columnsToShow' scope='col' (click)='onSort(i)' counter='0' style='width: 120px'
                 class='t_sort_title'>
                 {{AddSpaceInString(i)}}</th>
               <th *ngFor='let i of columnsToShow1' scope='col' (click)='onSort(i)' counter='0' style='width: 120px'
                 class='t_sort_title'>
                 {{AddSpaceInString(i)}}</th>
-              <th scope='col' style='width: 60px; padding-right:0px'> Status</th>
+              <th scope='col' style='width: 40px; padding-right:0px'> Status</th>
               <th scope='col' style='width: 100px; padding-right:0px'> Profile & Enrollment</th>
               <th scope='col' style='width: 100px; padding-left: 0px;'>Trial Session& Change Schedule</th>
             </tr>
@@ -77,7 +77,7 @@
               <td *ngFor='let j of columnsToShow' style='width: 60px'>
                 <app-learner-item [learner]=i [whichName]=j></app-learner-item>
               </td>
-              <td *ngFor='let j of columnsToShow1' style='width: 110px'>{{i[j]}}</td>
+              <td *ngFor='let j of columnsToShow1' style='width: 90px'>{{i[j]}}</td>
               <td style='width: 150px'>
                 <span  *ngFor='let k of i.InstrumentIcon' ><img [src]='k' height="20" width="20" /></span>
               </td>
