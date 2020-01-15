@@ -243,7 +243,10 @@ export class AdminLearnerPeriodCourseChangeModalComponent implements OnInit {
 
   GetTeachers = () => {
     let testlist=[];
-    if (!this.isSpecifiedTime) return;
+    if (!this.isSpecifiedTime) {
+      this.GetTeachersForSpecifiedTime();
+      return;
+    }
     if (!this.OrgId.invalid && !this.DayOfWeek.invalid) {
       this.service.GetTeacherRoomByOrgDayOfWeek(this.PeriodCourseChangeForm.get('OrgId').value, this.PeriodCourseChangeForm.get('DayOfWeek').value)
         .subscribe(res => {
