@@ -1,4 +1,7 @@
-<div class="time-picker" *ngIf="availableDayArrEx">
+<div *ngIf='loadingFlag'>
+  <div class="loaderLarge"></div>
+</div>
+<div class="time-picker" *ngIf="!loadingFlag">
     <div class="weekly-schedule">
       <div class="hour-labels">
         <div class="hour-label" *ngFor="let hour of hours">{{hour}}:00</div>

@@ -413,6 +413,12 @@ export class AdminLearnerPeriodCourseChangeModalComponent implements OnInit {
 getTimePickerInfo(time){
    console.log(time)
    let timeArray = time.BeginTime.split(':');
+   let bHour = timeArray[0];
+   let bMinute = timeArray[1];
+   bHour = bHour.toString().replace(' ','');
+   bMinute = bMinute.toString().replace(' ','');
+   if(bHour.length <=1 )  bHour = '0' + bHour;
+   if(bMinute.length <=1 )  bMinute = '0' + bMinute;
    let dayOfWeek = time.DayOfWeek
    let day
    switch (dayOfWeek){
@@ -451,8 +457,9 @@ getTimePickerInfo(time){
     
     console.log(this.PeriodCourseChangeForm);
     
-    this.PeriodCourseChangeForm.patchValue({BeginTime:time.BeginTime.toString().replace(' ','').replace(' ',''), DayOfWeek:day})
+    this.PeriodCourseChangeForm.patchValue({BeginTime: (bHour + ':' + bMinute), DayOfWeek:day})
 
+    console.log(this.PeriodCourseChangeForm.value.BeginTime);
 
     if(this.isSpecifiedTime){
       this.PeriodCourseChangeForm.patchValue({TeacherId: time.TeacherId});
