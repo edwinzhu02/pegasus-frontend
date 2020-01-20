@@ -104,7 +104,8 @@ export class TimerPickerBranchComponent implements OnInit {
     // get data from server 
     // this.getTeacherAvailable();
 
-    this.getTeachers();
+    // this.getTeachers();
+    this.getTeachersEx();
   }
 
   getTeachers(){
@@ -199,6 +200,61 @@ export class TimerPickerBranchComponent implements OnInit {
     // }
   }
 
+getTeachersEx(){
+    this.timePickerService.GetOrgTeacherAvailableCheck(this.learnerOrgId, this.startDate).subscribe((res) => {
+
+      var temp = res['Data'];
+
+      this.teacherArrLength = temp.length;
+
+
+
+
+      // define property of slot
+      for (let i = 0; i < this.teacherArrLength; i++) {
+        this.slot[i] = [];
+        this.learnerName[i] = [];
+        this.slotTime[i] = [];
+        for (let j = 0; j < this.slotYCount; j++) {
+          this.slot[i][j] = null;
+          this.learnerName[i][j] = null;
+          this.slotTime[i][j] = `${Math.floor((this.beginSlotPos + j * 15) / 60)} : ${(this.beginSlotPos + j * 15) % 60 == 0 ? '00' : (480 + j * 15) % 60}`;
+        }
+      }    
+      
+      for (var i = 0; i < temp.length; i ++) {
+        ​
+          console.log(temp[i].data); // 1, "string", false
+          let teaData = temp[i].data
+
+      this.weekdays.push(temp[i].FirstName + " " + temp[i].LastName);
+      this.weekdaysId.push(temp[i].TeacherId);          
+
+          this.arrangedArrEx[i] = this.transferTime(teaData.Arranged);
+          this.dayOffArrEx[i]  = this.transferTime(teaData.Dayoff);
+          this.tempChangeArrEx[i]  = this.transferTime(teaData.TempChange);
+          this.availableDayArrEx[i]  = teaData.AvailableDay;      
+          
+          
+          this.renderAvailableDayEx(i);
+          this.renderSlotPropEx(i);
+          this.loadingFlag = false;
+
+        ​console.log(this.slot); // 1, "string", false
+        }     
+        this.loadingFlag = false;
+        
+        console.log(this.arrangedArrEx);
+        console.log(this.dayOffArrEx);
+        console.log(this.tempChangeArrEx);
+        console.log(this.availableDayArrEx);      
+
+    }, err => {
+      console.log(err);
+    });
+
+  }
+  
   /* get teacher available data from TeacherAvailableCheck API in timePickerService */
   getTeacherAvailable() {
     this.timePickerService.getTeacherAvailableCheck(this.teacherId, this.startDate).subscribe(

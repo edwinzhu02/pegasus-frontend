@@ -18,4 +18,7 @@ export class TimePickerService {
   getTeacherByOrg(orgId,dayofweek){
     return this.http.get(this.baseUrl + `Teacher/GetTeacherByOrgDayOfWeek/${orgId}/${dayofweek}`) 
   }
+  GetOrgTeacherAvailableCheck(orgId,dayofweek){
+    return this.http.get(this.baseUrl + `TeacherAvailableCheck/GetOrgTeacher/${orgId}/${dayofweek}`)  
+  }
 }

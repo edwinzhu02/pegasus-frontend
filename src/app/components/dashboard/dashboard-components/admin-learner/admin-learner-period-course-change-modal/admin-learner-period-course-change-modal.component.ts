@@ -146,7 +146,8 @@ export class AdminLearnerPeriodCourseChangeModalComponent implements OnInit {
     if (!this.isSpecifiedTime){
       
       if(this.PeriodCourseChangeForm.value.allBranchTeachers){
-        this.GetAllBranchTeachersForSpecifiedTime();
+        // this.GetAllBranchTeachersForSpecifiedTime();
+        this.GetAllBranchTeachersForSpecifiedTimeEx();
       }
       else{
         this.GetTeachersForSpecifiedTime();
@@ -243,6 +244,76 @@ export class AdminLearnerPeriodCourseChangeModalComponent implements OnInit {
     //     console.log(err);
     //   });
   }
+
+GetAllBranchTeachersForSpecifiedTimeEx = () => {
+
+  this.service.GetAllAvailableTeacher().subscribe((res) => {
+    this.Teachers = res['Data'];
+  },
+  err => {
+    this.isloading = false;
+    Swal.fire({
+      type: 'error',
+      title: 'Oops...',
+      text: err.error.ErrorMessage
+    });
+  });
+
+      // // this.coursesService.getOrgs().subscribe((res) => {
+      // //   // let outData = [];
+
+
+      // //   let funArr = [];
+
+      // //   // console.log(res);
+      // //   res['Data'].forEach(e => {
+      // //     // outData.push({
+      // //     //   id: e['OrgId'], 
+      // //     //   title: e['OrgName']});
+
+      // //     console.log(e['OrgId']);
+
+      // //       funArr.push(this.service.GetTeacherByOrg(e['OrgId']));
+      // //   });
+
+
+      // //   forkJoin(...funArr).subscribe(
+      // //     (res) => {
+      // //       console.log(res);
+      // //       // allData = res[0].Data
+
+
+      // //       this.Teachers = [];
+      // //       for (var i = 0; i < res.length; i ++) {
+      // //       ​
+      // //         console.log(res[i].Data); // 1, "string", false
+      // //         // let teaData = res[i].Data
+
+      // //         res[i].Data.forEach(e => {
+      // //           this.Teachers.push(e);
+      // //         });
+
+              
+      // //       }     
+      // //       // this.loadingFlag = false;
+
+      // //       console.log(this.Teachers);
+
+      // //     },
+      // //     (err) => {
+      // //       console.log(err);
+      // //       alert('Sorry, something went wrong.' + err)
+      // //     })    
+      // // },
+      // // err => {
+      // //   this.isloading = false;
+      // //   Swal.fire({
+      // //     type: 'error',
+      // //     title: 'Oops...',
+      // //     text: err.error.ErrorMessage
+      // //   });
+      // // });   
+  }  
   
   submit = () => {
     if (this.PeriodCourseChangeForm.invalid) {
@@ -471,7 +542,8 @@ selectAllTeacherClicked(event){
   // console.log(this.PeriodCourseChangeForm.value.allBranchTeachers);
 
   if(event.target.checked){
-    this.GetAllBranchTeachersForSpecifiedTime();
+    // this.GetAllBranchTeachersForSpecifiedTime();
+    this.GetAllBranchTeachersForSpecifiedTimeEx();
   }
   else{
     this.GetTeachersForSpecifiedTime();
