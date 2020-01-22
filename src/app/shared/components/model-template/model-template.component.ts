@@ -1,8 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal,NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import Swal from 'sweetalert2';
 import { LearnersService } from 'src/app/services/http/learners.service';
-
+import { Router, ActivatedRoute } from '@angular/router';
+import { count } from 'rxjs/operators';
 
 @Component({
   selector: 'app-model-template',
@@ -18,7 +19,10 @@ modelTitle;
 @Input() learnerCourseTimeTable;
 eventProps;
 
-constructor(public activeModal: NgbActiveModal,private learnersService:LearnersService) {}
+constructor(public activeModal: NgbActiveModal,
+    private modalService: NgbModal,
+    private router:Router,
+    private learnersService:LearnersService) {}
   getModalDetail(){
     switch (this.whichModal) {
       case 'pay Invoice':
@@ -55,6 +59,18 @@ constructor(public activeModal: NgbActiveModal,private learnersService:LearnersS
     if (this.learnerCourseTimeTable){
       this.ShowTimeTableDetail();
     }
+  }
+  async closeSelf (){
+    // sessions/calendar/admin
+    // const url='sessions/calendar/admin/'+ this.eventProps.startTime;
+    // this.router.navigate(['home']);
+    function sleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
+    this.modalService.dismissAll();  
+    this.router.navigate(['home']);
+    await sleep(10);
+    this.router.navigate(['sessions/calendar/admin/',this.eventProps.startTime]);
   }
   onClicked(isAfter){
     Swal.fire({

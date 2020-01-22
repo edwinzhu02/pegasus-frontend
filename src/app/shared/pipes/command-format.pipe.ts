@@ -18,6 +18,8 @@ export class CommandFormatPipe implements PipeTransform {
       // '4' has been used in CourseClass, so this does the distinction.
       case 5:
         return 'Receipt Detail';
+      case 6: //use for learner profile 
+          return 'Invoices Detail';        
     }
   }
 

@@ -17,6 +17,9 @@
 
     <div *ngIf="learnerCourseTimeTable">
       <div class='container'>
+        <!-- <a [routerLink]="['sessions/calendar/admin']" [queryParams]="{ searchdate: eventProps.startTime }"> -->
+          <button type="button" class="btn btn-outline-dark" (click)="closeSelf()">Goto Branch TimeTable</button>
+        <!-- </a> -->
         <div class='row justify-content-center'>
           <p>Teacher's Name:</p> <p>{{eventProps.teacher}}</p>
         </div>

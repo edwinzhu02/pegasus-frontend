@@ -60,12 +60,13 @@
               <th *ngFor='let i of columnsToShow' scope='col' (click)='onSort(i)' counter='0' style='width: 120px'
                 class='t_sort_title'>
                 {{AddSpaceInString(i)}}</th>
-              <th *ngFor='let i of columnsToShow1' scope='col' (click)='onSort(i)' counter='0' style='width: 120px'
+              <th *ngFor='let i of columnsToShow1' scope='col' (click)='onSort(i)' counter='0' style='width: 140px'
                 class='t_sort_title'>
                 {{AddSpaceInString(i)}}</th>
               <th scope='col' style='width: 40px; padding-right:0px'> Status</th>
-              <th scope='col' style='width: 100px; padding-right:0px'> Profile & Enrollment</th>
-              <th scope='col' style='width: 100px; padding-left: 0px;'>Trial Session& Change Schedule</th>
+              <th scope='col' style='width: 100px; padding-right:0px'> Operation</th>              
+              <!-- <th scope='col' style='width: 100px; padding-right:0px'> Profile & Enrollment</th>
+              <th scope='col' style='width: 100px; padding-left: 0px;'>Trial Session& Change Schedule</th> -->
             </tr>
           </thead>
           <!--table body-->
@@ -81,6 +82,7 @@
               <td style='width: 150px'>
                 <span  *ngFor='let k of i.InstrumentIcon' ><img [src]='k' height="20" width="20" /></span>
               </td>
+              <div *ngIf='false'>
               <td style='width: 100px; padding-right:0px;'>
                 <span class='t_info_table_btn' (click)='popUpModal(1,i)' title='Student Profile'><span
                     class='fa fa-id-card'></span></span>
@@ -98,7 +100,10 @@
                     class="fas fa-folder-plus"></span></span>
 
               </td>
+            </div> 
+              
               <td style='width: 100px; padding-left:0px'>
+                <div *ngIf='false'>
                 <span class='t_info_table_btn' (click)='popUpModal(4,i)' title='Quit a Course'><span
                   class="fas fa-folder-minus"></span></span>
 
@@ -111,6 +116,7 @@
                 <!--              永久改课时间-->
                 <span class='t_info_table_btn' (click)="popUpModal(10,i)" title='Change Schedule
               '><span class='fas fa-calendar-alt'></span></span>
+            </div>
                 <span class='t_info_table_btn' (click)='popUpModal(3,i)' title='Delete Student Record'><span
                     class='fas fa-trash-alt'></span></span>
               </td>

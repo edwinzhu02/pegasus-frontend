@@ -171,6 +171,11 @@ const routes: Routes = [
             canActivate: [UserAuthGuard]
           },
           {
+            path: "calendar/admin/:searchdate",
+            component: SessionsCalendarViewAdminComponent,
+            canActivate: [UserAuthGuard]
+          },
+          {
             path: "calendar/tutor",
             component: SessionsCalendarViewTutorComponent,
             canActivate: [UserAuthGuard]

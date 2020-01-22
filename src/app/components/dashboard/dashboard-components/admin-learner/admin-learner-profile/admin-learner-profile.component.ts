@@ -44,6 +44,11 @@ export class AdminLearnerProfileComponent implements OnInit {
     class: 'fa fa-id-card'
   },
   {
+    title: 'Invoices List',
+    parameter: 14,
+    class: 'fas fa-file-invoice-dollar'
+  },
+  {
     title: 'Edit Student Profile',
     parameter: 2,
     class: 'fas fa-pen'
@@ -177,7 +182,9 @@ export class AdminLearnerProfileComponent implements OnInit {
         this.modalTemplate(command, whichLearner, title);
         break;
       case 13:
-          this.modalTemplate(command, whichLearner, title);
+        this.modalTemplate(command, whichLearner, title);
+      case 14:
+        this.detailModal(6, whichLearner);       
       break;        
     }
   }

@@ -8,6 +8,7 @@ declare let $: any;
 import {DatePipe} from '@angular/common';
 import {NgbModal, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import Swal from 'node_modules/sweetalert2/dist/sweetalert2.all.min.js';
+import Tooltip from 'node_modules/tooltip.js/dist/umd/tooltip.min.js';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import { SessionsService } from 'src/app/services/http/sessions.service';
 import {SessionDetailEditModalComponent} from '../../session-modals/session-detail-edit-modal/session-detail-edit-modal.component';
@@ -20,6 +21,8 @@ import {LearnersService} from '../../../../../../services/http/learners.service'
 import {debounce} from '../../../../../../shared/utils/debounce';
 import { SessionTrialModalComponent } from '../../session-modals/session-trial-modal/session-trial-modal.component';
 import { JsonHubProtocol } from '@aspnet/signalr';
+import { ActivatedRoute } from "@angular/router";
+// import { Tooltip } from 'chart.js';
 
 @Component({
   selector: 'app-sessions-calendar-view-admin',
@@ -55,6 +58,7 @@ export class SessionsCalendarViewAdminComponent implements OnInit {
   t = null;
   constructor(
     public activeModal: NgbActiveModal,
+    private route: ActivatedRoute,
     protected sessionService: SessionsService,
     private datePipe: DatePipe, private modalService: NgbModal,
     private fb: FormBuilder,
@@ -64,14 +68,26 @@ export class SessionsCalendarViewAdminComponent implements OnInit {
     this.searchForm = this.fb.group({
       dateOfLesson: ['']
     })
-    
+    this.route.queryParams.subscribe(queryParams => {
+      // do something with the query params
+      console.log(queryParams);
+
+    });
+  
+    this.route.params.subscribe(routeParams => {
+      console.log(routeParams);
+      if (routeParams.searchdate)
+          this.getEventByDate(routeParams.searchdate);
+    });
     if (this.selectedOrg==null)
       this.selectedOrg=JSON.parse(localStorage.getItem("OrgId"))[0];
     this.sessionService.getReceptionistRoom(this.selectedOrg).subscribe(data => {
       this.resourceData = data.Data;
 
       let date;
-      if(this.dateToShow == null || this.dateToShow == undefined){
+      const paramDate = this.getSearchDateFromUrl();
+      if (paramDate) this.dateToShow = this.datePipe.transform(paramDate, 'yyyy-MM-dd');
+      if(this.dateToShow == null || this.dateToShow == undefined ){
         date = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
       }
       else{
@@ -81,6 +97,7 @@ export class SessionsCalendarViewAdminComponent implements OnInit {
       this.sessionService.getReceptionistLesson(date,this.selectedOrg).subscribe(event => {
         this.eventsModel = this.generateEventData(event.Data);
         this.teacherAvoidDuplicate();
+        this.fullcalendar.calendar.gotoDate(date);
       });
       this.isloading = false;
       const that = this;
@@ -91,6 +108,19 @@ export class SessionsCalendarViewAdminComponent implements OnInit {
         displayEventTime: true,
         firstDay: 1,
         selectable: true,
+        eventRender: function(info) {
+          const title = info.event.extendedProps.info.CourseName;
+              // +',Teacher:'+info.event.extendedProps.info.TeacherFirstName+' '
+              // +info.event.extendedProps.info.TeacherLastName;
+          // console.log(title); 
+          const tooltip = new Tooltip(info.el, {
+            title: title,
+            placement: 'top',
+            trigger: 'hover',
+            container: 'body'
+          });
+          
+        },
         select(info) {
           that.selectSlot(info);
         },
@@ -153,13 +183,13 @@ export class SessionsCalendarViewAdminComponent implements OnInit {
         },
         plugins: [timeslot, interactionPlugin]
       };
-
-      if(this.dateToShow != null && this.dateToShow != undefined){
-        this.fullcalendar.calendar.gotoDate(this.dateToShow);
-      }
-
     });
+
   }
+  getSearchDateFromUrl():string{
+    return this.route.snapshot.paramMap.get("searchdate");
+  }
+
   ngOnChanges():void {
     this.ngOnInit();
   }
@@ -260,7 +290,7 @@ export class SessionsCalendarViewAdminComponent implements OnInit {
     })
     this.isloading = true;
     this.fullcalendar.calendar.removeAllEvents();
-    this.sessionService.getReceptionistLesson(date,this.selectedOrg).subscribe(event => {
+        this.sessionService.getReceptionistLesson(date,this.selectedOrg).subscribe(event => {
       this.eventData = this.generateEventData(event.Data);
       this.eventsModel = this.eventData;
       this.isloading = false;

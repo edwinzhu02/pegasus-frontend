@@ -16,6 +16,7 @@ import { forkJoin } from 'rxjs';
 export class LearnerDetailModalComponent implements OnInit {
   @Input() command;
   @Input() whichLearner;
+
   // PropNameArray:Array<any>
   public index = 0;
   public learnerPurpose: Array<any>;
@@ -35,8 +36,19 @@ export class LearnerDetailModalComponent implements OnInit {
   otherFileUrl = ''
   agreeFileUrl = ''
   learnerList1: any
-  errorMessage
-
+  errorMessage;
+  loadingFlag = false;
+//visible
+  isVisible={timetable:true,
+    missedLessons:true,
+    cancelledLessons:true,
+    scheduledLessons:true,
+    completedLessons:true,
+    invoices:true,
+    payment:true,
+    groupCourse:true,
+    pirvateCourse:true,
+    StudentInformation:true}
 
   //amendment列表
   amendmentList = []
@@ -81,14 +93,29 @@ export class LearnerDetailModalComponent implements OnInit {
      private downloadPDFService:DownloadPDFService ) {
   }
   ngOnInit() {
-    this.getData()
-    this.getOthersUrl()
-    this.getFormUrl()
-    this.getAmendmentList()
-
+    this.getData();
+    this.getOthersUrl();
+    this.getFormUrl();
+    this.getAmendmentList();
+    this.setVisiable();
   }
-
+  setVisiable() {
+    if (this.command ==6) {
+        this.isVisible = {
+          timetable:false,
+          missedLessons:false,
+          cancelledLessons:false,
+          scheduledLessons:false,
+          completedLessons:false,
+          invoices:true,
+          payment:false,
+          groupCourse:false,
+          pirvateCourse:false,
+          StudentInformation:false}
+    }
+  }
   getData() {
+    this.loadingFlag = true;
     let learnerListData = this.LearnerListService.getLearnerList();
     let lookUpData2 = this.LearnerListService.getLookups(2);
     let lookUpData3 = this.LearnerListService.getLookups(3);
@@ -105,7 +132,7 @@ export class LearnerDetailModalComponent implements OnInit {
 
     forkJoin([learnerListData, lookUpData2, lookUpData3, lookUpData4, lookUpData5, lookUpData7, learnerInvoice, learnerPayment, learnerSession, lookUpData14,makeUpSession,waitingInvoice,org]).subscribe(
       (res) => {
-
+        this.loadingFlag = false;
         console.log(res)
         this.learnerList1 = res[0]['Data'];
         this.getPurposeValue(res[1]['Data'])
@@ -144,9 +171,11 @@ export class LearnerDetailModalComponent implements OnInit {
       },
 
       (err) => {
+        this.loadingFlag = false;
         Swal.fire({ type: 'error', title: 'Oops...', text: 'Sorry, something went wrong' + err.error.ErrorMessage });
       }
     )
+
   }
   sortInvoice(waitingInvoice){
     waitingInvoice.sort((a,b)=>{
