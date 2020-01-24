@@ -307,7 +307,7 @@
           </div>
         </div>
         <div class="col-5">
-          <label class="mt-2">Discount Amount 1</label>
+          <label class="mt-2">Amount 1 (must be negative)</label>
           <input class="form-control" type="number" max="0" formControlName="Other17Fee" (keyup)="setOwingFee()"
             (change)="feeOnChange('Other17Fee','Other17')" />
           <div class="text-danger" *ngIf="invoiceEditForm.controls.Other17.errors?.fillFee">Please fill fee</div>
@@ -315,13 +315,13 @@
       </div>
       <div formGroupName="Other18" class="form-group row justify-content-center">
         <div class="col-5">
-          <label class="mt-2">Discount Item 2</label>
+          <label class="mt-2">Discount Item2</label>
           <input class="form-control" type="text" formControlName="Other18FeeName" />
           <div class="text-danger" *ngIf="invoiceEditForm.controls.Other18.errors?.fillFeeName">Please fill fee name
           </div>
         </div>
         <div class="col-5">
-          <label class="mt-2">Discount Amount 2</label>
+          <label class="mt-2">Amount2 (must be negative)</label>
           <input class="form-control" type="number" max="0" formControlName="Other18Fee" (keyup)="setOwingFee()"
             (change)="feeOnChange('Other18Fee','Other18')" />
           <div class="text-danger" *ngIf="invoiceEditForm.controls.Other18.errors?.fillFee">Please fill fee</div>
