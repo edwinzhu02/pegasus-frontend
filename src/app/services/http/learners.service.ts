@@ -118,6 +118,10 @@ export class LearnersService {
     return this.http.get(this.baseUrl+ 'Teacher/GetTeacherByOrg/'+orgId);
   }
 
+  GetAllAvailableTeacher(){
+    return this.http.get(this.baseUrl+ 'Teacher/GetAllAvailableTeacher/');
+  }  
+
 
   updateExpiryDate(awaitId,Qty): any {
     return this.http.put(this.baseUrl + 'LessonRearrange/' + awaitId+'/'+Qty,'');
