@@ -458,12 +458,20 @@ GetAllBranchTeachersForSpecifiedTimeEx = () => {
   
   open(){
     this.modalRefTimePicker=this.modalService.open(LearnerRegistrationModalComponent,{ windowClass: 'my-class'});
-    if (this.isSpecifiedTime)
+    if (this.isSpecifiedTime){
       this.customCourse = {"location":this.OrgId.value,"beginDate":this.BeginDate.value,
         "DayOfWeek":this.DayOfWeek.value, "Duration": this.toDatePickCourseDuration["Duration"], "DurationName": this.toDatePickCourseDuration["DurationName"]};
+        this.teaList=[];
+        this.teaList.push('nothing stupid');
+        this.teaList.push({Duration:this.toDatePickCourseDuration["Duration"]});
+      }
       else
+
       this.customCourse = {"location":this.OrgId.value,"beginDate":this.BeginDate.value,
       "DayOfWeek":undefined, "Duration": this.toDatePickCourseDuration["Duration"], "DurationName": this.toDatePickCourseDuration["DurationName"]};      
+
+      if (this.teaList.length<2)
+        this.teaList.push({Duration:this.toDatePickCourseDuration["Duration"]});
 
 
     console.log(this.BeginDate.value);
@@ -472,6 +480,7 @@ GetAllBranchTeachersForSpecifiedTimeEx = () => {
     this.modalRefTimePicker.componentInstance.customCourse = this.customCourse;
     this.modalRefTimePicker.componentInstance.teaList = this.teaList;//this.teaListOutArray[i].teaListToDatePick;
     this.modalRefTimePicker.componentInstance.isSpecifiedTime = this.isSpecifiedTime; 
+    this.modalRefTimePicker.componentInstance.dayOfWeekChoose = this.DayOfWeek.value;
 
   // this.timePickArrayNumber = i;
   this.modalRefTimePicker.componentInstance.beginTimeTo.subscribe(
@@ -482,7 +491,6 @@ GetAllBranchTeachersForSpecifiedTimeEx = () => {
       console.log(err)
     }
   )
-
 }
 getTimePickerInfo(time){
    console.log(time)

@@ -10,7 +10,7 @@
 </div>
 
 <div class="modal-body" *ngIf="this.isSpecifiedTime">
-  <app-timer-picker-branch [command]="command" [customCourse]='customCourse' [teaList]='teaList'
+  <app-timer-picker-branch [command]="command" [customCourse]='customCourse' [teaList]='teaList' [dayOfWeekChoose]='dayOfWeekChoose'
     (beginTime)="beginTimeFromChild($event)"></app-timer-picker-branch>
 </div>
 

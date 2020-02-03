@@ -3,6 +3,7 @@
     background-color: #f5f5fa;
     border: 1px solid #ddd;
     padding: 10px;
+    margin:auto;
   }
   .hour-labels {
     display: table-cell;

@@ -16,9 +16,10 @@ export class LearnerRegistrationModalComponent implements OnInit, AfterViewCheck
   @ViewChild(TimePickerComponent) timePickerComponent;
   @ViewChild(TimerPickerBranchComponent) timerPickerBranchComponent; 
 
-  customCourse;
-  teaList;
-  isSpecifiedTime;
+  @Input() customCourse;
+  @Input() teaList;
+  @Input() isSpecifiedTime;
+  @Input() dayOfWeekChoose;
 
   // edwin add
   @Input() command;

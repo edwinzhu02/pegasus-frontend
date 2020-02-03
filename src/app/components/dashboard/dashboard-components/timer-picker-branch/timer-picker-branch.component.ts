@@ -15,6 +15,7 @@ export class TimerPickerBranchComponent implements OnInit {
   @Input() customCourse;
   @Input() teaList;
   @Input() isAllTeacherChecked;
+  @Input() dayOfWeekChoose;
   // transmit begin time picked by user from time-picker to learner-registration-form
   @Output() beginTime = new EventEmitter<any>();
 
@@ -201,7 +202,7 @@ export class TimerPickerBranchComponent implements OnInit {
   }
 
 getTeachersEx(){
-    this.timePickerService.GetOrgTeacherAvailableCheck(this.learnerOrgId, this.startDate).subscribe((res) => {
+    this.timePickerService.GetOrgTeacherAvailableCheck(this.learnerOrgId, this.startDate,this.dayOfWeekChoose).subscribe((res) => {
 
       var temp = res['Data'];
 
