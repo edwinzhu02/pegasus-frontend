@@ -29,7 +29,7 @@ export class ParentRegistrationFormComponent implements OnInit {
      this.parentForm.push(
        this.fb.group({
         FirstName: ['', Validators.required],
-        LastName: ['', Validators.required],
+        LastName: ['', ],
         Relationship: ['', Validators.required],
         ContactNum: [this.newLearner.value.ContactNum, Validators.required],
         Email: [this.newLearner.value.Email, [Validators.required, Validators.email]]
@@ -40,7 +40,7 @@ export class ParentRegistrationFormComponent implements OnInit {
       this.parentForm.push(
         this.fb.group({
           FirstName: [p.FirstName ? p.FirstName : '', Validators.required],
-          LastName: [p.LastName ? p.LastName : '', Validators.required],
+          LastName: [p.LastName ? p.LastName : '', ],
           Relationship: [p.Relationship ? p.Relationship : '', Validators.required],
           ContactNum: [p.ContactNum ? p.ContactNum : '', Validators.required],
           Email: [p.Email ? p.Email : '', [Validators.required, Validators.email]]

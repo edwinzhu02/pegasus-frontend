@@ -83,7 +83,7 @@ export class AdminLearnerTimetableComponent implements OnInit {
       eventObject.title +='\n'+"Reason:"+i.CancelReson;
     }
     else if(i.IsConfirm)
-      colorObject = {'color':'grey'}
+      colorObject = {'color':'green'}
     else{
       // colorObject = {'color':'grey'}
     }
