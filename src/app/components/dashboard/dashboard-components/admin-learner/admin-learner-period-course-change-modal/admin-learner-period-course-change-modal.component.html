@@ -9,6 +9,54 @@
 <form [formGroup]="PeriodCourseChangeForm" (ngSubmit)="submit()">
   <div class='modal-body tl_md_body'>
     <div class="form-group">
+      <fieldset *ngFor="let ele of learner.One2oneCourseInstance">
+        <input hidden [value]="ele.CourseInstanceId" type="radio" formControlName="instanceId" (change)="CourseRadioButtonChange()">
+        <br>
+        <div class="card">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-6">
+                <span class="label" style="font-weight: bold">Course: </span>
+                <span class='text'>{{ele.Course.CourseName}}</span>
+              </div>
+
+              <div class="col-6">
+                <span class="label" style="font-weight: bold">Teacher Name: </span>
+                <span class='text'>{{ele.Teacher.FirstName}} {{ele.Teacher.LastName}}</span>
+              </div>
+
+              <div *ngIf='ele.Org' class="col-6">
+                <span class="label" style="font-weight: bold">Location: </span>
+                <span class='text'>{{ele.Org.Abbr}} - {{ele.Room.RoomName}}</span>
+              </div>
+
+              <div class="col-6">
+                <span class="label" style="font-weight: bold">From </span>
+                <span class='text'>{{ele.BeginDate | date: 'yyyy-MM-dd'}} to {{ele.EndDate|date: 'yyyy-MM-dd'}}</span>
+              </div>
+
+            </div>
+            <div>
+              <span class="label" style="font-weight: bold">Course Sechdule: </span>
+              <fieldset *ngFor='let sechdule of ele.CourseSchedule'>
+                <input type="radio" [value]="sechdule.CourseScheduleId" (change)="ScheduleRadioButtonChange(sechdule.CourseInstanceId)" formControlName="CourseScheduleId">
+                <label> 
+                    <span class='text'> {{sechdule.DayOfWeek|weekFormat}}
+                      {{sechdule.BeginTime}} -- {{sechdule.EndTime}} </span>
+                </label>
+                <div *ngFor="let amendment of ele.Amendment">
+                  <small *ngIf="amendment.IsTemporary == 0" class="text-secondary">
+                    The course begins at {{amendment.BeginTime}} from {{amendment.BeginDate| date:'yyyy-MM-dd'}} ( Teacher: {{amendment.Teacher.FirstName}} Location : {{amendment.Org.Abbr}} - {{amendment.Room.RoomName}})
+                  </small>
+                  <small *ngIf="amendment.IsTemporary==1" class="text-secondary">
+                    The course begins at {{amendment.BeginTime}} from {{amendment.BeginDate| date:'yyyy-MM-dd'}} to {{amendment.EndDate| date:'yyyy-MM-dd'}} ( Teacher: {{amendment.Teacher.FirstName}} Location : {{amendment.Org.Abbr}} - {{amendment.Room.RoomName}})
+                  </small>
+                </div>
+              </fieldset>
+            </div>
+          </div>
+        </div>
+      </fieldset>      
       <div class="row">
         <div class="col-5">
           <div>Begin Date</div>
@@ -48,7 +96,9 @@
               </select>
             </div>
           </div>        
-        <div  [style.visibility]="isSpecifiedTime ? 'visible' : 'hidden'" class="col-5">
+        <!-- <div  [style.visibility]="isSpecifiedTime ? 'visible' : 'hidden'" class="col-5">
+           -->
+           <div  class="col-5">           
           <div>Day of week</div>
           <div>
             <select formControlName="DayOfWeek" (change)="GetTeachers()">
@@ -106,54 +156,7 @@
         </div>
       </div>
 
-      <fieldset *ngFor="let ele of learner.One2oneCourseInstance">
-        <input hidden [value]="ele.CourseInstanceId" type="radio" formControlName="instanceId" (change)="CourseRadioButtonChange()">
-        <br>
-        <div class="card">
-          <div class="card-body">
-            <div class="row">
-              <div class="col-6">
-                <span class="label" style="font-weight: bold">Course: </span>
-                <span class='text'>{{ele.Course.CourseName}}</span>
-              </div>
 
-              <div class="col-6">
-                <span class="label" style="font-weight: bold">Teacher Name: </span>
-                <span class='text'>{{ele.Teacher.FirstName}} {{ele.Teacher.LastName}}</span>
-              </div>
-
-              <div *ngIf='ele.Org' class="col-6">
-                <span class="label" style="font-weight: bold">Location: </span>
-                <span class='text'>{{ele.Org.Abbr}} - {{ele.Room.RoomName}}</span>
-              </div>
-
-              <div class="col-6">
-                <span class="label" style="font-weight: bold">From </span>
-                <span class='text'>{{ele.BeginDate | date: 'yyyy-MM-dd'}} to {{ele.EndDate|date: 'yyyy-MM-dd'}}</span>
-              </div>
-
-            </div>
-            <div>
-              <span class="label" style="font-weight: bold">Course Sechdule: </span>
-              <fieldset *ngFor='let sechdule of ele.CourseSchedule'>
-                <input type="radio" [value]="sechdule.CourseScheduleId" (change)="ScheduleRadioButtonChange(sechdule.CourseInstanceId)" formControlName="CourseScheduleId">
-                <label> 
-                    <span class='text'> {{sechdule.DayOfWeek|weekFormat}}
-                      {{sechdule.BeginTime}} -- {{sechdule.EndTime}} </span>
-                </label>
-                <div *ngFor="let amendment of ele.Amendment">
-                  <small *ngIf="amendment.IsTemporary == 0" class="text-secondary">
-                    The course begins at {{amendment.BeginTime}} from {{amendment.BeginDate| date:'yyyy-MM-dd'}} ( Teacher: {{amendment.Teacher.FirstName}} Location : {{amendment.Org.Abbr}} - {{amendment.Room.RoomName}})
-                  </small>
-                  <small *ngIf="amendment.IsTemporary==1" class="text-secondary">
-                    The course begins at {{amendment.BeginTime}} from {{amendment.BeginDate| date:'yyyy-MM-dd'}} to {{amendment.EndDate| date:'yyyy-MM-dd'}} ( Teacher: {{amendment.Teacher.FirstName}} Location : {{amendment.Org.Abbr}} - {{amendment.Room.RoomName}})
-                  </small>
-                </div>
-              </fieldset>
-            </div>
-          </div>
-        </div>
-      </fieldset>
       <div class="col-5">
         <div>Begin Time:</div>
         <input type="time" class="form-control" formControlName="BeginTime">

@@ -64,7 +64,7 @@ export class AdminLearnerPeriodCourseChangeModalComponent implements OnInit {
     
     this.PeriodCourseChangeForm = this.fb.group({
       BeginDate: [this.myDate(), Validators.required],
-      EndDate: ['', Validators.required],
+      EndDate: ['',],
       BeginTime: ['', [Validators.required, timePickerValidator]],
       reason: ['', Validators.required],
       instanceId: ['', Validators.required],
@@ -362,10 +362,30 @@ GetAllBranchTeachersForSpecifiedTimeEx = () => {
     //console.log(this.learner.One2oneCourseInstance);
     
   }
-
+  getDefaultValue(courseInstanceId){
+    const ci = this.learner.One2oneCourseInstance.find(
+      e=>{
+        return e.CourseInstanceId == courseInstanceId;
+      }
+    )
+    const formValue = {
+      BeginTime :ci.CourseSchedule[0].BeginTime ,
+      OrgId :ci.OrgId,
+      RoomId :ci.RoomId,
+      DayOfWeek :ci.CourseSchedule[0].DayOfWeek,   
+      TeacherId :ci.TeacherId,            
+    }
+    return formValue;
+  }
   ScheduleRadioButtonChange = (courseInstanceId) => {
+    const formValue = this.getDefaultValue(courseInstanceId);
     this.PeriodCourseChangeForm.patchValue({
-      instanceId: courseInstanceId
+      instanceId: courseInstanceId,
+      BeginTime :formValue.BeginTime,
+      OrgId :formValue.OrgId,
+      RoomId :formValue.RoomId,     
+      DayOfWeek :formValue.DayOfWeek, 
+      TeacherId :formValue.TeacherId,               
     });
     
    // console.log(courseInstanceId);
