@@ -153,7 +153,8 @@ export class AdminLearnerPeriodCourseChangeModalComponent implements OnInit {
         this.GetTeachersForSpecifiedTime();
       }
     }
-
+    else
+      this.GetTeachers();
   }
   GetTeachersForSpecifiedTime = () => {
     this.Teachers = [];
@@ -375,6 +376,7 @@ GetAllBranchTeachersForSpecifiedTimeEx = () => {
       DayOfWeek :ci.CourseSchedule[0].DayOfWeek,   
       TeacherId :ci.TeacherId,            
     }
+//
     return formValue;
   }
   ScheduleRadioButtonChange = (courseInstanceId) => {

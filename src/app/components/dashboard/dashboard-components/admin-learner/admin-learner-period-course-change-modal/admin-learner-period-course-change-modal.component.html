@@ -89,7 +89,7 @@
         <div class="col-10">
             <div>Do you need a specified teacher or specified time, Please choose!</div>
             <div>
-              <select  (change)="changeMode($event.target.value) ">
+              <select id='mode' (change)="changeMode($event.target.value) ">
                 <option disabled selected value> -- select an option -- </option>
                 <option [value]="0">Specific Teacher</option>
                 <option [value]="1">Specific Time</option>                
@@ -115,7 +115,8 @@
           <small class="text-danger" *ngIf="DayOfWeek.invalid && DayOfWeek.touched">Please select day of week</small>
         </div>
         <div class="col-5">
-          <div [style.visibility]="isSpecifiedTime ? 'hidden' : 'visible'">
+          <!-- <div [style.visibility]="isSpecifiedTime ? 'hidden' : 'visible'"> -->
+            <div>
             <div>Teacher</div>
             <select formControlName="TeacherId" (change)='selectTeacher($event.target.value)' [(ngModel)]='searchValue'>
               <option disabled selected value>-- select an option --</option>
@@ -124,7 +125,8 @@
             <small class="text-danger" *ngIf="TeacherId.invalid && TeacherId.touched">Please select teacher</small>            
           </div>
 
-          <div [style.visibility]="isSpecifiedTime ? 'hidden' : 'visible'">
+          <!-- <div [style.visibility]="isSpecifiedTime ? 'hidden' : 'visible'"> -->
+          <div>
             <input type="checkbox" formControlName="allBranchTeachers" class="checkbox" (click)="selectAllTeacherClicked($event)">
             <label class="check-label">All branch teachers</label>            
           </div>
