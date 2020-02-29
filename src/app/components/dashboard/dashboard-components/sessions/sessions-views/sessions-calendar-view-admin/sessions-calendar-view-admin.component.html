@@ -1,3 +1,6 @@
+<div style=" float:right;margin-right: 200px;">
+  <input type="checkbox" [checked]="cancelLessons" (change)="cancelLessons = !cancelLessons;this.refreshData()">Canceled Lessons
+</div>
 <!--search modal-->
 <ng-template #content let-modal>
   <div class="modal-header">
@@ -40,6 +43,33 @@
   <!-- modal-body -->
   <div class="container">
     <div class="row">
+      <div class="col-12">This change is apply for</div>
+      <div class="col-4">
+        <input type="radio" id="permanent" name="permanent" value="1" [(ngModel)]="changeLesson.changeType">
+        <label for="permanent">Permanent</label>
+      </div>      
+      <div  class="col-4">
+        <input type="radio" id="lesson" checked name="lesson" value="2" [(ngModel)]="changeLesson.changeType">
+        <label for="lesson">This Lesson</label>
+      </div>
+      <div *ngIf='!isDropRoomChanged' class="col-4">
+        <input type="radio" id="term" name="term" value="3" [(ngModel)]="changeLesson.changeType">
+        <label for="term">This Term</label>
+      </div>
+      <div  *ngIf='isDropRoomChanged' class="col-12">
+        <label>Please Select Teacher</label>
+        <div *ngIf='!dropTeacherList||dropTeacherList.length ==0' class="alert alert-primary" role="alert">
+          No teacher in this rooms!
+        </div>
+        <div *ngFor="let teacher of dropTeacherList; let idx = index" style="margin-right:2rem">
+          <div class="col-4">
+            <input type="radio" id="teacher" name="teacher" [value]="changeLesson.teacherId" [(ngModel)]="changeLesson.teacherId">
+            <label for="teacher">{{teacher.TeacherName}}</label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
       <div class="col-12">
         <!-- Reason: <input class="form-control"  type="text" [(ngModel)]="reason"> -->
         <app-reason-Input  class="form-control" [(ngModel)]="reason"></app-reason-Input>
@@ -61,6 +91,7 @@
     </button>
   </div>
 </ng-template>
+
 <ng-template let-modal #methodModal>
   <div class="modal-header m-2">
     <h4>lesson Info</h4>

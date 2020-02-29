@@ -1,3 +1,4 @@
+import { filter } from 'rxjs/operators';
 import {Component, OnInit, ViewChild, ViewEncapsulation, Input} from '@angular/core';
 import {OptionsInput} from '@fullcalendar/core';
 import timeslot from '@fullcalendar/resource-timegrid';
@@ -22,6 +23,7 @@ import {debounce} from '../../../../../../shared/utils/debounce';
 import { SessionTrialModalComponent } from '../../session-modals/session-trial-modal/session-trial-modal.component';
 import { JsonHubProtocol } from '@aspnet/signalr';
 import { ActivatedRoute } from "@angular/router";
+import { toDate } from '@angular/common/src/i18n/format_date';
 // import { Tooltip } from 'chart.js';
 
 @Component({
@@ -53,6 +55,13 @@ export class SessionsCalendarViewAdminComponent implements OnInit {
   IsConfirmEditSuccess = false;
   learnerProfileLoading = false;
   orgs:any;
+  cancelLessons = false;
+  changeLesson = {
+    changeType:"1" , //1 permanent 2 lesson 3 term
+    teacherId:null
+  };
+  dropTeacherList;
+  isDropRoomChanged;
   
   @ViewChild(CalendarComponent) fullcalendar: CalendarComponent;
   t = null;
@@ -150,6 +159,18 @@ export class SessionsCalendarViewAdminComponent implements OnInit {
           this.sessionEditModel = new SessionEdit(info.event.extendedProps.info.LessonId,
             info.event.extendedProps.info.LearnerId, RoomId, info.event.extendedProps.info.TeacherId,
           info.event.extendedProps.info.OrgId, null, newStartTime);
+          // dropTeacherList
+          this.isDropRoomChanged = !(RoomId==info.event.extendedProps.info.RoomId);
+          let dayofWeek = this.fullcalendar.calendar.getDate().getDay();
+          dayofWeek = dayofWeek==0 ? 7 : dayofWeek;
+          this.changeLesson.teacherId=null;
+          this.sessionService.getTeacherByRoomDay(info.event.extendedProps.info.OrgId,
+              RoomId,dayofWeek).subscribe(res=>{
+                this.dropTeacherList=res['Data'];
+                if (this.dropTeacherList.length>0)
+                  this.changeLesson.teacherId=this.dropTeacherList[0].TeacherId;
+                  console.log(this.changeLesson.teacherId);
+              });
           const modalRef = this.modalService.open(this.confirmModal);
           modalRef.result.then(() => {
             this.getEventByDate(Date);
@@ -281,7 +302,10 @@ export class SessionsCalendarViewAdminComponent implements OnInit {
         s.title += '\nStudent:\n ' + s.learner[0].FirstName + ' ' + s.learner[0].LastName;
       }
     });
-    return data;
+    if (this.cancelLessons == false)
+      return data.filter(s =>s.IsCanceled !=1 )
+    else
+      return data;
   }
   getEventByDate = (date) => {
     const teacherRoom = document.querySelectorAll('#teacherRoom');
@@ -339,21 +363,59 @@ export class SessionsCalendarViewAdminComponent implements OnInit {
   }
 
   ConfirmEdit = () => {
-    this.isloadingSmall = true;
-    this.sessionEditModel.reason = this.reason;
-    console.log(this.reason);
-    console.log(this.sessionEditModel);
-    this.sessionService.SessionEdit(this.sessionEditModel).subscribe(res => {
-      this.IsConfirmEditSuccess = true;
-      this.isloadingSmall = false;
-    }, err => {
-      this.isloadingSmall = false;
+    if (!this.changeLesson.teacherId){
       Swal.fire({
         type: 'error',
         title: 'Oops...',
-        text: err.error.ErrorMessage
+        text: "No teacher"
       });
-    });
+      return;
+    }
+    this.isloadingSmall = true;
+    this.sessionEditModel.reason = this.reason;
+    console.log(this.changeLesson);
+    console.log(this.reason);
+    console.log(this.sessionEditModel);
+    //1 permanent 2 lesson 3 term
+    if (this.changeLesson.changeType=='2'){
+      this.sessionEditModel.TeacherId = this.changeLesson.teacherId;
+      this.sessionService.SessionEdit(this.sessionEditModel).subscribe(res => {
+        this.IsConfirmEditSuccess = true;
+        this.isloadingSmall = false;
+      }, err => {
+        this.isloadingSmall = false;
+        Swal.fire({
+          type: 'error',
+          title: 'Oops...',
+          text: err.error.ErrorMessage
+        });
+      });
+    }
+    else {
+      const periodChangeModel ={
+        UserId:localStorage.getItem('userID'),
+        TeacherId:this.changeLesson.teacherId,
+        LearnerId:this.sessionEditModel.LearnerId,
+        LessonId:this.sessionEditModel.LessonId,
+        Reason:this.sessionEditModel.reason,
+        ChangedDate:this.sessionEditModel.BeginTime,
+        OrgId: this.sessionEditModel.OrgId,
+        IsPermanent:this.changeLesson.changeType=='1'?1:0
+      };
+      
+      this.sessionService.PostPeriodChange(periodChangeModel).subscribe(res => {
+          this.IsConfirmEditSuccess = true;
+          this.isloadingSmall = false;
+        }, err => {
+          this.isloadingSmall = false;
+          Swal.fire({
+            type: 'error',
+            title: 'Oops...',
+            text: err.error.ErrorMessage
+          });
+      })
+    }
+  
   }
 
   openEdit = (info) => {

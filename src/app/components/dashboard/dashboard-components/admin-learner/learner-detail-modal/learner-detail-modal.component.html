@@ -342,9 +342,9 @@
                     </div>
   
                     <!-- End date 无编辑 -->
-                    <div class="col-12" *ngIf='ele.Amendment.length == 0'>
+                    <div class="col-12" *ngIf='ele.EndDate'>
                       <span class="label" *ngIf='ele.EndDate'>Course End Day:</span>
-                      <span class='text' *ngIf='ele.EndDate' [ngStyle]="{'text-decoration':ele.EndDate?'line-through':null}">{{ele.EndDate| date:'EEE, MMM d, y'}}</span>
+                      <span class='text' *ngIf='ele.EndDate'>{{ele.EndDate| date:'EEE, MMM d, y'}}</span>
                     </div>
   
                     <!-- end date有编辑 -->

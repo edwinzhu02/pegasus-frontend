@@ -1,3 +1,4 @@
+import { PeriodCourseDurationChange } from './../../models/PeriodCourseDurationChange';
 import { Injectable } from "@angular/core";
 import { environment } from "../../../environments/environment.prod";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
@@ -34,6 +35,11 @@ export class SessionsService {
       headers: this.httpHeaders
     });
   }
+  getTeacherByRoomDay(orgId,roomId,dayOfWeek){
+    return this.http.get<any>(this.baseUrl + `teacher/GetTeacherByRoomDay/${orgId}/${roomId}/${dayOfWeek}`, {
+      headers: this.httpHeaders
+    });
+  }  
   getReceptionistLesson(date,orgId) {
     // console.log(this.httpHeaders);
     return this.http.get<any>(
@@ -184,5 +190,10 @@ export class SessionsService {
     return this.http.get<any>(
       this.baseUrl + "orgs/"
     );    
+  }
+  PostPeriodChange(model){
+    return this.http.post<any>(
+      this.baseUrl + "PeriodCourseChange/DragAndDropCourseChange/",model
+    );
   }
 }
