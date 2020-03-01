@@ -121,6 +121,12 @@ export class SessionsService {
       SessionModel
     );
   }
+  SessionResize(SessionModel) {
+    // console.log(this.httpHeaders);
+    return this.http.put<any>(
+      this.baseUrl + "OnetoOneCourseInstance/ChangeOnetoOneCourseInstance/"+SessionModel.lessonId+"/"+SessionModel.duration,null
+    );
+  }  
   GroupSessionEdit(SessionModel) {
     // console.log(this.httpHeaders);
     return this.http.put<any>(

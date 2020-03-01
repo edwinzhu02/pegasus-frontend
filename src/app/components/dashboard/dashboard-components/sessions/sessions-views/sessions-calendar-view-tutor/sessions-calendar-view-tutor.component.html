@@ -15,6 +15,20 @@
   <!-- modal-body -->
   <div class="container">
     <div class="row">
+        <div class="col-12">This change is apply for</div>
+        <div class="col-4">
+          <input type="radio" id="permanent" name="permanent" value="1" [(ngModel)]="changeLesson.changeType">
+          <label for="permanent">Permanent</label>
+        </div>      
+        <div  class="col-4">
+          <input type="radio" id="lesson" checked name="lesson" value="2" [(ngModel)]="changeLesson.changeType">
+          <label for="lesson">This Lesson</label>
+        </div>
+        <div class="col-4">
+          <input type="radio" id="term" name="term" value="3" [(ngModel)]="changeLesson.changeType">
+          <label for="term">This Term</label>
+        </div>
+
       <div class="col-12">
         Reason:
          <!-- <input class="form-control"  type="text" [(ngModel)]="reason"> -->

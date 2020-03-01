@@ -27,7 +27,7 @@
   </div>
 </ng-template>
 
-<!--session-edit confirm modal-->
+<!--session drag confirm modal-->
 <ng-template #confirmModal let-modal>
   <div class="modal-header m-2">
     <h4>Please Confirm</h4>
@@ -80,6 +80,40 @@
     <span *ngIf='IsConfirmEditSuccess' class='text-success'>Edit Success </span>
     <div *ngIf="isloadingSmall" class="loaderSmall"></div>
     <button [class.d-none]="IsConfirmEditSuccess" type="button" class="btn btn-dark" (click)="ConfirmEdit()">
+      Confirm
+    </button>
+    <button
+      type="button"
+      class="btn btn-outline-dark"
+      (click)="modal.dismiss('Cross click')"
+    >
+      Cancel
+    </button>
+  </div>
+</ng-template>
+<!--session resize confirm modal-->
+<ng-template #resizeModal let-modal>
+  <div class="modal-header m-2">
+    <h4>Please Confirm</h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <!-- modal-body -->
+  <div class="container">
+    <div class="col-12">Orginal Course is {{resizeCourse.courseName}}</div>
+    <br>
+    <div class="col-12">Do you want to change this course to {{resizeCourse.newDuration}} mins course!</div>
+  </div>
+  <div class="modal-footer">
+    <span *ngIf='IsConfirmEditSuccess' class='text-success'>Edit Success </span>
+    <div *ngIf="isloadingSmall" class="loaderSmall"></div>
+    <button [class.d-none]="IsConfirmEditSuccess" type="button" class="btn btn-dark" (click)="ConfirmResize()">
       Confirm
     </button>
     <button

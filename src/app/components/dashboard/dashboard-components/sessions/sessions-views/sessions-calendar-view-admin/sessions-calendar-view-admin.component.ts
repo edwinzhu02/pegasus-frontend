@@ -44,6 +44,8 @@ export class SessionsCalendarViewAdminComponent implements OnInit {
   
   @ViewChild('confirmModal') confirmModal;
   @ViewChild('methodModal') methodModal;
+  @ViewChild('resizeModal') resizeModal;
+  
   eventInfo;
   options: OptionsInput;
   eventsModel: any;
@@ -62,6 +64,8 @@ export class SessionsCalendarViewAdminComponent implements OnInit {
   };
   dropTeacherList;
   isDropRoomChanged;
+  resizeCourse:any;
+  lessonResizeModel;
   
   @ViewChild(CalendarComponent) fullcalendar: CalendarComponent;
   t = null;
@@ -113,7 +117,9 @@ export class SessionsCalendarViewAdminComponent implements OnInit {
       this.options = {
         themeSystem: 'jquery-ui',
         editable: true,
-        eventDurationEditable: false,
+        // eventDurationEditable: true,
+        // eventStartEditable:true,
+        eventResizableFromStart:true,
         displayEventTime: true,
         firstDay: 1,
         selectable: true,
@@ -149,6 +155,36 @@ export class SessionsCalendarViewAdminComponent implements OnInit {
           const Date = this.datePipe.transform(this.fullcalendar.calendar.getDate(), 'yyyy-MM-dd');
         },
         ////////
+        eventResize:(info)=>{
+          console.log();
+          const Date = this.datePipe.transform(this.fullcalendar.calendar.getDate(), 'yyyy-MM-dd');
+          const startTime = info.event.start;
+          const endTime = info.event.end;
+          const minutes = (endTime.getTime() -startTime.getTime())/(1000*60);
+          console.log(info);
+          if ((minutes<30) ||(minutes>60)){
+            alert("no such duration course!");
+            return;
+          }
+          this.resizeCourse = {
+            courseName:info.event.extendedProps.info.CourseName,
+            courseId:info.event.extendedProps.info.courseId,
+            newDuration:minutes
+          }
+          this.lessonResizeModel = {
+            lessonId:info.event.extendedProps.info.LessonId,
+            duration:(minutes/15)-1
+          };
+          console.log(this.lessonResizeModel);
+          const modalRef = this.modalService.open(this.resizeModal);
+          modalRef.result.then(() => {
+            this.getEventByDate(Date);
+          }, () => {
+            this.getEventByDate(Date);
+          });
+
+        },
+              
         eventDrop: (info) => { // when event drag , need to send put request to change the time of this event
           this.IsConfirmEditSuccess = false;
           this.reason = '';
@@ -361,7 +397,22 @@ export class SessionsCalendarViewAdminComponent implements OnInit {
     this.fullcalendar.calendar.gotoDate(datetoshow);
     this.getEventByDate(date);
   }
+  ConfirmResize = () => {
+    this.isloadingSmall = true;
+    console.log(this.lessonResizeModel);
+    this.sessionService.SessionResize(this.lessonResizeModel).subscribe(res => {
+      this.IsConfirmEditSuccess = true;
+      this.isloadingSmall = false;
+    }, err => {
+      this.isloadingSmall = false;
+      Swal.fire({
+        type: 'error',
+        title: 'Oops...',
+        text: err.error.ErrorMessage
+      });
+    });
 
+  }
   ConfirmEdit = () => {
     if (!this.changeLesson.teacherId){
       Swal.fire({

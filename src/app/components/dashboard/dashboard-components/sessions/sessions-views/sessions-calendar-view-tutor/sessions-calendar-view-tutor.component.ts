@@ -39,6 +39,9 @@ export class SessionsCalendarViewTutorComponent implements OnInit {
   teacherSelected;
   eventsModel: any;
   t = null;
+  changeLesson={ //1. permanent 2. lesson 3. term
+    changeType:'1'
+  };
   constructor(private sessionsService: SessionsService,
               private coursesService: CoursesService, private datePipe: DatePipe, private modalService: NgbModal,
               private mondayDatePipe: MondayDateInWeekByDatePipe) { }
@@ -75,6 +78,7 @@ export class SessionsCalendarViewTutorComponent implements OnInit {
         this.sessionEditModel = new SessionEdit(
           LessonId, LearnerId, RoomId, this.teacherId, OrgId, this.reason, newStartTime
         )
+        console.log(info)
         console.log(this.sessionEditModel)
         const modalRef = this.modalService.open(this.confirmModal);
         modalRef.result.then(() => {
@@ -106,9 +110,28 @@ export class SessionsCalendarViewTutorComponent implements OnInit {
   }
 
   ConfirmEdit = () => {
+    let fun;
     this.isloadingSmall = true;
     this.sessionEditModel.reason = this.reason;
-    this.sessionsService.SessionEdit(this.sessionEditModel).subscribe(res => {
+
+    if (this.changeLesson.changeType=='2'){  //1. permanent 2. lesson 3. term
+      fun  =  this.sessionsService.SessionEdit(this.sessionEditModel);
+    }
+    else{
+      const periodChangeModel ={
+        UserId:localStorage.getItem('userID'),
+        TeacherId:this.sessionEditModel.TeacherId,
+        LearnerId:this.sessionEditModel.LearnerId,
+        LessonId:this.sessionEditModel.LessonId,
+        Reason:this.sessionEditModel.reason,
+        ChangedDate:this.sessionEditModel.BeginTime,
+        OrgId: this.sessionEditModel.OrgId,
+        IsPermanent:this.changeLesson.changeType=='1'?1:0
+      };
+    
+      fun  =  this.sessionsService.PostPeriodChange(periodChangeModel);
+    }
+    fun.subscribe(res => {
       this.IsConfirmEditSuccess = true;
       this.isloadingSmall = false;
     }, err => {
@@ -206,6 +229,7 @@ export class SessionsCalendarViewTutorComponent implements OnInit {
     this.isloading = true;
     this.sessionsService.getTeacherLesson(this.teacherId, beginDate).subscribe(data => {
       this.eventsModel = this.generateEventData(data.Data);
+      console.log(this.eventsModel)
       this.isloading = false;
     }, err => {
       console.log(err);
