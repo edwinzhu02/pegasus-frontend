@@ -87,6 +87,7 @@ export class PayrollListComponent implements OnInit {
     this.teacherTransactionList.forEach(element => {
        let diffMs = Date.parse(element.LessonEndTime) - Date.parse(element.LessonBeginTime);
        element.Duration = Math.round(((diffMs % 86400000) % 3600000) / 60000);
+       if (element.Duration==0)  element.Duration=60;
     });
   }
 }
