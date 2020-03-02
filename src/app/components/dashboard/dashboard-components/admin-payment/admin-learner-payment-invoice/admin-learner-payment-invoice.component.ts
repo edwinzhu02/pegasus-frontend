@@ -176,8 +176,10 @@ export class AdminLearnerPaymentInvoiceComponent implements OnInit, OnDestroy {
       this.errMsgM = true;
     }
     if ((!this.isCredit&&this.invoiceForm.value.owing <= 0 )||
-        (this.isCredit&&this.invoiceForm.value.owing < 0 )||
-       (this.invoiceForm.value.owing + this.isCredit?this.credit:0)> this.dataInvoice[j].OwingFee) {
+        (this.isCredit&&this.invoiceForm.value.owing < 0 ))
+        // ||
+      //  (this.invoiceForm.value.owing + this.isCredit?this.credit:0)  > this.dataInvoice[j].OwingFee) 
+        {
       this.errMsgO = true;
     }
     if (this.errMsgM || this.errMsgO) {

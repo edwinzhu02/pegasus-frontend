@@ -156,6 +156,7 @@ export class SessionsCalendarViewAdminComponent implements OnInit {
         },
         ////////
         eventResize:(info)=>{
+          this.IsConfirmEditSuccess = false;          
           console.log();
           const Date = this.datePipe.transform(this.fullcalendar.calendar.getDate(), 'yyyy-MM-dd');
           const startTime = info.event.start;
