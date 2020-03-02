@@ -398,6 +398,7 @@ export class SessionsCalendarViewAdminComponent implements OnInit {
     this.fullcalendar.calendar.gotoDate(datetoshow);
     this.getEventByDate(date);
   }
+  
   ConfirmResize = () => {
     this.isloadingSmall = true;
     console.log(this.lessonResizeModel);
