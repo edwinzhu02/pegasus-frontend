@@ -1,7 +1,7 @@
 import { Router,ActivatedRoute } from '@angular/router';
-import { environment } from 'src/environments/environment.prod';
 import { Component, OnInit, Input} from '@angular/core';
 import { SessionsService } from '../../services/http/sessions.service';
+// import { SessionsService } from '../../../assets/images/Avatar/';
 // import {Router}
 
 interface IPostModel{
@@ -30,7 +30,7 @@ export class MessgeboardComponent implements OnInit {
   id:number;
   message:string;
   messages=[];
-  logo=environment.photoUrl+"assets/images/Avatar/able.png";
+  logo="../../../assets/images/Avatar/able.png";
   isloading=false;
   
   constructor(private router:Router,
@@ -73,16 +73,16 @@ export class MessgeboardComponent implements OnInit {
       
       if (element.StaffId !=null){
         msg.name='Receptionist';
-        msg.avatar=environment.photoUrl+"assets/images/Avatar/able.png"; 
+        msg.avatar="../../../assets/images/Avatar/able.png"; 
       }
         
       else if (element.TeacherId !=null){
         msg.name=(element.Teacher.FirstName).toUpperCase();
-        msg.avatar=environment.photoUrl+"assets/images/Avatar/teacher.jpg"; 
+        msg.avatar="../../../assets/images/Avatar/teacher.jpg"; 
       }
       else {
         msg.name=element.Learner.FirstName.toUpperCase()+' '+element.Learner.LastName.toUpperCase();
-        msg.avatar=environment.photoUrl+"assets/images/Avatar/student.jpg"; 
+        msg.avatar="../../../assets/images/Avatar/student.jpg"; 
       }
         
 
@@ -131,14 +131,14 @@ export class MessgeboardComponent implements OnInit {
       })
       .catch(err =>alert(err.toString()));
   }
-  addList(MessageContent){
-    const msg = {} as IMsgModel;
-    msg.message = MessageContent;
-    msg.time =  Date.now().toString();
-    msg.avatar=environment.photoUrl+"assets/images/Avatar/teacher.jpg";        
-    msg.incoming=true;
-    this.messages.push(msg);
-  }
+  // addList(MessageContent){
+  //   const msg = {} as IMsgModel;
+  //   msg.message = MessageContent;
+  //   msg.time =  Date.now().toString();
+  //   msg.avatar="../../../assets/images/Avatar/teacher.jpg";        
+  //   msg.incoming=true;
+  //   this.messages.push(msg);
+  // }
   // str format is '2016-11-09T18:00:01'
   convertDate(str){
     var date = new Date(str);
