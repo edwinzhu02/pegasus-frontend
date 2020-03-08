@@ -1,3 +1,5 @@
+import { MessagerModalComponent } from './../../../../general/messager/messager-modal/messager-modal.component';
+import { environment } from 'src/environments/environment.prod';
 import { filter } from 'rxjs/operators';
 import {Component, OnInit, ViewChild, ViewEncapsulation, Input} from '@angular/core';
 import {OptionsInput} from '@fullcalendar/core';
@@ -24,6 +26,9 @@ import { SessionTrialModalComponent } from '../../session-modals/session-trial-m
 import { JsonHubProtocol } from '@aspnet/signalr';
 import { ActivatedRoute } from "@angular/router";
 import { toDate } from '@angular/common/src/i18n/format_date';
+import { Router } from '@angular/router';
+import { BoardmodelComponent} from '../../../../../../components/messgeboard/boardmodel/boardmodel.component'
+
 // import { Tooltip } from 'chart.js';
 
 @Component({
@@ -76,6 +81,7 @@ export class SessionsCalendarViewAdminComponent implements OnInit {
     private datePipe: DatePipe, private modalService: NgbModal,
     private fb: FormBuilder,
     private learnersService: LearnersService,
+    private router:Router
     ) {}
   ngOnInit(): void {
     this.searchForm = this.fb.group({
@@ -557,5 +563,18 @@ export class SessionsCalendarViewAdminComponent implements OnInit {
     const Date = this.datePipe.transform(this.fullcalendar.calendar.getDate(), 'yyyy-MM-dd');
     this.getEventByDate(Date);
   }
- 
+  gotoMessage=(lessonId)=>{
+    // this.router.navigate(['Messgeboard', {id: "1"}]);
+    // window.open(environment.photoUrl+"Messgeboard"); 
+    const modalRef = this.modalService.open(BoardmodelComponent, {
+      size: "lg",
+      backdrop: "static",
+      keyboard: false
+    });
+    modalRef.componentInstance.params = {
+      id: localStorage.getItem("staffId"),
+      role: 5,
+      lessonId: lessonId,
+    };    
+  }
 }

@@ -195,6 +195,9 @@ import { AdminLearnerPaymentComponent } from './components/dashboard/dashboard-c
 import { AdminSendPaymentEmailComponent } from './components/dashboard/dashboard-components/admin-learner/admin-send-payment-email/admin-send-payment-email.component';
 import { SessionCalendarViewGroupCoursesComponent } from './components/dashboard/dashboard-components/sessions/sessions-views/session-calendar-view-group-courses/session-calendar-view-group-courses.component';
 import { TimerPickerBranchComponent } from './components/dashboard/dashboard-components/timer-picker-branch/timer-picker-branch.component';
+import { MessgeboardComponent } from './components/messgeboard/messgeboard.component';
+import { BoardmodelComponent } from './components/messgeboard/boardmodel/boardmodel.component';
+import { BoardpageComponent } from './components/messgeboard/boardpage/boardpage.component';
 
 @NgModule({
   declarations: [
@@ -377,7 +380,10 @@ import { TimerPickerBranchComponent } from './components/dashboard/dashboard-com
     AdminLearnerPaymentComponent,
     AdminSendPaymentEmailComponent,
     SessionCalendarViewGroupCoursesComponent,
-    TimerPickerBranchComponent
+    TimerPickerBranchComponent,
+    MessgeboardComponent,
+    BoardmodelComponent,
+    BoardpageComponent
   ],
   imports: [
     NgbModule,
@@ -473,7 +479,8 @@ import { TimerPickerBranchComponent } from './components/dashboard/dashboard-com
     RegistrationToParentComponent,
     LearnerAddModalTestComponent,
     AdminLearnerPaymentComponent,
-    AdminSendPaymentEmailComponent
+    AdminSendPaymentEmailComponent,
+    BoardmodelComponent
   ],
   exports: [AppComponent],
   bootstrap: [AppComponent]

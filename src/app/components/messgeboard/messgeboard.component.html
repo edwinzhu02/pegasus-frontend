@@ -1,0 +1,41 @@
+<body class="bg-funky">
+  <div class="container" style="margin-top:20px;">
+    <img [src]="logo" alt="sun"><span>ABLE MUSIC STUDIO</span>
+    <div>
+      <textarea class='col-12' rows="4" name="Text" [(ngModel)]='message' required></textarea>
+      <div>
+        <div *ngIf='isloading' class='loaderSmall'></div>
+        <div *ngIf='!isloading' >
+          <button type="submit" class="btn btn-outline-dark" (click)="send()">Send Message</button>
+        </div>
+      </div>
+    </div>
+    <div class="messaging">
+      <div class="inbox_msg">
+        <div class="mesgs">
+          <div *ngFor='let i of messages' class="msg_history">
+            <div *ngIf='!i.incoming' class="incoming_msg">
+              <div class="incoming_msg_img">
+                <img [src]="i.avatar" alt="sunil"> </div>
+              <div class="received_msg">
+                <div class="received_withd_msg">
+                  <p>{{i.message}}</p>
+                  <span class="time_date">{{i.name}} at {{i.time}}</span>
+                </div>
+              </div>
+            </div>
+            <div *ngIf='i.incoming' class="outgoing_msg">
+              <div class="sent_msg">
+                <p>{{i.message}}</p>
+                <div class="incoming_msg_img"><img [src]="i.avatar" alt="sun">
+                </div>
+                <span class="time_date">{{i.name}} at {{i.time}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>

@@ -56,7 +56,7 @@ import { TrialInfoComponent } from "./components/dashboard/dashboard-components/
 import { PublishPanelComponent } from "./components/dashboard/dashboard-components/admin-publish/publish-panel/publish-panel.component";
 import { TodoListComponent } from './components/dashboard/dashboard-components/admin-notice/todo-list/todo-list.component';
 import { SessionsTopviewsComponent } from './components/dashboard/dashboard-components/sessions/sessions-topviews/sessions-topviews.component';
-
+import {BoardpageComponent} from './components/messgeboard/boardpage/boardpage.component'
 //canActivate: [DashboardRestrictGuard],
 const routes: Routes = [
   {
@@ -303,6 +303,7 @@ const routes: Routes = [
       },
     ]
   },
+  { path: "Messgeboard/:role/:lessonId/:id", component: BoardpageComponent },
   { path: "login", component: LoginComponent },
   { path: "**", redirectTo: "home" }
 ];

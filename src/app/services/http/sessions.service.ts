@@ -197,6 +197,16 @@ export class SessionsService {
       this.baseUrl + "orgs/"
     );    
   }
+  getMsgs(lessonId){
+    return this.http.get<any>(
+      this.baseUrl + "LessonMessage/"+lessonId
+    );    
+  }
+  postMsg(model){
+    return this.http.post<any>(
+      this.baseUrl + "lessonMessage",model
+    );    
+  }
   PostPeriodChange(model){
     return this.http.post<any>(
       this.baseUrl + "PeriodCourseChange/DragAndDropCourseChange/",model
