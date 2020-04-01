@@ -40,7 +40,7 @@
             <td>
               {{i.MessageLastestDate | date: "yyyy"}}<br />{{i.MessageLastestDate |date: "MM-dd"}}<br />{{i.MessageLastestDate| date: "HH:mm:ss"}}
             </td>
-            <td> <button *ngIf="i.LessonId" class="btn btn-primary" (click)="gotoMessage({{i.LessonId}})">View<i
+            <td> <button *ngIf="i.LessonId" class="btn btn-primary" (click)="gotoMessage(i.LessonId)">View<i
                   class="fas fa-comments"></i> </button>
             </td>
         </tbody>
