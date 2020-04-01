@@ -202,6 +202,12 @@ export class SessionsService {
       this.baseUrl + "LessonMessage/"+lessonId
     );    
   }
+  getLessonMsgs(orgId, beginDate,endDate){
+    return this.http.get<any>(
+      this.baseUrl + "LessonMessage/" + orgId + "/" + beginDate + "/" + endDate
+    );    
+  }
+  
   postMsg(model){
     return this.http.post<any>(
       this.baseUrl + "lessonMessage",model

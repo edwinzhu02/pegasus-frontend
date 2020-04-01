@@ -89,7 +89,7 @@ export class NotificationPopupComponent implements OnInit {
 
   /* handle long messages */
   sliceMessage(messages,type) {
-    console.log(messages);
+    // console.log(messages);
     if (!messages) return;
     if (type==1)
       messages.map((obj) => {

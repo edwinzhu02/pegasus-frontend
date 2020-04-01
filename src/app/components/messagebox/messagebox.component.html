@@ -1,0 +1,55 @@
+<div *ngIf='loadingFlag'>
+  <div class="loaderLarge"></div>
+</div>
+<div *ngIf='!loadingFlag'>
+
+  <div class='container tl_body'>
+    <!-- head -->
+    <div class='col-12 tl_body_title'>
+      <h2>Lesson Message List</h2>
+    </div>
+
+    <!-- search -->
+    <div class='col-12 tl_body_search'>
+      Begin Date:&nbsp;<input type="date" [(ngModel)]="beginDate">
+      End Date:&nbsp;<input type="date" [(ngModel)]="endDate">
+      <button (click)="searchByDate()"><span class="fas fa-search"></span>Search</button>
+    </div>
+
+    <!-- body main -->
+    <div class="col-12">
+      <table class="table table-striped" style="text-align: center;">
+        <thead>
+          <tr>
+            <th *ngFor="let title of titleArray let i = index" scope="col" class="tl_body_table_head"
+              style="width:310px; cursor: pointer; ">{{title}}</th>
+            <th scope='col' class='tl_body_table_head'></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor='let i of lessonMessageData | slice: (page-1)* pageSize : (page-1) * pageSize + pageSize; let j = index'>
+            <th scope="row"> {{j+1}} </th>
+            <td> {{i.TeacherName}} </td>
+            <td>{{i.LearnerId?i.LearnerFirstName:null}} {{i.LearnerId?i.LearnerLastName:null}} </td>
+            <td> {{i.LessonId}} </td>
+            <td>
+              {{i.BeginTime | date: "yyyy"}}<br />{{i.BeginTime |date: "MM-dd"}}<br />{{i.BeginTime| date: "HH:mm:ss"}}
+            </td>
+            <td>{{i.EndTime | date: "yyyy"}}<br />{{i.EndTime |date: "MM-dd"}}<br />{{i.EndTime| date: "HH:mm:ss"}}</td>
+            <td>
+              {{i.MessageLastestDate | date: "yyyy"}}<br />{{i.MessageLastestDate |date: "MM-dd"}}<br />{{i.MessageLastestDate| date: "HH:mm:ss"}}
+            </td>
+            <td> <button *ngIf="i.LessonId" class="btn btn-primary" (click)="gotoMessage({{i.LessonId}})">View<i
+                  class="fas fa-comments"></i> </button>
+            </td>
+        </tbody>
+      </table>
+    </div>
+    <!--body pagination-->
+    <div class='col-12'>
+      <ngb-pagination [collectionSize]='SessionListLength' [(page)]='page' [pageSize]='pageSize'></ngb-pagination>
+    </div>
+
+  </div>
+</div>

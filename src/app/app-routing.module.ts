@@ -57,6 +57,7 @@ import { PublishPanelComponent } from "./components/dashboard/dashboard-componen
 import { TodoListComponent } from './components/dashboard/dashboard-components/admin-notice/todo-list/todo-list.component';
 import { SessionsTopviewsComponent } from './components/dashboard/dashboard-components/sessions/sessions-topviews/sessions-topviews.component';
 import {BoardpageComponent} from './components/messgeboard/boardpage/boardpage.component'
+import { MessageboxComponent } from './components/messagebox/messagebox.component';
 //canActivate: [DashboardRestrictGuard],
 const routes: Routes = [
   {
@@ -194,7 +195,8 @@ const routes: Routes = [
             path: "calendar/groupcourses/:onetoone",
             component: SessionCalendarViewGroupCoursesComponent,
             canActivate: [UserAuthGuard]
-          },                     
+          },
+                                   
         ]
       },
       // Courses Area
@@ -301,9 +303,15 @@ const routes: Routes = [
         component: AdminLearnerPaymentComponent,
         canActivate: [UserAuthGuard]
       },
+      {
+        path: "MessageBox",
+        component: MessageboxComponent,
+        canActivate: [UserAuthGuard]
+      }, 
     ]
   },
   { path: "Messgeboard/:role/:lessonId/:id", component: BoardpageComponent },
+  
   { path: "login", component: LoginComponent },
   { path: "**", redirectTo: "home" }
 ];

@@ -1,62 +1,73 @@
-
 <div class='container tl_body'>
   <div *ngIf="isloading" class="loaderLarge"></div>
-    <div class='row'>
-      <!--body head-->
-      <div class='col-12 tl_body_title'>
-        <h2>Session List</h2>
+  <div class='row'>
+    <!--body head-->
+    <div class='col-12 tl_body_title'>
+      <h2>Session List</h2>
     </div>
-      <!--body search-->
-      <div class='col-12 tl_body_search'>
-        <span>Begin date:&nbsp;<input type="date" [(ngModel)]="searchBeginDate"/></span>
-        <span>End date:&nbsp;<input type="date"[(ngModel)]="searchEndDate"></span>&nbsp;
-        <button (click)="searchByDate()"><span class="fas fa-search"></span></button>
-      </div>
-      <div class="col-12 tl_body_search">
-        <span class="fas fa-search"></span>
-        <span>Teacher: <input type="text" [(ngModel)]="teacherSearchValue" (ngModelChange)="teacherSearch()" placeholder="Search by ... " ></span>
-      </div>
+    <!--body search-->
+    <div class='col-12 tl_body_search'>
+      <span>Begin date:&nbsp;<input type="date" [(ngModel)]="searchBeginDate" /></span>
+      <span>End date:&nbsp;<input type="date" [(ngModel)]="searchEndDate"></span>&nbsp;
+      <button (click)="searchByDate()"><span class="fas fa-search"></span></button>
+    </div>
+    <div class="col-12 tl_body_search">
+      <span class="fas fa-search"></span>
+      <span>Teacher: <input type="text" [(ngModel)]="teacherSearchValue" (ngModelChange)="teacherSearch()"
+          placeholder="Search by ... "></span>
+    </div>
 
-      <!--body main-->
-      <div class='col-12'>
-        <table class='table table-striped'>
-          <thead>
-            <tr>
-              <th *ngFor="let item of titleArray, let i = index" scope='col' class='tl_body_table_head' style='width: 310px; cursor: pointer'>{{item}}</th>
-              <th scope='col' class='tl_body_table_head'>Edit</th>
-              <th scope='col' class='tl_body_table_head'></th>
-            </tr>
-          </thead>
-          <tbody>
-            <!-- dataTable-->
-            <tr *ngFor = 'let i of SessionList | slice: (page-1)* pageSize : (page-1) * pageSize + pageSize; let j = index'>
-              <th scope="row">{{j+1}}</th>
-              <td>{{i.TeacherFirstName}}</td>
-              <td>{{i.Learner?i.Learner:null}}</td>
-              <td>{{i.CourseName}}</td>
-              <td>{{i.IsTrial?'Yes':'No'}}</td>
-              <td>{{i.BeginTime | date: "yyyy"}}<br/>{{i.BeginTime |date: "MM-dd"}}<br/>{{i.BeginTime| date: "HH:mm:ss"}}</td>
-              <td>{{i.EndTime | date: "yyyy"}}<br/>{{i.EndTime |date: "MM-dd"}}<br/>{{i.EndTime| date: "HH:mm:ss"}}</td>
-              <td>{{i.Room}}</td>
-              <td>{{i.Branch}}</td>
-              <td>{{i.IsCanceled?'Yes':'No'}}</td>
-              <td>{{i.IsConfirm?'Yes':'No'}}</td>
-              <td><button type="button" class="btn btn-outline-secondary" placement="left" [ngbTooltip]='i.CancelReson'>here</button></td>
-              <td>
-                <a *ngIf='!i.IsCanceled&&!i.IsConfirm' (click)='openSessionEditModal(i)' style="cursor: pointer;"><button class="btn btn-primary" style="width: 70px; height: 20px; font-size: 12px; line-height: 6px" >Edit</button></a><br>
-                <a *ngIf='!i.IsCanceled&&!i.IsConfirm'  (click)="openSessionConfirmModal(i.LessonId)" style="cursor: pointer;"><button class="btn btn-success" style="width: 70px; height: 20px; font-size: 12px; line-height: 6px">Confirm</button></a><br>
-                <a *ngIf='!i.IsCanceled&&!i.IsConfirm' (click)='openRescheduleModal(i.LessonId)' style="cursor: pointer;"><button class="btn btn-warning" style="color: white; width: 70px; height: 20px; font-size: 12px; line-height: 6px">Split</button></a>
-                <a *ngIf='!i.IsCanceled&&!i.IsConfirm' (click)='openSessionCancelModal(i.LessonId)' style="cursor: pointer;"><button class="btn btn-danger" style="width: 70px; height: 20px; font-size: 12px; line-height: 6px">Cancel</button></a>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+    <!--body main-->
+    <div class='col-12'>
+      <table class='table table-striped'>
+        <thead>
+          <tr>
+            <th *ngFor="let item of titleArray, let i = index" scope='col' class='tl_body_table_head'
+              style='width: 310px; cursor: pointer'>{{item}}</th>
+            <th scope='col' class='tl_body_table_head'>Edit</th>
+            <th scope='col' class='tl_body_table_head'></th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- dataTable-->
+          <tr *ngFor='let i of SessionList | slice: (page-1)* pageSize : (page-1) * pageSize + pageSize; let j = index'>
+            <th scope="row">{{j+1}}</th>
+            <td>{{i.TeacherFirstName}}</td>
+            <td>{{i.Learner?i.Learner:null}}</td>
+            <td>{{i.CourseName}}</td>
+            <td>{{i.IsTrial?'Yes':'No'}}</td>
+            <td>
+              {{i.BeginTime | date: "yyyy"}}<br />{{i.BeginTime |date: "MM-dd"}}<br />{{i.BeginTime| date: "HH:mm:ss"}}
+            </td>
+            <td>{{i.EndTime | date: "yyyy"}}<br />{{i.EndTime |date: "MM-dd"}}<br />{{i.EndTime| date: "HH:mm:ss"}}</td>
+            <td>{{i.Room}}</td>
+            <td>{{i.Branch}}</td>
+            <td>{{i.IsCanceled?'Yes':'No'}}</td>
+            <td>{{i.IsConfirm?'Yes':'No'}}</td>
+            <td><button type="button" class="btn btn-outline-secondary" placement="left"
+                [ngbTooltip]='i.CancelReson'>here</button></td>
+            <td>
+              <a *ngIf='!i.IsCanceled&&!i.IsConfirm' (click)='openSessionEditModal(i)' style="cursor: pointer;"><button
+                  class="btn btn-primary"
+                  style="width: 70px; height: 20px; font-size: 12px; line-height: 6px">Edit</button></a><br>
+              <a *ngIf='!i.IsCanceled&&!i.IsConfirm' (click)="openSessionConfirmModal(i.LessonId)"
+                style="cursor: pointer;"><button class="btn btn-success"
+                  style="width: 70px; height: 20px; font-size: 12px; line-height: 6px">Confirm</button></a><br>
+              <a *ngIf='!i.IsCanceled&&!i.IsConfirm' (click)='openRescheduleModal(i.LessonId)'
+                style="cursor: pointer;"><button class="btn btn-warning"
+                  style="color: white; width: 70px; height: 20px; font-size: 12px; line-height: 6px">Split</button></a>
+              <a *ngIf='!i.IsCanceled&&!i.IsConfirm' (click)='openSessionCancelModal(i.LessonId)'
+                style="cursor: pointer;"><button class="btn btn-danger"
+                  style="width: 70px; height: 20px; font-size: 12px; line-height: 6px">Cancel</button></a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
-      <!--body pagination-->
-      <div class='col-12'>
-        <ngb-pagination [collectionSize] = 'SessionListLength' [(page)] ='page' [pageSize]='pageSize'></ngb-pagination>
-      </div>
+    <!--body pagination-->
+    <div class='col-12'>
+      <ngb-pagination [collectionSize]='SessionListLength' [(page)]='page' [pageSize]='pageSize'></ngb-pagination>
     </div>
   </div>
-
+</div>

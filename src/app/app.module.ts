@@ -198,6 +198,7 @@ import { TimerPickerBranchComponent } from './components/dashboard/dashboard-com
 import { MessgeboardComponent } from './components/messgeboard/messgeboard.component';
 import { BoardmodelComponent } from './components/messgeboard/boardmodel/boardmodel.component';
 import { BoardpageComponent } from './components/messgeboard/boardpage/boardpage.component';
+import { MessageboxComponent } from './components/messagebox/messagebox.component';
 
 @NgModule({
   declarations: [
@@ -273,6 +274,7 @@ import { BoardpageComponent } from './components/messgeboard/boardpage/boardpage
     IsTemporaryPipe,
     SessionCancelModalComponent,
     SessionTrialModalComponent,
+    MessageboxComponent,
     SessionTutorReportModalComponent,
     SessionCompletedModalComponent,
     GenderPipe,
