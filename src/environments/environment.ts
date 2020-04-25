@@ -10,7 +10,7 @@ export const environment = {
    baseUrl: 'http://localhost:5000/api/',
    photoUrl: 'http://localhost:5000/',  
   // baseUrl: 'http://192.168.178.76:5000/api/',
-  companyName: 'Able Music Studio',
+  companyName: 'Amber Studio',
   siteName: 'Project Pegasus'
 };
 
