@@ -10,7 +10,7 @@ export class DownloadPDFService {
   constructor() { }
 
   downloadPDF(learnerName: IInvoiceLearnerName, invoice: IInvoice ,branch) {
-    let table_header = [['DESCRIPTION', "UNITPRICE","QTY", 'AMOUNT']]
+    let table_header = [['DESCRIPTION', "UNIT PRICE","QTY", 'AMOUNT']]
     let body = []
     let options = { columnWidth: 'auto' }
     let currentHeight: number = 90
