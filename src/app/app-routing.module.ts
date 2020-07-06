@@ -58,6 +58,7 @@ import { TodoListComponent } from './components/dashboard/dashboard-components/a
 import { SessionsTopviewsComponent } from './components/dashboard/dashboard-components/sessions/sessions-topviews/sessions-topviews.component';
 import {BoardpageComponent} from './components/messgeboard/boardpage/boardpage.component'
 import { MessageboxComponent } from './components/messagebox/messagebox.component';
+import { LessonsReportComponent } from './components/dashboard/dashboard-components/admin-lessonStat/lessons-report/lessons-report.component';
 //canActivate: [DashboardRestrictGuard],
 const routes: Routes = [
   {
@@ -287,6 +288,9 @@ const routes: Routes = [
 
       //pagegroup area
       { path: "pageGroup", component: PageGroupDetailsComponent },
+
+      //lesson report area
+      { path: "lessonReport", component: LessonsReportComponent },
 
       // Below to be rearranged
       { path: "holidays", component: HolidayCalendarComponent },

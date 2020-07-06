@@ -1,0 +1,24 @@
+<p>
+  lessons-report works!
+</p>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Tearcher</th>
+      <th scope="col">Student</th>
+      <th scope="col">Course</th>
+      <th scope="col">Lesson Fee</th>
+      <th scope="col">Paid</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let lesson of lessonsData; index as i">
+      <th scope="row">1</th>
+      <td>{{lesson.Tearcher}}</td>
+      <td>{{lesson.FirstName}}{{lesson.LastName}}</td>
+      <td>{{lesson.Course}}</td>
+    </tr>
+  </tbody>
+</table>

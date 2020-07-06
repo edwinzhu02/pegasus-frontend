@@ -199,6 +199,7 @@ import { MessgeboardComponent } from './components/messgeboard/messgeboard.compo
 import { BoardmodelComponent } from './components/messgeboard/boardmodel/boardmodel.component';
 import { BoardpageComponent } from './components/messgeboard/boardpage/boardpage.component';
 import { MessageboxComponent } from './components/messagebox/messagebox.component';
+import { LessonsReportComponent } from './components/dashboard/dashboard-components/admin-lessonStat/lessons-report/lessons-report.component';
 
 @NgModule({
   declarations: [
@@ -385,7 +386,8 @@ import { MessageboxComponent } from './components/messagebox/messagebox.componen
     TimerPickerBranchComponent,
     MessgeboardComponent,
     BoardmodelComponent,
-    BoardpageComponent
+    BoardpageComponent,
+    LessonsReportComponent
   ],
   imports: [
     NgbModule,
