@@ -8,6 +8,7 @@ import {
   MatInputModule,
   MatSelectModule
 } from "@angular/material";
+import { MatTabsModule } from '@angular/material/tabs';
 // Dependencies
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
@@ -399,6 +400,7 @@ import { LessonsReportComponent } from './components/dashboard/dashboard-compone
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
+    MatTabsModule,
     routing,
     FullCalendarModule,
     CommonModule,

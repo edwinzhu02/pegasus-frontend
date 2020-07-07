@@ -11,10 +11,18 @@ export class LessonsReportComponent implements OnInit {
   terms: any;
   orgs: any;
   orgList: any
+  days = []
 
   constructor(public sessionsService: SessionsService) { }
 
   ngOnInit() {
+    this.days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    this.getLessons();
+    this.getTerms();
+    this.getOrgs();
+  }
+
+  getLessons() {
     this.sessionsService.getLessonReports(2,4).subscribe(
       res => {
         // console.log('res', res)
@@ -24,6 +32,9 @@ export class LessonsReportComponent implements OnInit {
       err => {
         console.log(err)
       })
+  }
+  
+  getTerms() {
     this.sessionsService.getTerms().subscribe(
       res => {
         this.terms = res['Data'];
@@ -32,9 +43,11 @@ export class LessonsReportComponent implements OnInit {
       err => {
         console.log(err)
       })
+  }
 
+  getOrgs() {
     let userOrgs = JSON.parse(localStorage.getItem('OrgId'))
-    console.log(userOrgs);
+    // console.log(userOrgs);
     this.sessionsService.getOrgs().subscribe(
       res => {
         this.orgs = res['Data']
