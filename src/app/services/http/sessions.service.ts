@@ -212,7 +212,9 @@ export class SessionsService {
       this.baseUrl + "LessonsView/" + orgId + "/" + termId 
     );    
   }
-  
+  getTerms() {
+    return this.http.get<any>(this.baseUrl + 'Term');
+  }
   postMsg(model){
     return this.http.post<any>(
       this.baseUrl + "lessonMessage",model

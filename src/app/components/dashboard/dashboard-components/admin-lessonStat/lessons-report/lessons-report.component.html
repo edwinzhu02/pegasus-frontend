@@ -1,24 +1,55 @@
-<p>
-  lessons-report works!
-</p>
+<div class="container mx-1">
+  <div class="row mb-3">
+    <div class="col-md-4">
+      <label><b>Select Term</b></label>
+      <select class="form-control">
+        <option *ngFor="let term of terms" [value]="term.TermId">
+          {{ term.TermName }} &nbsp;
+          {{ term.BeginDate | date }} - {{ term.EndDate | date }}
+        </option>
+      </select>
+    </div>
+    <div class="col-md-2">
+      <label><b>Select Org</b></label>
+      <select class="form-control">
+        <option *ngFor="let org of orgs" [value]="org.OrgId">
+          {{ org.OrgId + ' ' + org.OrgName}}
+        </option>
+      </select>
+    </div>
+  </div>
 
-<table class="table table-bordered">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Tearcher</th>
-      <th scope="col">Student</th>
-      <th scope="col">Course</th>
-      <th scope="col">Lesson Fee</th>
-      <th scope="col">Paid</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let lesson of lessonsData; index as i">
-      <th scope="row">1</th>
-      <td>{{lesson.Tearcher}}</td>
-      <td>{{lesson.FirstName}}{{lesson.LastName}}</td>
-      <td>{{lesson.Course}}</td>
-    </tr>
-  </tbody>
-</table>
+  <nav>
+    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+      <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-mon" role="tab" aria-controls="nav-home" aria-selected="true">Mon</a>
+      <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-tue" role="tab" aria-controls="nav-profile" aria-selected="false">Tue</a>
+      <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-wed" role="tab" aria-controls="nav-contact" aria-selected="false">Wed</a>
+    </div>
+  </nav>
+  <div class="tab-content" id="nav-tabContent">
+    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-mon-tab">...</div>
+    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-tue-tab">...</div>
+    <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-wed-tab">...</div>
+  </div>
+
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Teacher</th>
+        <th scope="col">Student</th>
+        <th scope="col">Course</th>
+        <th scope="col">Lesson Fee</th>
+        <th scope="col">Paid</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let lesson of lessonsData; index as i">
+        <th scope="row">{{ i+1 }}</th>
+        <td>{{ lesson.Teacher }}</td>
+        <td>{{ lesson.FirstName }} {{ lesson.LastName }}</td>
+        <td>{{ lesson.Course }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
