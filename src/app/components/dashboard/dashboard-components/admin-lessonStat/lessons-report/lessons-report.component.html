@@ -53,17 +53,19 @@
         <td>{{ lesson.Course }}</td>
         <td id="report" *ngFor="let i of lesson.LessonsViewModel"
           [class.green]="i.IsPaid==1" [class.red]="i.IsPaid==0" [class.grey]="i.Iscanceled==1" [class.blue]="i.IsCompleted==1 && i.IsPaid==1">
-          <div *ngIf="i.WeekNo" style="font-size: x-small;">Week{{i.WeekNo+1}}</div>
-          <div *ngIf="i.IsPaid == 1">Paid</div>
-          <div *ngIf="i.IsPaid == 0">Unpaid</div>
-          <div *ngIf="i.IsCanaeled == 1">Canceled</div>
-          <div *ngIf="i.IsCompleted == 1"><b>Completed</b></div>
-          <div *ngIf="i.MakeUpDetail" style="font-size: x-small;">
-            MadeUp:<br>{{ i.MakeUpDetail }}
-          </div>
-          <div *ngIf="i.Remaining" style="font-size: x-small;">
-            Remain: {{ i.Remaining }}
-          </div>
+            <div *ngIf="i.WeekNo" style="font-size: x-small;">
+              Week{{i.WeekNo+1}}
+            </div>
+            <div *ngIf="i.IsPaid == 1">Paid</div>
+            <div *ngIf="i.IsPaid == 0">Unpaid</div>
+            <div *ngIf="i.IsCanaeled == 1">Canceled</div>
+            <div *ngIf="i.IsCompleted == 1"><b>Completed</b></div>
+            <div *ngIf="i.MakeUpDetail" style="font-size: x-small;">
+              MadeUp:<br>{{ i.MakeUpDetail }}
+            </div>
+            <div *ngIf="i.Remaining" style="font-size: x-small;">
+              Remain: {{ i.Remaining }}
+            </div>
         </td>
       </tr>
     </tbody>
