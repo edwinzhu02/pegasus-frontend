@@ -1,9 +1,9 @@
-<div class="w-100 mx-2">
+<div class="mx-2" style="width: 95%; margin: 0 auto;">
   <form #form="ngForm" (ngSubmit)="showReport(form.value)">
     <div class="row mb-3">
         <div class="col-md-4">
           <label for="termSelect"><b>Select Term</b></label>
-          <select class="form-control" style="width: 93%;" ngModel name="termSelect" id="termSelect" required>
+          <select class="form-control" style="width: 95%;" ngModel name="termSelect" id="termSelect" required>
             <option *ngFor="let term of terms" [value]="term.TermId" placeholder="Term">
               {{ term.TermId }}. &nbsp;{{ term.TermName }} &nbsp;
               {{ term.BeginDate | date }} - {{ term.EndDate | date }}
@@ -33,7 +33,7 @@
     </mat-tab>
   </mat-tab-group>
 
-  <table class="table table-bordered" style="display:block; width: 92%; overflow-x: scroll;">
+  <table class="table table-bordered" style="display:block; overflow-x: scroll; width: 91%;">
     <thead>
       <tr>
         <!-- <th scope="col">#</th> -->
@@ -48,22 +48,25 @@
       <tr *ngFor="let lesson of lessonsData; index as i">
         <!-- <th scope="row">{{ i+1 }}</th> -->
         <th scope="row">{{ lesson.DayOfWeek }}</th>
-        <td id="report">{{ lesson.Teacher }}</td>
-        <td id="report">{{lesson.FirstName }} {{ lesson.LastName }}</td>
+        <td class="report">{{ lesson.Teacher }}</td>
+        <td class="report">
+          {{lesson.FirstName }} {{ lesson.LastName }}
+        </td>
         <td>{{ lesson.Course }}</td>
         <td id="report" *ngFor="let i of lesson.LessonsViewModel"
           [class.green]="i.IsPaid==1" [class.red]="i.IsPaid==0" [class.grey]="i.Iscanceled==1" [class.blue]="i.IsCompleted==1 && i.IsPaid==1">
-            <div *ngIf="i.WeekNo" style="font-size: x-small;">
-              Week{{i.WeekNo+1}}
+            <div *ngIf="i.IsPaid == 1" class="small-font">Paid</div>
+            <div *ngIf="i.IsPaid == 0" class="small-font">Unpaid</div>
+            <div *ngIf="i.IsCanaeled == 1" class="small-font">
+              Canceled
             </div>
-            <div *ngIf="i.IsPaid == 1">Paid</div>
-            <div *ngIf="i.IsPaid == 0">Unpaid</div>
-            <div *ngIf="i.IsCanaeled == 1">Canceled</div>
-            <div *ngIf="i.IsCompleted == 1"><b>Completed</b></div>
-            <div *ngIf="i.MakeUpDetail" style="font-size: x-small;">
+            <div *ngIf="i.IsCompleted == 1" class="small-font">
+              <b>Completed</b>
+            </div>
+            <div *ngIf="i.MakeUpDetail" class="xsmall-font">
               MadeUp:<br>{{ i.MakeUpDetail }}
             </div>
-            <div *ngIf="i.Remaining" style="font-size: x-small;">
+            <div *ngIf="i.Remaining" class="xsmall-font">
               Remain: {{ i.Remaining }}
             </div>
         </td>

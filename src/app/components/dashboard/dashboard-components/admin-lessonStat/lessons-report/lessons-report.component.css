@@ -13,7 +13,7 @@ td div {
   margin-bottom: 3px;
 }
 
-#report {
+.report {
   padding: 20px 0px 5px 0px;
   text-align: center;
 }
@@ -40,4 +40,12 @@ td div {
 
 .blue {
   background-color: rgb(82, 82, 179);
+}
+
+.small-font {
+  font-size: small;
+}
+
+.xsmall-font {
+  font-size: x-small;
 }
