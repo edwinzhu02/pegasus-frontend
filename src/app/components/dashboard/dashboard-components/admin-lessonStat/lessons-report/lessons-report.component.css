@@ -1,3 +1,43 @@
 a {
   color: black;
 }
+
+th {
+  text-align: center;
+}
+
+td div {
+  width: 100px !important;
+  text-align: center;
+  margin: 0 auto;
+  margin-bottom: 3px;
+}
+
+#report {
+  padding: 20px 0px 5px 0px;
+  text-align: center;
+}
+
+.disabled {
+  cursor: not-allowed;
+}
+
+.green {
+  background-color: rgb(87, 160, 87);
+}
+
+.red {
+  background-color: rgb(156, 68, 68);
+}
+
+.grey {
+  background-color: grey;
+}
+
+.yellow {
+  background-color: rgb(145, 145, 39);
+}
+
+.blue {
+  background-color: rgb(82, 82, 179);
+}

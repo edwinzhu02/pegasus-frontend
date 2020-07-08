@@ -1,23 +1,31 @@
-<div class="container-fluid mx-1">
-  <div class="row mb-3">
-    <div class="col-md-4">
-      <label><b>Select Term</b></label>
-      <select class="form-control" style="width: 80%;">
-        <option *ngFor="let term of terms" [value]="term.TermId">
-          {{ term.TermName }} &nbsp;
-          {{ term.BeginDate | date }} - {{ term.EndDate | date }}
-        </option>
-      </select>
+<div class="w-100 mx-2">
+  <form #form="ngForm" (ngSubmit)="showReport(form.value)">
+    <div class="row mb-3">
+        <div class="col-md-4">
+          <label for="termSelect"><b>Select Term</b></label>
+          <select class="form-control" style="width: 93%;" ngModel name="termSelect" id="termSelect" required>
+            <option *ngFor="let term of terms" [value]="term.TermId" placeholder="Term">
+              {{ term.TermId }}. &nbsp;{{ term.TermName }} &nbsp;
+              {{ term.BeginDate | date }} - {{ term.EndDate | date }}
+            </option>
+          </select>
+        </div>
+        <div class="col-md-2">
+          <label for="orgSelect"><b>Select Org</b></label>
+          <select class="form-control" ngModel name="orgSelect" id="orgSelect" required>
+            <option *ngFor="let org of orgs" [value]="org.OrgId">
+              {{ org.OrgId + '. ' + org.OrgName}}
+            </option>
+          </select>
+        </div>
+        <div class="col-md-2">
+          <br>
+          <button type="submit" [disabled]="!form.valid" class="btn btn-primary mt-2 ml-2" [class.disabled]="!form.valid">
+            Show Report
+          </button>
+        </div>
     </div>
-    <div class="col-md-2">
-      <label><b>Select Org</b></label>
-      <select class="form-control">
-        <option *ngFor="let org of orgs" [value]="org.OrgId">
-          {{ org.OrgId + ' ' + org.OrgName}}
-        </option>
-      </select>
-    </div>
-  </div>
+  </form>
 
   <mat-tab-group class="mb-2">
     <mat-tab *ngFor=" let day of days" [label]="day"> 
@@ -25,23 +33,38 @@
     </mat-tab>
   </mat-tab-group>
 
-  <table class="table table-bordered">
+  <table class="table table-bordered" style="display:block; width: 92%; overflow-x: scroll;">
     <thead>
       <tr>
-        <th scope="col">#</th>
+        <!-- <th scope="col">#</th> -->
+        <th scope="col">Day</th>
         <th scope="col">Teacher</th>
-        <th scope="col">Student</th>
+        <th scope="col" id="student">Student</th>
         <th scope="col">Course</th>
-        <th scope="col">Lesson Fee</th>
+        <th scope="col" *ngFor="let week of weeks">{{ week }}</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let lesson of lessonsData; index as i">
-        <th scope="row">{{ i+1 }}</th>
-        <td>{{ lesson.Teacher }}</td>
-        <td>{{ lesson.FirstName }} {{ lesson.LastName }}</td>
+        <!-- <th scope="row">{{ i+1 }}</th> -->
+        <th scope="row">{{ lesson.DayOfWeek }}</th>
+        <td id="report">{{ lesson.Teacher }}</td>
+        <td id="report">{{lesson.FirstName }} {{ lesson.LastName }}</td>
         <td>{{ lesson.Course }}</td>
-        <td></td>
+        <td id="report" *ngFor="let i of lesson.LessonsViewModel"
+          [class.green]="i.IsPaid==1" [class.red]="i.IsPaid==0" [class.grey]="i.Iscanceled==1" [class.blue]="i.IsCompleted==1 && i.IsPaid==1">
+          <div *ngIf="i.WeekNo" style="font-size: x-small;">Week{{i.WeekNo+1}}</div>
+          <div *ngIf="i.IsPaid == 1">Paid</div>
+          <div *ngIf="i.IsPaid == 0">Unpaid</div>
+          <div *ngIf="i.IsCanaeled == 1">Canceled</div>
+          <div *ngIf="i.IsCompleted == 1"><b>Completed</b></div>
+          <div *ngIf="i.MakeUpDetail" style="font-size: x-small;">
+            MadeUp:<br>{{ i.MakeUpDetail }}
+          </div>
+          <div *ngIf="i.Remaining" style="font-size: x-small;">
+            Remain: {{ i.Remaining }}
+          </div>
+        </td>
       </tr>
     </tbody>
   </table>

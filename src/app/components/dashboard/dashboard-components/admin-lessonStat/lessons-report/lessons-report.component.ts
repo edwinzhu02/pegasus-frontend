@@ -11,15 +11,22 @@ export class LessonsReportComponent implements OnInit {
   terms: any;
   orgs: any;
   orgList: any
-  days = []
+  days = [];
+  weeks = [];
 
   constructor(public sessionsService: SessionsService) { }
 
   ngOnInit() {
     this.days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    this.weeks = ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6', 'Week 7', 'Week 8', 'Week 9', 'Week 10', 'Week 11','Week 12', 'Week 13', 'Week 14']
     this.getLessons();
     this.getTerms();
     this.getOrgs();
+    
+  }
+
+  showReport(data) {
+    console.log(data)
   }
 
   getLessons() {
@@ -56,7 +63,6 @@ export class LessonsReportComponent implements OnInit {
       err => {
         console.log(err)
       })
-
     if (Object.keys(userOrgs).length > 1) {
       
     }
