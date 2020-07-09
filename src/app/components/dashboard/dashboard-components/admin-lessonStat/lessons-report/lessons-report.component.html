@@ -28,7 +28,7 @@
   </form>
 
   <mat-tab-group class="mb-2">
-    <mat-tab *ngFor=" let day of days" [label]="day"> 
+    <mat-tab *ngFor=" let day of daysOfWeek" [label]="day"> 
       {{ day }} 
     </mat-tab>
   </mat-tab-group>
@@ -49,12 +49,16 @@
         <!-- <th scope="row">{{ i+1 }}</th> -->
         <th scope="row">{{ lesson.DayOfWeek }}</th>
         <td class="report">{{ lesson.Teacher }}</td>
-        <td class="report">
-          {{lesson.FirstName }} {{ lesson.LastName }}
-        </td>
+        <td class="report">{{lesson.FirstName }} {{ lesson.LastName }}</td>
         <td>{{ lesson.Course }}</td>
         <td id="report" *ngFor="let i of lesson.LessonsViewModel"
-          [class.green]="i.IsPaid==1" [class.red]="i.IsPaid==0" [class.grey]="i.Iscanceled==1" [class.blue]="i.IsCompleted==1 && i.IsPaid==1">
+          [class.blue]="i.IsPaid == 1 && i.IsCompleted == 0"  
+          [class.green]="i.IsPaid == 1 && i.IsCompleted == 1" 
+          [class.light-red]="i.IsPaid == 0 && i.IsCompleted == 0" 
+          [class.dark-red]="i.IsPaid == 0 && i.IsCompleted == 1" 
+          [class.light-grey]="i.IsPaid == 0 && i.Iscanceled == 1 && i.Remaining == 0"
+          [class.dark-grey]="i.IsPaid == 1 && i.Iscanceled == 1 && i.Remaining > 0"
+          [class.orange]="i.IsPaid == 0 && i.Iscanceled == 1 && i.Remaining > 0">
             <div *ngIf="i.IsPaid == 1" class="small-font">Paid</div>
             <div *ngIf="i.IsPaid == 0" class="small-font">Unpaid</div>
             <div *ngIf="i.IsCanaeled == 1" class="small-font">
@@ -66,8 +70,8 @@
             <div *ngIf="i.MakeUpDetail" class="xsmall-font">
               MadeUp:<br>{{ i.MakeUpDetail }}
             </div>
-            <div *ngIf="i.Remaining" class="xsmall-font">
-              Remain: {{ i.Remaining }}
+            <div *ngIf="i.Remaining" class="small-font">
+              Remains {{ i.Remaining * 15 }}mins
             </div>
         </td>
       </tr>

@@ -11,18 +11,23 @@ export class LessonsReportComponent implements OnInit {
   terms: any;
   orgs: any;
   orgList: any
-  days = [];
+  daysOfWeek = [];
   weeks = [];
+  sortedData = [];
 
   constructor(public sessionsService: SessionsService) { }
 
   ngOnInit() {
-    this.days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    this.daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     this.weeks = ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6', 'Week 7', 'Week 8', 'Week 9', 'Week 10', 'Week 11','Week 12', 'Week 13', 'Week 14']
     this.getLessons();
     this.getTerms();
     this.getOrgs();
-    
+    console.log('daysOfWeek', this.daysOfWeek)
+    this.daysOfWeek.forEach(element => {
+      this.sortedData[element] = []
+    });
+    console.log('before sort', this.sortedData)
   }
 
   showReport(data) {
@@ -32,9 +37,14 @@ export class LessonsReportComponent implements OnInit {
   getLessons() {
     this.sessionsService.getLessonReports(2,4).subscribe(
       res => {
-        // console.log('res', res)
         this.lessonsData = res['Data'];
         console.log('lessonData', this.lessonsData)
+        // Sortting Data
+        this.lessonsData.forEach(element => {
+          let day = this.getDay(element.DayOfWeek)
+          this.sortedData[day].push(element)
+        })
+        console.log('Sorted Data', this.sortedData)
       },
       err => {
         console.log(err)
@@ -66,5 +76,10 @@ export class LessonsReportComponent implements OnInit {
     if (Object.keys(userOrgs).length > 1) {
       
     }
+  }
+
+  getDay(day): string {
+    console.log(this.daysOfWeek[day])
+    return this.daysOfWeek[day]
   }
 }

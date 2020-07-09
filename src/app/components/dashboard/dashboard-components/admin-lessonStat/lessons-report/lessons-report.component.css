@@ -22,24 +22,32 @@ td div {
   cursor: not-allowed;
 }
 
+.blue {
+  background-color: rgb(82, 82, 179);
+}
+
 .green {
   background-color: rgb(87, 160, 87);
 }
 
-.red {
+.light-red {
+  background-color: rgb(255, 100, 100);
+}
+
+.dark-red {
   background-color: rgb(156, 68, 68);
 }
 
-.grey {
+.light-grey {
+  background-color: rgb(175, 175, 175);
+}
+
+.dark-grey {
   background-color: grey;
 }
 
-.yellow {
-  background-color: rgb(145, 145, 39);
-}
-
-.blue {
-  background-color: rgb(82, 82, 179);
+.orange {
+  background-color: rgb(255, 186, 57);
 }
 
 .small-font {
