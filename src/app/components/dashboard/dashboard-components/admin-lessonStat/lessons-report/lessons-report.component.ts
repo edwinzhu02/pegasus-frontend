@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { SessionsService } from 'src/app/services/http/sessions.service';
-import * as moment from 'moment';
 
 @Component({
   selector: 'app-lessons-report',
@@ -22,23 +21,23 @@ export class LessonsReportComponent implements OnInit {
   ngOnInit() {
     this.daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     this.weeks = ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6', 'Week 7', 'Week 8', 'Week 9', 'Week 10', 'Week 11','Week 12', 'Week 13', 'Week 14']
-    this.getLessons();
     this.getTerms();
     this.getOrgs();
     // console.log('before sortting', this.sortedData)
   }
 
-  showReport(data) {
-    console.log(data)
+  showReport(value) {
+    console.log(value)
     this.ifShowReport = true
-    this.sortData(this.terms[data.termSelect])
+    this.getLessons(value.orgSelect, value.termSelect);
   }
 
-  getLessons() {
-    this.sessionsService.getLessonReports(2,4).subscribe(
+  getLessons(orgId, termId) {
+    this.sessionsService.getLessonReports(orgId, termId).subscribe(
       res => {
         this.lessonsData = res['Data'];
         console.log('lessonData', this.lessonsData)
+        this.sortData()
       },
       err => {
         console.log(err)
@@ -50,12 +49,6 @@ export class LessonsReportComponent implements OnInit {
       res => {
         this.terms = res['Data'];
         console.log('terms', this.terms)
-        this.terms.forEach(term => {
-          this.sortedData[term.TermId-1] = []
-          this.daysOfWeek.forEach(day => {
-            this.sortedData[term.TermId-1][day] = []
-          });
-        })
       },
       err => {
         console.log(err)
@@ -73,29 +66,16 @@ export class LessonsReportComponent implements OnInit {
       })
   }
 
-  sortData(term) {
-    console.log('Selected term', term)
+  sortData() {
+    // console.log('Selected term', term)
+    this.daysOfWeek.forEach(day => {
+      this.sortedData[day] = []
+    });
     this.lessonsData.forEach(course => {
-      if (this.match(course, term) == true) {
-        let day = this.getDay(course.DayOfWeek)
-        this.sortedData[term.TermId-1][day].push(course)
-      }
+      let day = this.getDay(course.DayOfWeek)
+      this.sortedData[day].push(course)
     })
     console.log('sorted data', this.sortedData)
-  }
-
-  match(course, term) {
-    let isMatch: boolean = false
-    course.LessonsViewModel.forEach(element => {
-      let courseDate = moment(element.OriginalDate).format( 'YYYY-MM-DD')
-      let termBegin = moment(term.BeginDate).format('YYYY-MM-DD')
-      let termEnd = moment(term.EndDate).format('YYYY-MM-DD')
-      // console.log(courseDate)
-      if (moment(courseDate).isBetween(termBegin, termEnd)) {
-        isMatch = true
-      }
-    })
-    return isMatch
   }
 
   getDay(day): string {
