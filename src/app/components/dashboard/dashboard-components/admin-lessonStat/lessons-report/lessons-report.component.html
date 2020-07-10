@@ -1,17 +1,20 @@
 <div class="mx-2" style="width: 95%; margin: 0 auto;">
+  <div *ngIf="!ifShowReport" class="my-2" style="color: darkred;">
+    Please select Term & Branch to view report: 
+  </div>
   <form #form="ngForm" (ngSubmit)="showReport(form.value)">
     <div class="row mb-3">
         <div class="col-md-4">
           <label for="termSelect"><b>Select Term</b></label>
           <select class="form-control" style="width: 95%;" ngModel name="termSelect" id="termSelect" required>
-            <option *ngFor="let term of terms" [value]="term.TermId" placeholder="Term">
+            <option *ngFor="let term of terms" [value]="term.TermId-1" placeholder="Term">
               {{ term.TermId }}. &nbsp;{{ term.TermName }} &nbsp;
               {{ term.BeginDate | date }} - {{ term.EndDate | date }}
             </option>
           </select>
         </div>
         <div class="col-md-2">
-          <label for="orgSelect"><b>Select Org</b></label>
+          <label for="orgSelect"><b>Select Branch</b></label>
           <select class="form-control" ngModel name="orgSelect" id="orgSelect" required>
             <option *ngFor="let org of orgs" [value]="org.OrgId">
               {{ org.OrgId + '. ' + org.OrgName}}
@@ -20,23 +23,70 @@
         </div>
         <div class="col-md-2">
           <br>
-          <button type="submit" [disabled]="!form.valid" class="btn btn-primary mt-2 ml-2" [class.disabled]="!form.valid">
+          <button type="submit" [disabled]="!form.valid || !lessonsData" class="btn btn-primary mt-2 ml-2" [class.disabled]="!form.valid || !lessonsData">
             Show Report
           </button>
+          <span *ngIf="!lessonsData" class="pl-3">Fetching data ...</span>
         </div>
     </div>
   </form>
 
-  <mat-tab-group class="mb-2">
-    <mat-tab *ngFor=" let day of daysOfWeek" [label]="day"> 
-      {{ day }} 
+  <mat-tab-group *ngIf="ifShowReport" class="mb-2">
+    <mat-tab *ngFor=" let day of daysOfWeek; index as d" [label]="day"> 
+      <div *ngIf="!sortedData[form.value.termSelect][day][0]" class="ml-3 mt-2" style="color: darkred;">
+        No data found for {{ day }}s in {{ terms[form.value.termSelect].TermName }}
+      </div>
+      <table *ngIf="sortedData[form.value.termSelect][day][0]" class="table table-bordered" style="display:block; overflow-x: scroll; width: 91%;">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <!-- <th scope="col">Day</th> -->
+            <th scope="col">Teacher</th>
+            <th scope="col" id="student">Student</th>
+            <th scope="col">Course</th>
+            <th scope="col" *ngFor="let week of weeks">{{ week }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of sortedData[form.value.termSelect][day]; index as i">
+            <th scope="row">{{ i+1 }}</th>
+            <!-- <th scope="row">{{ data.DayOfWeek }}</th> -->
+            <td class="report">{{ data.Teacher }}</td>
+            <td class="report">{{data.FirstName }} {{ data.LastName }}</td>
+            <td>{{ data.Course }}</td>
+            <td id="report" *ngFor="let i of data.LessonsViewModel"
+              [class.blue]="i.IsPaid == 1 && i.IsCompleted == 0"  
+              [class.green]="i.IsPaid == 1 && i.IsCompleted == 1" 
+              [class.light-red]="i.IsPaid == 0 && i.IsCompleted == 0" 
+              [class.dark-red]="i.IsPaid == 0 && i.IsCompleted == 1" 
+              [class.light-grey]="i.IsPaid == 0 && i.Iscanceled == 1 && i.Remaining == 0"
+              [class.dark-grey]="i.IsPaid == 1 && i.Iscanceled == 1 && i.Remaining > 0"
+              [class.orange]="i.IsPaid == 0 && i.Iscanceled == 1 && i.Remaining > 0">
+                <div class="xsmall-font">{{ i.OriginalDate | date }}</div>
+                <div *ngIf="i.IsPaid == 1" class="small-font">Paid</div>
+                <div *ngIf="i.IsPaid == 0" class="small-font">Unpaid</div>
+                <div *ngIf="i.IsCanaeled == 1" class="small-font">
+                  Canceled
+                </div>
+                <div *ngIf="i.IsCompleted == 1" class="small-font">
+                  <b>Completed</b>
+                </div>
+                <div *ngIf="i.MakeUpDetail" class="xsmall-font">
+                  MadeUp:<br>{{ i.MakeUpDetail }}
+                </div>
+                <div *ngIf="i.Remaining" class="small-font">
+                  Remains {{ i.Remaining * 15 }}mins
+                </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </mat-tab>
   </mat-tab-group>
 
-  <table class="table table-bordered" style="display:block; overflow-x: scroll; width: 91%;">
+  <!-- <table class="table table-bordered" style="display:block; overflow-x: scroll; width: 91%;">
     <thead>
       <tr>
-        <!-- <th scope="col">#</th> -->
         <th scope="col">Day</th>
         <th scope="col">Teacher</th>
         <th scope="col" id="student">Student</th>
@@ -46,7 +96,6 @@
     </thead>
     <tbody>
       <tr *ngFor="let lesson of lessonsData; index as i">
-        <!-- <th scope="row">{{ i+1 }}</th> -->
         <th scope="row">{{ lesson.DayOfWeek }}</th>
         <td class="report">{{ lesson.Teacher }}</td>
         <td class="report">{{lesson.FirstName }} {{ lesson.LastName }}</td>
@@ -76,5 +125,5 @@
         </td>
       </tr>
     </tbody>
-  </table>
+  </table> -->
 </div>
