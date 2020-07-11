@@ -30,15 +30,22 @@
     </div>
   </form>
 
-  <mat-tab-group *ngIf="ifShowReport" class="mb-2">
-    <mat-tab *ngFor=" let day of daysOfWeek" [label]="day"> 
-      <span *ngIf="ifShowReport && !lessonsData" class="pl-3">
-        Fetching data ...
-      </span>
-      <div *ngIf="!lessonsData || !lessonsData[0]" class="ml-3 mt-2" style="color: darkred;">
-        No data found for {{ day }}s in {{ terms[form.value.termSelect].TermName }}
+  <div id="spinner" *ngIf="showSpinner == true">
+    <mat-spinner></mat-spinner>
+      <div class="pt-2">
+        Fetching Data
       </div>
-      <table *ngIf="lessonsData" class="table table-bordered" style="display:block; overflow-x: scroll; width: 91%;">
+  </div>
+  <div *ngIf="dataReady == false && !showSpinner" style="color: darkred;" class="ml-3 mt-2">
+    No data found
+  </div>
+
+  <mat-tab-group *ngIf="dataReady" class="mb-2">
+    <mat-tab *ngFor=" let day of daysOfWeek" [label]="day">
+      <div *ngIf="!showSpinner && !sortedData[day][0]" class="ml-3 mt-2" style="color: darkred;">
+        No data found on {{ day }}s
+      </div>
+      <table *ngIf="!showSpinner && sortedData[day][0]" class="table table-bordered" style="display:block; overflow-x: scroll; width: 91%;">
         <thead>
           <tr>
             <th scope="col">#</th>

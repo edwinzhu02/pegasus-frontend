@@ -8,6 +8,8 @@ import { SessionsService } from 'src/app/services/http/sessions.service';
 })
 export class LessonsReportComponent implements OnInit {
   ifShowReport: boolean = false
+  showSpinner: boolean = false
+  dataReady: boolean
   lessonsData: any;
   terms: any;
   orgs: any;
@@ -23,12 +25,12 @@ export class LessonsReportComponent implements OnInit {
     this.weeks = ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6', 'Week 7', 'Week 8', 'Week 9', 'Week 10', 'Week 11','Week 12', 'Week 13', 'Week 14']
     this.getTerms();
     this.getOrgs();
-    // console.log('before sortting', this.sortedData)
   }
 
   showReport(value) {
     console.log(value)
     this.ifShowReport = true
+    this.showSpinner = true
     this.getLessons(value.orgSelect, value.termSelect);
   }
 
@@ -37,10 +39,20 @@ export class LessonsReportComponent implements OnInit {
       res => {
         this.lessonsData = res['Data'];
         console.log('lessonData', this.lessonsData)
-        this.sortData()
+        if (this.lessonsData[0]) {
+          this.showSpinner = false
+          this.dataReady = true
+          this.sortData()
+        } else {
+          this.showSpinner = false
+          this.dataReady = false
+        }
+        this.showSpinner = false
+        console.log(this.dataReady)
       },
       err => {
         console.log(err)
+        alert('Error! Something went wrong. Plaese refer console for further information.')
       })
   }
   
@@ -52,6 +64,7 @@ export class LessonsReportComponent implements OnInit {
       },
       err => {
         console.log(err)
+        alert('Error! Something went wrong. Plaese refer console for further information.')
       })
   }
 
@@ -63,6 +76,7 @@ export class LessonsReportComponent implements OnInit {
       },
       err => {
         console.log(err)
+        alert('Error! Something went wrong. Plaese refer console for further information.')
       })
   }
 
