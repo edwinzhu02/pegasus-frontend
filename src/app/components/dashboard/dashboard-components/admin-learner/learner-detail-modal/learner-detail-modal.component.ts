@@ -178,7 +178,8 @@ export class LearnerDetailModalComponent implements OnInit {
 
   }
   sortInvoice(waitingInvoice){
-    waitingInvoice = waitingInvoice.filter(e=>e.TotalFee!=null);  
+    // waitingInvoice = waitingInvoice.filter(e=>e.TotalFee!=null); 
+
     waitingInvoice.sort((a,b)=>{
       return (b.InvoiceNum+0) - (a.InvoiceNum+0)
     })
