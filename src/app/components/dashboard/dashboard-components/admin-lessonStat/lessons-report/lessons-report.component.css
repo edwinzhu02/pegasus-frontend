@@ -59,6 +59,10 @@ mat-spinner {
 }
 
 .dark-grey {
+  background-color: rgb(100, 100, 100);
+}
+
+.medium-grey {
   background-color: grey;
 }
 

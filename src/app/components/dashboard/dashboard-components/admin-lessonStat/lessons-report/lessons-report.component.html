@@ -13,7 +13,7 @@
             </option>
           </select>
         </div>
-        <div class="col-md-2">
+        <div *ngIf="userOrgId.length>1" class="col-md-2">
           <label for="orgSelect"><b>Select Branch</b></label>
           <select class="form-control" ngModel name="orgSelect" id="orgSelect" required>
             <option *ngFor="let org of orgs" [value]="org.OrgId">
@@ -70,6 +70,7 @@
               [class.dark-red]="i.IsPaid == 0 && i.IsCompleted == 1" 
               [class.light-grey]="i.IsPaid == 0 && i.IsCanceled == 1 && i.Remaining == 0"
               [class.dark-grey]="i.IsPaid == 1 && i.IsCanceled == 1 && i.Remaining > 0"
+              [class.medium-grey]="i.IsPaid == 1 && i.IsCanceled == 1 && i.Remaining == 0"
               [class.orange]="i.IsPaid == 0 && i.IsCanceled == 1 && i.Remaining > 0">
                 <div class="xsmall-font">{{ i.OriginalDate | date }}</div>
                 <div *ngIf="i.IsPaid == 1" class="small-font">Paid</div>

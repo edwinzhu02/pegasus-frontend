@@ -7,6 +7,7 @@ import { SessionsService } from 'src/app/services/http/sessions.service';
   styleUrls: ['./lessons-report.component.css']
 })
 export class LessonsReportComponent implements OnInit {
+  userOrgId = []
   ifShowReport: boolean = false
   showSpinner: boolean = false
   dataReady: boolean
@@ -25,13 +26,18 @@ export class LessonsReportComponent implements OnInit {
     this.weeks = ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6', 'Week 7', 'Week 8', 'Week 9', 'Week 10', 'Week 11','Week 12', 'Week 13', 'Week 14']
     this.getTerms();
     this.getOrgs();
+    this.userOrgId = JSON.parse(localStorage.getItem('OrgId'))
   }
 
   showReport(value) {
     console.log(value)
     this.ifShowReport = true
     this.showSpinner = true
-    this.getLessons(value.orgSelect, value.termSelect);
+    if (this.userOrgId.length > 1) {
+      this.getLessons(value.orgSelect, value.termSelect);
+    } else {
+      this.getLessons(this.userOrgId[0], value.termSelect)
+    }
   }
 
   getLessons(orgId, termId) {
@@ -48,7 +54,7 @@ export class LessonsReportComponent implements OnInit {
           this.dataReady = false
         }
         this.showSpinner = false
-        console.log(this.dataReady)
+        // console.log(this.dataReady)
       },
       err => {
         console.log(err)
