@@ -54,7 +54,6 @@ export class LessonsReportComponent implements OnInit {
           this.dataReady = false
         }
         this.showSpinner = false
-        // console.log(this.dataReady)
       },
       err => {
         console.log(err)
@@ -66,7 +65,6 @@ export class LessonsReportComponent implements OnInit {
     this.sessionsService.getTerms().subscribe(
       res => {
         this.terms = res['Data'];
-        // console.log('terms', this.terms)
       },
       err => {
         console.log(err)
@@ -78,7 +76,6 @@ export class LessonsReportComponent implements OnInit {
     this.sessionsService.getOrgs().subscribe(
       res => {
         this.orgs = res['Data']
-        // console.log(this.orgs)
       },
       err => {
         console.log(err)
@@ -87,7 +84,6 @@ export class LessonsReportComponent implements OnInit {
   }
 
   sortData() {
-    // console.log('Selected term', term)
     this.daysOfWeek.forEach(day => {
       this.sortedData[day] = []
     });
@@ -96,6 +92,25 @@ export class LessonsReportComponent implements OnInit {
       this.sortedData[day].push(course)
     })
     console.log('sorted data', this.sortedData)
+  }
+
+  isHide(day, week) {
+    if (this.weeks.indexOf(week) > this.findMaxWeekNo(day)) {
+      return true
+    } else {
+      return false
+    }
+  }
+
+  findMaxWeekNo(day) {
+    let array = []
+    this.sortedData[day].forEach(element => {
+      element.LessonsViewModel.forEach(lesson => {
+        array.push(lesson.WeekNo)
+      })
+    })
+    console.log(Math.max(...array))
+    return Math.max(...array)
   }
 
   getDay(day): string {

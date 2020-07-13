@@ -3,7 +3,7 @@
     Please select Term & Branch to view report: 
   </div>
   <form #form="ngForm" (ngSubmit)="showReport(form.value)">
-    <div class="row mb-2">
+    <div class="row mb-3">
         <div class="col-md-4">
           <label for="termSelect"><b>Select Term</b></label>
           <select class="form-control" style="width: 95%;" ngModel name="termSelect" id="termSelect" required>
@@ -52,7 +52,7 @@
             <th scope="col">Teacher</th>
             <th scope="col">Student</th>
             <th scope="col">Course</th>
-            <th scope="col" *ngFor="let week of weeks">{{ week }}</th>
+            <th scope="col" *ngFor="let week of weeks" [class.hide]="isHide(day, week)">{{ week }}</th>
           </tr>
         </thead>
         <tbody>
@@ -61,7 +61,7 @@
             <td class="report">{{ data.Teacher }}</td>
             <td class="report">{{ data.FirstName }} {{ data.LastName }}</td>
             <td><div id="course">{{ data.Course }}</div></td>
-            <td id="lesson" *ngFor="let x of weeks; index as index">
+            <td id="lesson" *ngFor="let x of weeks; index as index" [class.hide]="isHide(day, x)">
                 <div *ngFor="let i of data.LessonsViewModel">
                   <div *ngIf="i.WeekNo !== index" style="width: 80px;"></div>
                   <div *ngIf="i.WeekNo == index" id="state"

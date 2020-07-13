@@ -4,7 +4,7 @@ a {
 
 table {
   display: block; 
-  max-height: 750px;
+  max-height: 700px;
   overflow-y: scroll;
   overflow-x: scroll; 
   width: 91%;
@@ -62,6 +62,10 @@ mat-spinner {
 
 .disabled {
   cursor: not-allowed;
+}
+
+.hide {
+  display: none;
 }
 
 .blue {
