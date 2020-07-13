@@ -66,7 +66,7 @@ export class LessonsReportComponent implements OnInit {
     this.sessionsService.getTerms().subscribe(
       res => {
         this.terms = res['Data'];
-        console.log('terms', this.terms)
+        // console.log('terms', this.terms)
       },
       err => {
         console.log(err)

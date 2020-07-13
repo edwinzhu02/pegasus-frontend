@@ -2,15 +2,21 @@ a {
   color: black;
 }
 
+table {
+  display: block; 
+  overflow-x: scroll; 
+  width: 91%;
+}
+
 th {
   text-align: center;
 }
 
-td div {
+td>div {
   width: 100px !important;
+  height: 100%;
   text-align: center;
   margin: 0 auto;
-  margin-bottom: 3px;
 }
 
 mat-spinner {
@@ -29,8 +35,26 @@ mat-spinner {
   border-radius: 5px;
 }
 
+#course {
+  width: 200px !important;
+}
+
+#lesson {
+  padding: 0;
+  max-height: 110px;
+  overflow-y: auto;
+}
+
+#state {
+  width: 100px !important;
+  min-height: 100px !important;
+  margin: 0;
+  padding: 5px;
+  text-align: center;
+}
+
 .report {
-  padding: 20px 0px 5px 0px;
+  padding: 20px 5px 5px 5px;
   text-align: center;
 }
 
@@ -39,7 +63,7 @@ mat-spinner {
 }
 
 .blue {
-  background-color: rgb(82, 82, 179);
+  background-color: skyblue;
 }
 
 .green {
@@ -55,11 +79,11 @@ mat-spinner {
 }
 
 .light-grey {
-  background-color: rgb(175, 175, 175);
+  background-color: lightgrey;
 }
 
 .dark-grey {
-  background-color: rgb(100, 100, 100);
+  background-color: rgb(168, 168, 168);
 }
 
 .medium-grey {
