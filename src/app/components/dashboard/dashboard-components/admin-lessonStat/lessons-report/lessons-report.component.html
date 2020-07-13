@@ -1,4 +1,4 @@
-<div class="mx-2" style="width: 95%; margin: 0 auto;">
+<div class="mx-2">
   <div *ngIf="!ifShowReport" class="my-2" style="color: darkred;">
     Please select Term & Branch to view report: 
   </div>
@@ -60,7 +60,7 @@
             <th scope="row">{{ i+1 }}</th>
             <td class="report">{{ data.Teacher }}</td>
             <td class="report">{{ data.FirstName }} {{ data.LastName }}</td>
-            <td><div id="course">{{ data.Course }}</div></td>
+            <td class="report"><div id="course">{{ data.Course }}</div></td>
             <td id="lesson" *ngFor="let x of weeks; index as index" [class.hide]="isHide(day, x)">
                 <div *ngFor="let i of data.LessonsViewModel">
                   <div *ngIf="i.WeekNo !== index" style="width: 80px;"></div>
@@ -73,13 +73,13 @@
                     [class.dark-grey]="i.IsPaid == 1 && i.IsCanceled == 1 && i.Remaining > 0"
                     [class.medium-grey]="i.IsPaid == 1 && i.IsCanceled == 1 && i.Remaining == 0"
                     [class.orange]="i.IsPaid == 0 && i.IsCanceled == 1 && i.Remaining > 0">
-                      <div class="xsmall-font">{{ i.OriginalDate | date }}</div>
+                      <div class="xsmall-font">{{ i.OriginalDate | date:'MMM d' }}</div>
                       <div *ngIf="i.IsPaid == 1" class="small-font">Paid</div>
                       <div *ngIf="i.IsPaid == 0" class="small-font">Unpaid</div>
                       <div *ngIf="i.IsCanceled == 1" class="small-font">
                         Cancelled
                       </div>
-                      <div *ngIf="i.IsCompleted == 1" class="small-font">
+                      <div *ngIf="i.IsCompleted == 1" class="xsmall-font">
                         <b>Completed</b>
                       </div>
                       <div *ngIf="i.MakeUpDetail" class="xsmall-font">

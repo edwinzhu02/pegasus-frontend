@@ -23,7 +23,7 @@ export class LessonsReportComponent implements OnInit {
 
   ngOnInit() {
     this.daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-    this.weeks = ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6', 'Week 7', 'Week 8', 'Week 9', 'Week 10', 'Week 11','Week 12', 'Week 13', 'Week 14']
+    this.weeks = ['W 1', 'W 2', 'W 3', 'W 4', 'W 5', 'W 6', 'W 7', 'W 8', 'W 9', 'W 10', 'W 11','W 12', 'W 13', 'W 14']
     this.getTerms();
     this.getOrgs();
     this.userOrgId = JSON.parse(localStorage.getItem('OrgId'))
@@ -109,7 +109,6 @@ export class LessonsReportComponent implements OnInit {
         array.push(lesson.WeekNo)
       })
     })
-    console.log(Math.max(...array))
     return Math.max(...array)
   }
 
