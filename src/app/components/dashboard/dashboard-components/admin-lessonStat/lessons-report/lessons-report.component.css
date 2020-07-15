@@ -7,7 +7,7 @@ table {
   max-height: 700px;
   overflow-y: scroll;
   overflow-x: scroll; 
-  width: 87%;
+  width: 88%;
 }
 
 th {
@@ -37,7 +37,7 @@ mat-spinner {
 }
 
 #course {
-  width: 122px !important;
+  width: 135px !important;
   margin: 0;
   padding: 0;
 }
@@ -49,14 +49,14 @@ mat-spinner {
 
 #state {
   width: 100% !important;
-  min-height: 100px !important;
+  height: 100px !important;
   margin: 0;
   padding: 3px;
   text-align: center;
 }
 
 .report {
-  padding: 20px 5px 5px 5px;
+  padding: 10px 5px 5px 5px;
   text-align: center;
 }
 

@@ -48,7 +48,7 @@ export class LessonsReportComponent implements OnInit {
         if (this.lessonsData[0]) {
           this.showSpinner = false
           this.dataReady = true
-          this.sortData()
+          this.parseData()
         } else {
           this.showSpinner = false
           this.dataReady = false
@@ -83,15 +83,32 @@ export class LessonsReportComponent implements OnInit {
       })
   }
 
-  sortData() {
+  parseData() {
     this.daysOfWeek.forEach(day => {
       this.sortedData[day] = []
     });
     this.lessonsData.forEach(course => {
       let day = this.getDay(course.DayOfWeek)
       this.sortedData[day].push(course)
+      this.sortData(day)
     })
     console.log('sorted data', this.sortedData)
+    // console.log(this.sortData('Sunday'))
+  }
+
+  sortData(day) {
+    function compare(a, b) {
+      const A = a.Teacher.toUpperCase()
+      const B = b.Teacher.toUpperCase()
+      let comparison = 0
+      if (A > B) {
+        comparison = 1
+      } else if (A < B) {
+        comparison = -1
+      }
+      return comparison
+    }
+    this.sortedData[day].sort(compare)
   }
 
   isHide(day, week) {
