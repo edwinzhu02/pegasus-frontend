@@ -100,10 +100,16 @@ export class LessonsReportComponent implements OnInit {
     function compare(a, b) {
       const A = a.Teacher.toUpperCase()
       const B = b.Teacher.toUpperCase()
+      const C = a.FirstName.toUpperCase()
+      const D = b.FirstName.toUpperCase()
       let comparison = 0
       if (A > B) {
         comparison = 1
       } else if (A < B) {
+        comparison = -1
+      } else if (C > D) {
+        comparison = 1
+      } else if (C < D) {
         comparison = -1
       }
       return comparison
