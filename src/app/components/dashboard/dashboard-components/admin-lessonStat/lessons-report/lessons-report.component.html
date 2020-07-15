@@ -3,27 +3,26 @@
     Please select Term & Branch to view report: 
   </div>
   <form #form="ngForm" (ngSubmit)="showReport(form.value)">
-    <div class="row mb-3">
+    <div class="row mb-1">
         <div class="col-md-4">
-          <label for="termSelect"><b>Select Term</b></label>
-          <select class="form-control" style="width: 95%;" ngModel name="termSelect" id="termSelect" required>
+          <select class="form-control" ngModel name="termSelect" id="termSelect" required>
+            <option value="" selected="selected" disabled >Select Term</option>
             <option *ngFor="let term of terms" [value]="term.TermId" placeholder="Term">
               {{ term.TermId }}. &nbsp;{{ term.TermName }} &nbsp;
               {{ term.BeginDate | date }} - {{ term.EndDate | date }}
             </option>
           </select>
         </div>
-        <div *ngIf="userOrgId.length>1" class="col-md-2">
-          <label for="orgSelect"><b>Select Branch</b></label>
-          <select class="form-control" ngModel name="orgSelect" id="orgSelect" required>
+        <div *ngIf="userOrgId.length>1" class="col-md-3">
+          <select class="form-control" style="width: 90%;" ngModel name="orgSelect" id="orgSelect" required>
+            <option value="" selected="selected" disabled >Select Branch</option>
             <option *ngFor="let org of orgs" [value]="org.OrgId">
               {{ org.OrgId + '. ' + org.OrgName }}
             </option>
           </select>
         </div>
-        <div class="col-md-2">
-          <br>
-          <button type="submit" [disabled]="!form.valid" class="btn btn-primary mt-2 ml-2" [class.disabled]="!form.valid">
+        <div class="col-md-5">
+          <button type="submit" [disabled]="!form.valid" class="btn btn-primary" [class.disabled]="!form.valid">
             Show Report
           </button>
         </div>
