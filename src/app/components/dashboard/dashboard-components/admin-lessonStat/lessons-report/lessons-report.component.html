@@ -59,7 +59,8 @@
           <tr *ngFor="let data of sortedData[day]; index as i">
             <th scope="row">{{ i+1 }}</th>
             <td class="report">{{ data.Teacher }}</td>
-            <td class="report">{{ data.FirstName }} {{ data.LastName }}</td>
+            <!-- <td class="report">{{ data.FirstName }} {{ data.LastName }}</td> -->
+            <td > <app-learner-item [learner]=data  [whichName]="whichName"></app-learner-item></td>
             <td><div id="course">{{ data.Course }}</div></td>
             <td id="lesson" *ngFor="let x of weeks; index as index">
                 <div *ngFor="let i of data.LessonsViewModel">

@@ -57,7 +57,7 @@
             [class.t_mf_error_border]='updateForm.get("Duration").invalid && updateForm.get("Duration").touched'>
             <option *ngFor='let i of durations' value={{i.PropValue}}>{{i.PropName}}</option>
           </select>
-          <label class='t_mf_label'>Price(Total):</label>&nbsp;
+          <label class='t_mf_label'>Unit Price:</label>&nbsp;
           <small class='text-danger errorfontsmall' style='text-align: center'
           *ngIf='updateForm.get("Price").invalid && updateForm.get("Price").touched'>required</small>
           <input type="number" class='col-12 t_mf_input' formControlName='Price'

@@ -18,6 +18,7 @@ export class LessonsReportComponent implements OnInit {
   daysOfWeek = [];
   weeks = [];
   sortedData = [];
+  whichName = 'FirstName';
 
   constructor(public sessionsService: SessionsService) { }
 
