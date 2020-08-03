@@ -24,7 +24,7 @@ export class LessonsReportComponent implements OnInit {
 
   ngOnInit() {
     this.daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-    this.weeks = ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6', 'Week 7', 'Week 8', 'Week 9', 'Week 10', 'Week 11','Week 12', 'Week 13', 'Week 14']
+    this.weeks = ['W 1', 'W 2', 'W 3', 'W 4', 'W 5', 'W 6', 'W 7', 'W 8', 'W 9', 'W 10', 'W 11','W 12', 'W 13', 'W 14']
     this.getTerms();
     this.getOrgs();
     this.userOrgId = JSON.parse(localStorage.getItem('OrgId'))
@@ -49,13 +49,12 @@ export class LessonsReportComponent implements OnInit {
         if (this.lessonsData[0]) {
           this.showSpinner = false
           this.dataReady = true
-          this.sortData()
+          this.parseData()
         } else {
           this.showSpinner = false
           this.dataReady = false
         }
         this.showSpinner = false
-        // console.log(this.dataReady)
       },
       err => {
         console.log(err)
@@ -67,7 +66,6 @@ export class LessonsReportComponent implements OnInit {
     this.sessionsService.getTerms().subscribe(
       res => {
         this.terms = res['Data'];
-        // console.log('terms', this.terms)
       },
       err => {
         console.log(err)
@@ -79,7 +77,6 @@ export class LessonsReportComponent implements OnInit {
     this.sessionsService.getOrgs().subscribe(
       res => {
         this.orgs = res['Data']
-        // console.log(this.orgs)
       },
       err => {
         console.log(err)
@@ -87,16 +84,56 @@ export class LessonsReportComponent implements OnInit {
       })
   }
 
-  sortData() {
-    // console.log('Selected term', term)
+  parseData() {
     this.daysOfWeek.forEach(day => {
       this.sortedData[day] = []
     });
     this.lessonsData.forEach(course => {
       let day = this.getDay(course.DayOfWeek)
       this.sortedData[day].push(course)
+      this.sortData(day)
     })
     console.log('sorted data', this.sortedData)
+    // console.log(this.sortData('Sunday'))
+  }
+
+  sortData(day) {
+    function compare(a, b) {
+      const A = a.Teacher.toUpperCase()
+      const B = b.Teacher.toUpperCase()
+      const C = a.FirstName.toUpperCase()
+      const D = b.FirstName.toUpperCase()
+      let comparison = 0
+      if (A > B) {
+        comparison = 1
+      } else if (A < B) {
+        comparison = -1
+      } else if (C > D) {
+        comparison = 1
+      } else if (C < D) {
+        comparison = -1
+      }
+      return comparison
+    }
+    this.sortedData[day].sort(compare)
+  }
+
+  isHide(day, week) {
+    if (this.weeks.indexOf(week) > this.findMaxWeekNo(day)) {
+      return true
+    } else {
+      return false
+    }
+  }
+
+  findMaxWeekNo(day) {
+    let array = []
+    this.sortedData[day].forEach(element => {
+      element.LessonsViewModel.forEach(lesson => {
+        array.push(lesson.WeekNo)
+      })
+    })
+    return Math.max(...array)
   }
 
   getDay(day): string {

@@ -2,10 +2,16 @@ a {
   color: black;
 }
 
+select{
+  display: inline !important;
+}
+
 table {
   display: block; 
+  max-height: 700px;
+  overflow-y: scroll;
   overflow-x: scroll; 
-  width: 91%;
+  max-width: 88%;
 }
 
 th {
@@ -13,7 +19,6 @@ th {
 }
 
 td>div {
-  width: 100px !important;
   height: 100%;
   text-align: center;
   margin: 0 auto;
@@ -36,30 +41,35 @@ mat-spinner {
 }
 
 #course {
-  width: 200px !important;
+  width: 135px !important;
+  margin: 0;
+  padding: 0;
 }
 
 #lesson {
   padding: 0;
   max-height: 110px;
-  overflow-y: auto;
 }
 
 #state {
-  width: 100px !important;
-  min-height: 100px !important;
+  width: 100% !important;
+  height: 100px !important;
   margin: 0;
-  padding: 5px;
+  padding: 3px;
   text-align: center;
 }
 
 .report {
-  padding: 20px 5px 5px 5px;
+  padding: 10px 5px 5px 5px;
   text-align: center;
 }
 
 .disabled {
   cursor: not-allowed;
+}
+
+.hide {
+  display: none;
 }
 
 .blue {

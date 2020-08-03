@@ -1,29 +1,28 @@
-<div class="mx-2" style="width: 95%; margin: 0 auto;">
+<div class="mx-2">
   <div *ngIf="!ifShowReport" class="my-2" style="color: darkred;">
     Please select Term & Branch to view report: 
   </div>
   <form #form="ngForm" (ngSubmit)="showReport(form.value)">
-    <div class="row mb-3">
+    <div class="row mb-1">
         <div class="col-md-4">
-          <label for="termSelect"><b>Select Term</b></label>
-          <select class="form-control" style="width: 95%;" ngModel name="termSelect" id="termSelect" required>
+          <select class="form-control" ngModel name="termSelect" id="termSelect" required>
+            <option value="" selected="selected" disabled >Select Term</option>
             <option *ngFor="let term of terms" [value]="term.TermId" placeholder="Term">
               {{ term.TermId }}. &nbsp;{{ term.TermName }} &nbsp;
               {{ term.BeginDate | date }} - {{ term.EndDate | date }}
             </option>
           </select>
         </div>
-        <div *ngIf="userOrgId.length>1" class="col-md-2">
-          <label for="orgSelect"><b>Select Branch</b></label>
-          <select class="form-control" ngModel name="orgSelect" id="orgSelect" required>
+        <div *ngIf="userOrgId.length>1" class="col-md-3">
+          <select class="form-control" style="width: 90%;" ngModel name="orgSelect" id="orgSelect" required>
+            <option value="" selected="selected" disabled >Select Branch</option>
             <option *ngFor="let org of orgs" [value]="org.OrgId">
               {{ org.OrgId + '. ' + org.OrgName }}
             </option>
           </select>
         </div>
-        <div class="col-md-2">
-          <br>
-          <button type="submit" [disabled]="!form.valid" class="btn btn-primary mt-2 ml-2" [class.disabled]="!form.valid">
+        <div class="col-md-5">
+          <button type="submit" [disabled]="!form.valid" class="btn btn-primary" [class.disabled]="!form.valid">
             Show Report
           </button>
         </div>
@@ -52,7 +51,7 @@
             <th scope="col">Teacher</th>
             <th scope="col">Student</th>
             <th scope="col">Course</th>
-            <th scope="col" *ngFor="let week of weeks">{{ week }}</th>
+            <th scope="col" *ngFor="let week of weeks" [class.hide]="isHide(day, week)">{{ week }}</th>
           </tr>
         </thead>
         <tbody>
@@ -60,9 +59,9 @@
             <th scope="row">{{ i+1 }}</th>
             <td class="report">{{ data.Teacher }}</td>
             <!-- <td class="report">{{ data.FirstName }} {{ data.LastName }}</td> -->
-            <td > <app-learner-item [learner]=data  [whichName]="whichName"></app-learner-item></td>
-            <td><div id="course">{{ data.Course }}</div></td>
-            <td id="lesson" *ngFor="let x of weeks; index as index">
+            <td  class="report"> <app-learner-item [learner]=data  [whichName]="whichName"></app-learner-item></td>
+            <td  class="report"><div id="course">{{ data.Course }}</div></td>
+            <td id="lesson" *ngFor="let x of weeks; index as index"  [class.hide]="isHide(day, x)">
                 <div *ngFor="let i of data.LessonsViewModel">
                   <div *ngIf="i.WeekNo !== index" style="width: 80px;"></div>
                   <div *ngIf="i.WeekNo == index" id="state"
@@ -74,13 +73,13 @@
                     [class.dark-grey]="i.IsPaid == 1 && i.IsCanceled == 1 && i.Remaining > 0"
                     [class.medium-grey]="i.IsPaid == 1 && i.IsCanceled == 1 && i.Remaining == 0"
                     [class.orange]="i.IsPaid == 0 && i.IsCanceled == 1 && i.Remaining > 0">
-                      <div class="xsmall-font">{{ i.OriginalDate | date }}</div>
+                      <div class="xsmall-font">{{ i.OriginalDate | date:'MMM d' }}</div>
                       <div *ngIf="i.IsPaid == 1" class="small-font">Paid</div>
                       <div *ngIf="i.IsPaid == 0" class="small-font">Unpaid</div>
                       <div *ngIf="i.IsCanceled == 1" class="small-font">
                         Cancelled
                       </div>
-                      <div *ngIf="i.IsCompleted == 1" class="small-font">
+                      <div *ngIf="i.IsCompleted == 1" class="xsmall-font">
                         <b>Completed</b>
                       </div>
                       <div *ngIf="i.MakeUpDetail" class="xsmall-font">
